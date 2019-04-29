@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Leaflet Realtime</title>
+	
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">	
+  
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	
+
+<!--   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" /> -->
+
+
+
+  <link rel="stylesheet" href="https://rawgit.com/mapshakers/leaflet-icon-pulse/master/src/L.Icon.Pulse.css">
+
+
+
+	<style>
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+	</style>
+	
+
+	<style>
+		.btnStyle {
+			cursor:pointer;
+			background-color: #fe634d; 
+			--background-color: #4D90FE; 
+			border-radius: 40px;
+			background-image: -moz-linear-gradient(center top , #fe634d, #4787ED); 
+			border: 1px solid #3079ED; 
+			color: #FFFFFF;
+			padding: 4px;
+			margin-top: 4px;
+			margin-bottom: 4px;
+			width:33px;
+			height:33px;
+		}
+
+		.lblStyle {
+			color: red;
+			padding: 4px;
+			margin-top: 4px;
+			margin-bottom: 4px;
+			width: 100%;
+			font-weight: bold;
+		}
+
+	</style>
+
+	<style>
+	.modal-login {		
+		color: #636363;
+		width: 350px;
+	}
+	.modal-login .modal-content {
+		padding: 20px;
+		border-radius: 5px;
+		border: none;
+	}
+	.modal-login .modal-header {
+		border-bottom: none;   
+        position: relative;
+        justify-content: center;
+	}
+	.modal-login h4 {
+		text-align: center;
+		font-size: 26px;
+		margin: 30px 0 -15px;
+	}
+	.modal-login .form-control:focus {
+		border-color: #70c5c0;
+	}
+	.modal-login .form-control, .modal-login .btn {
+		min-height: 40px;
+		border-radius: 3px; 
+	}
+	.modal-login .close {
+        position: absolute;
+		top: -5px;
+		right: -5px;
+	}	
+	.modal-login .modal-footer {
+		background: #ecf0f1;
+		border-color: #dee4e7;
+		text-align: center;
+        justify-content: center;
+		margin: 0 -20px -20px;
+		border-radius: 5px;
+		font-size: 13px;
+	}
+	.modal-login .modal-footer a {
+		color: #999;
+	}		
+	.modal-login .avatar {
+		position: absolute;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		top: -70px;
+		width: 95px;
+		height: 95px;
+		border-radius: 50%;
+		z-index: 9;
+		background: #60c7c1;
+		padding: 15px;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+	}
+	.modal-login .avatar img {
+		width: 100%;
+	}
+	.modal-login.modal-dialog {
+		margin-top: 80px;
+	}
+    .modal-login .btn {
+        color: #fff;
+        border-radius: 4px;
+		background: #60c7c1;
+		text-decoration: none;
+		transition: all 0.4s;
+        line-height: normal;
+        border: none;
+    }
+	.modal-login .btn:hover, .modal-login .btn:focus {
+		background: #45aba6;
+		outline: none;
+	}
+	.trigger-btn {
+		display: inline-block;
+		margin: 100px auto;
+	}
+	</style>
+
+
+
+</head>
+<body>
+	
+    <div id="map">
+	
+	    <div class="leaflet-top leaflet-left">
+<!-- 	    <div style="padding-left: 10px;padding-right: 10px; position:absolute; bottom:-10px; width:100%;"> -->
+		<br>
+		<br>
+		<br>
+		<br>
+		<input type="button" id="Btn1" value="One" onclick="SingleGPS()" class="btnStyle span3 leaflet-control" />
+		<br>
+        <input type="button" id="Btn2" value="All" onclick="AllGPS()" class="btnStyle span3 leaflet-control" />
+		<br>
+		<br>
+        </div>
+
+	    <div class="leaflet-bottom leaflet-left">
+		    <input type="button" id="Btn3" value="login" class="btnStyle span3 leaflet-control" />
+            <span id="namelogin" class="lblStyle span3 leaflet-control"> Name: </span>
+        </div>	
+	
+	</div>
+
+	<!-- Modal HTML -->
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="avatar">
+						<img src="avatar.png" alt="Avatar">				
+						<!--<img src="../images/avatar.png" alt="Avatar">-->
+					</div>				
+					<h4 class="modal-title">Member Login</h4>	
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form >
+						<div class="form-group">
+							<input type="text" class="form-control" id="usernamel" placeholder="Username" >		
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="passwordl" placeholder="Password" >	
+						</div>        
+						<div class="form-group">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-btn" id="submitl">เข้าสู่ระบบ</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" id="regis">ลงทะเบียน</a>
+				</div>
+			</div>
+		</div>
+	</div>   
+	<!-- Modal HTML -->
+	<div id="myModalregis" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="avatar">
+						<img src="avatar.png" alt="Avatar">				
+						<!--<img src="../images/avatar.png" alt="Avatar">-->
+					</div>				
+					<h4 class="modal-title">Member Regis</h4>	
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" id="usernamer" placeholder="Username" >		
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="passwordr" placeholder="Password" >	
+						</div>   
+						<div class="form-group">
+							<input type="text" class="form-control" id="namer" placeholder="Name" >	
+						</div>  
+						<div class="form-group">
+							<input type="text" class="form-control" id="emailr" placeholder="Email" >	
+						</div>  
+						<div class="form-group">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-btn" id="submitr">ลงทะเบียน</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="#" id="login">เเข้าสู่ระบบ</a>
+				</div>
+			</div>
+		</div>
+	</div>   
+
+
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--<script src="https://code.jquery.com/jquery-2.1.4.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<!--   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>	 -->
+  <script src="https://rawgit.com/mapshakers/leaflet-icon-pulse/master/src/L.Icon.Pulse.js"></script>
+  <script src="../dist/leaflet-realtime.js"></script>
+  <script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) { options.async = true; });</script>
+    <!--<script src="index.js"></script>-->
+    <script>
+	   	    
+  
+	var test= {
+		    "type": "FeatureCollection",
+		    "features": [
+			{
+			    "type": "Feature",
+			    "properties": {
+				"gid": 1,
+				"PID": "9-18-3",
+				"BCT": "BCT126",
+				"OWNER_TYPE": "A",
+				"LOCNO": 0,
+				"LOCEXT": "",
+				"STREET": "CROSBY LANE",
+				"ACQUIRED": "5/7/2010",
+				"GRANTOR": "John A. SPARGO",
+				"UPLAND": 0,
+				"WETLAND": 3.96,
+				"TOTAL": 3.96,
+				"HABITAT": "salt marsh"
+			    },
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [97.26160411127392, 7.036028625636857]
+			    }
+			}
+		    ]
+		};
+	var status_login = 0;		
+	
+	$(document).ready(function () {    
+		console.warn('edit08022562');
+		//getLocation();
+        });	
+ 
+		$("#Btn3").click(function(e){
+			$("#myModal").modal();
+
+		});   
+	    
+
+		
+		$("#login").click(function(e){
+			status_login = 1;
+			$("#myModalregis").modal('hide');
+			$("#myModal").modal('show');
+		});  
+		$("#regis").click(function(e){
+			$("#myModal").modal('hide');
+			$("#myModalregis").modal('show');
+		});  	
+
+		$("#submitl").click(function(e){
+			console.log($("#usernamel").val()+','+$("#passwordl").val());
+
+			var php_sql = 'https://api.mlab.com/api/1/databases/location/collections/gps?apiKey=zCxIftNnbizcCTl61rydbRWUcFevJ5TR&q={"username": "'+$("#usernamel").val()+'","password": "'+$("#passwordl").val()+'"}';
+			//alert(php_sql);
+			$.ajax({url: php_sql,
+				async:false,
+				success: function(result){
+					if(result == ''){
+						alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+						localStorage.removeItem("oid");
+					}
+					else{
+						$.each(result, function() {
+							if(this._id.$oid != ""){
+								localStorage.setItem("oid", this._id.$oid);
+								//localStorage.oid = this._id.$oid;
+								//localStorage.removeItem("lastname");
+								$("#namelogin").text($("#namelogin").text()+this.name);
+								$("#Btn3").css("background-color", "green");
+								$("#myModal").modal('hide');
+								console.log('ยินดีต้อนรับคุณ'+this.name+','+this.latlng);
+							}
+						});	
+					}
+				}
+			});
+	
+
+		}); 
+		
+
+		$("#submitr").click(function(e){
+			alert($("#usernamer").val()+','+$("#passwordr").val()+','+$("#namer").val()+','+$("#emailr").val());
+		});  
+
+	    	/*
+		//var latlng= [{"geometry": {"type": "Point", "coordinates": [97.86160411127392, 7.436028625636857]}, "type": "Feature", "properties": {}}]
+		var map = L.map('map'),
+		    	//realtime = L.realtime(latlng, {			
+		    	//realtime = L.realtime('https://wanderdrone.appspot.com/', {
+			realtime = L.realtime("location.geojson", {				
+				interval: 600 * 1000
+			}).addTo(map);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);	   
+	    
+		realtime.on('update', function() {
+			map.fitBounds(realtime.getBounds(), {maxZoom: 3});
+		});
+	    	*/
+
+		var cities = L.layerGroup();
+
+		L.marker([7.10, 101.61]).bindPopup('This is Littleton, CO.').addTo(cities),
+		L.marker([7.11, 101.62]).bindPopup('This is Denver, CO.').addTo(cities),
+		L.marker([7.11, 101.63]).bindPopup('This is Aurora, CO.').addTo(cities),
+		L.marker([7.11, 101.64]).bindPopup('This is Golden, CO.').addTo(cities);
+
+
+		var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+				'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+		var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+			streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+
+		var map = L.map('map', {
+			center: [13, 101],
+			zoom: 6,
+			layers: [grayscale, cities]
+		});
+
+		var baseLayers = {
+			"Grayscale": grayscale,
+			"Streets": streets
+		};
+
+		var overlays = {
+			"Cities": cities
+		};
+
+		L.control.layers(baseLayers, overlays).addTo(map);
+
+		    //$.getJSON(test, function (data) {
+            //$.getJSON('testpoint.geojson', function (data) {
+		//alert(data);
+		//$.each(data.features, function (key, val) {
+		//	$.each(val.properties, function(i,j){
+		//		alert(i+','+j);
+		//	})              
+		//});     
+		    
+		/* 
+                var items = [];
+                $.each(data.features, function (key, val) {
+                    items.push('<li id="' + key + '">' + val + '</li>');
+                });
+                $('<ul/>', {
+                    'class':'my-new-list',
+                    html:items.join('')
+                }).appendTo('body');
+		*/
+		/*
+		$.each(data.features, function (key, val) {
+			$.each(val.properties, function(i,j){
+				items.push('<li id="' + i + '">' + j + '</li>');
+			})              
+		}); 
+		 $.each(data.features, function (key, val) {
+			geometry = val.geometry;
+			properties = val.properties;
+			alert (properties.place);  
+		});   
+		*/	  	 
+		    
+		    
+		    
+            //});
+		var multilinedata = {
+		  "type": "FeatureCollection",
+		  "features": [
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"id": 1
+		      },
+		      "geometry": {
+			"type": "LineString",
+			"coordinates": [
+			  [103.48283,8.02487],
+			  [103.48391,8.02475],
+			  [103.48233,8.02486],
+			  [103.48212,8.02443],
+			  [103.48243,8.02429],
+			  [103.28245,8.02477]
+			]
+		      }
+		    },
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"id": 2
+		      },
+		      "geometry": {
+			"type": "LineString",
+			"coordinates": [
+			  [103.65953,8.55865],
+			  [103.65953,8.5579],
+			  [103.65972,8.55809],
+			  [103.65941,8.55878],
+			  [103.65953,8.55896],
+			  [103.85903,8.55888]
+			]
+		      }
+		    }
+		  ]
+		}
+		var multiline = L.geoJSON(multilinedata, {}).addTo(map);	
+		//การแสดงผลข้อมูล-----------------------------------------	
+		
+		
+		//การแสดงผลข้อมูลจุดแบบจุดเดียว-----------------------------------------	
+		var Icon1 = L.icon({
+			iconUrl: 'baseball-marker.png',
+			iconSize: [32, 37],
+			iconAnchor: [16, 37],
+			popupAnchor: [0, -28]
+		});
+		var singlepoint = {
+		    "type": "Feature",
+		    "properties": {
+			"popupContent": "จุดที่ 1"
+		    },
+		    "geometry": {
+			"type": "Point",
+			"coordinates": [104.99404191970824, 9.756213909328125]
+		    }
+		};
+		var coorsLayer = L.geoJSON(singlepoint, {
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: Icon1});
+			},
+			onEachFeature: onEachFeature
+		}).addTo(map);	
+		//การแสดงผลข้อมูลจุดแบบจุดเดียว-----------------------------------------	
+		
+		
+		//การแสดงผลข้อมูลเส้น-----------------------------------------	
+		var linedata = {
+		    "type": "FeatureCollection",
+		    "features": [
+			{
+			    "type": "Feature",
+			    "geometry": {
+				"type": "LineString",
+				"coordinates": [
+				    [100.16160411127392, 7.0936028625636857],
+				    [100.16060411127392, 7.036028625636857]
+				]
+			    },
+			    "properties": {
+				"popupContent": "เส้นทาง1",
+				"underConstruction": false
+			    },
+			    "id": 1
+			},
+			{
+			    "type": "Feature",
+			    "geometry": {
+				"type": "LineString",
+				"coordinates": [
+				    [101.21160411127392, 7.016028625636857],
+				    [101.20160411127392, 7.096028625636857]
+				]
+			    },
+			    "properties": {
+				"popupContent": "เส้นทาง2",
+				"underConstruction": true
+			    },
+			    "id": 2
+			},
+			{
+			    "type": "Feature",
+			    "geometry": {
+				"type": "LineString",
+				"coordinates": [
+				    [102.99820470809937, 7.74979664004068],
+				    [102.98689651489258, 7.741052354709055]
+				]
+			    },
+			    "properties": {
+				"popupContent": "เส้นทาง3",
+				"underConstruction": false
+			    },
+			    "id": 3
+			}
+		    ]
+		};
+		L.geoJSON(linedata, {
+			//กรองให้แสดงfeature เฉพาะที่มี underConstruction เป็น false เท่านั้น
+			filter: function (feature, layer) {
+				if (feature.properties) {
+					// If the property "underConstruction" exists and is true, return false (don't render features under construction)
+					return feature.properties.underConstruction !== undefined ? !feature.properties.underConstruction : true;
+				}
+				return false;
+			},
+			onEachFeature: onEachFeature
+		}).addTo(map);
+		//การแสดงผลข้อมูลเส้น-----------------------------------------	
+			
+		
+		
+		
+		//การแสดงผลข้อมูลจุดและมัลติโพลีกอน-----------------------------------------	
+		var pointdata = {
+		    "type": "FeatureCollection",
+		    "features": [
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9998241,
+				    9.7471494
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "A"
+			    },
+			    "id": 51
+			},
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9983545,
+				    9.7502833
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "B"
+			    },
+			    "id": 52
+			},
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9963919,
+				    9.7444271
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "C"
+			    },
+			    "id": 54
+			},
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9960754,
+				    9.7498956
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "D"
+			    },
+			    "id": 55
+			},
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9933717,
+				    9.7477264
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "E"
+			    },
+			    "id": 57
+			},
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9913392,
+				    9.7432392
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "F"
+			    },
+			    "id": 58
+			},
+			{
+			    "geometry": {
+				"type": "Point",
+				"coordinates": [
+				    104.9788452,
+				    9.6933755
+				]
+			    },
+			    "type": "Feature",
+			    "properties": {
+				"popupContent": "F"
+			    },
+			    "id": 74
+			}
+		    ]
+		};
+		var multipolydata = {
+		    "type": "Feature",
+		    "properties": {
+			"popupContent": "รายละเอียด",
+			"style": {
+			    weight: 2,
+			    color: "#999",
+			    opacity: 1,
+			    fillColor: "#B0DE5C",
+			    fillOpacity: 0.8
+			}
+		    },
+		    "geometry": {
+			"type": "MultiPolygon",
+			"coordinates": [
+			    [
+				[
+				    [105.00432014465332, 9.74732195489861],
+				    [105.00715255737305, 9.74620006835170],
+				    [105.00921249389647, 9.74468219277038],
+				    [105.01067161560059, 9.74362625960105],
+				    [105.01195907592773, 9.74290029616054],
+				    [105.00989913940431, 9.74078835902781],
+				    [105.00758171081543, 9.74059036160317],
+				    [105.00346183776855, 9.74059036160317],
+				    [105.00097274780272, 9.74059036160317],
+				    [105.00062942504881, 9.74072235994946],
+				    [105.00020027160645, 9.74191033368865],
+				    [105.00071525573731, 9.74276830198601],
+				    [105.00097274780272, 9.74369225589818],
+				    [105.00097274780272, 9.74461619742136],
+				    [105.00123023986816, 9.74534214278395],
+				    [105.00183105468751, 9.74613407445653],
+				    [105.00432014465332, 9.74732195489861]
+				],[
+				    [105.00361204147337, 9.74354376414072],
+				    [105.00301122665405, 9.74278480127163],
+				    [105.00221729278564, 9.74316428375108],
+				    [105.00283956527711, 9.74390674342741],
+				    [105.00361204147337, 9.74354376414072]
+				]
+			    ],[
+				[
+				    [105.00942707061768, 9.73989736613708],
+				    [105.00942707061768, 9.73910536278566],
+				    [105.00685214996338, 9.73923736397631],
+				    [105.00384807586671, 9.73910536278566],
+				    [105.00174522399902, 9.73903936209552],
+				    [105.00041484832764, 9.73910536278566],
+				    [105.00041484832764, 9.73979836621592],
+				    [105.00535011291504, 9.73986436617916],
+				    [105.00942707061768, 9.73989736613708]
+				]
+			    ]
+			]
+		    }
+		};
+		L.geoJSON([pointdata, multipolydata], {
+			style: function (feature) {
+				return feature.properties && feature.properties.style;
+			},
+			onEachFeature: onEachFeature,
+			pointToLayer: function (feature, latlng) {
+				return L.circleMarker(latlng, {
+					radius: 8,
+					fillColor: "#ff7800",
+					color: "#000",
+					weight: 1,
+					opacity: 1,
+					fillOpacity: 0.8
+				});
+			}
+		}).addTo(map);	
+		
+		//ฟังก์ชั่นสำหรับแสดงข้อมูลผ่าน popup-------------------------------------------
+		function onEachFeature(feature, layer) {
+			var popupContent = "<p>GeoJSON ประเภทของข้อมูลคือ " +
+					feature.geometry.type + ", และมีรายละเอียดข้อมูล ดังนี้ </p>";
+			if (feature.properties && feature.properties.popupContent) {
+				popupContent += feature.properties.popupContent;
+			}
+			layer.bindPopup(popupContent);
+		}
+		//ฟังก์ชั่นสำหรับแสดงข้อมูลผ่าน popup-------------------------------------------
+		
+		
+	
+	    
+	    
+	    
+/*
+	$.getJSON('location.geojson', function (data) {
+                var items = [];
+                $.each(data.features, function (key, val) {
+                    items.push('<li id="' + key + '">' + val + '</li>');
+                });
+		
+             }).error(function(){
+                 console.log('error');
+             });
+        });
+*/	    
+	
+	    
+
+	</script>
+	
+	
+<script>
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else { 
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+	alert("Latitude: " + position.coords.latitude +   //The latitude as a decimal number (always returned)
+  "<br>Longitude: " + position.coords.longitude+  //The longitude as a decimal number (always returned)
+  "<br>accuracy: " + position.coords.accuracy+    //The accuracy of position (always returned)
+    "<br>altitude: " + position.coords.altitude+   //The altitude in meters above the mean sea level (returned if available)
+      "<br>altitudeAccuracy: " + position.coords.altitudeAccuracy+   //The altitude accuracy of position (returned if available)
+      "<br>heading: " + position.coords.heading+  	//The heading as degrees clockwise from North (returned if available)
+      "<br>speed: " + position.coords.speed+  //The speed in meters per second (returned if available)
+    "<br>timestamp: " + position.timestamp)  //The date/time of the response (returned if available)
+  ;
+  //alert(position.coords.latitude+','+position.coords.longitude);
+}
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+	  alert("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+	  	  alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+	  	  alert("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+	  	  alert("An unknown error occurred.");
+      break;
+  }
+}
+
+
+</script>
+	
+<script>	
+	var i= 1;	
+	var marker = null;	
+	
+	var myInterval = setInterval(function () {
+		//alert(i);
+		//i+=1;
+            	//console.log('it works' + new Date());
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+			    
+			//alert(position.coords.latitude+', '+position.coords.longitude);
+			    
+			  if (marker !== null) {
+			    	map.removeLayer(marker);
+			  }
+			  var greenIcon = L.icon({
+				    iconUrl: 'golf.png',
+				    //shadowUrl: 'golf.png',
+
+				    iconSize:     [35, 35], // size of the icon
+				    //shadowSize:   [50, 64], // size of the shadow
+				    //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+				    //shadowAnchor: [4, 62],  // the same for the shadow
+				    //popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+			  });
+				  
+			  //marker = L.marker([position.coords.latitude,position.coords.longitude], {icon: greenIcon}).addTo(map).bindPopup("I am golf.<br>(ตำแหน่ง: "+position.coords.latitude+', '+position.coords.longitude+')<br>'+new Date());
+			  //marker = L.marker([position.coords.latitude,position.coords.longitude]).addTo(map).bindPopup("I am golf."+new Date());				  
+			  var pulsingIcon = L.icon.pulse({iconSize:[10,10],color:'red',heartbeat:2});
+			  marker = L.marker([position.coords.latitude,position.coords.longitude],{icon: pulsingIcon}).addTo(map).bindPopup("(ตำแหน่ง: "+position.coords.latitude+', '+position.coords.longitude+')<br>'+new Date());  
+			    
+		    });
+		}
+
+        },10000); 	
+	
+	//clearInterval(myInterval);
+			
+</script>
+
+
+
+<script>
+var status_btn1 = "0";
+var status_btn2 = "0";
+
+var AllInterval;
+var Allpoint=null;
+
+var SingleInterval;
+var Singlepoint=null;
+
+function SingleGPS() {
+
+	if (status_btn1 == "0")
+	{
+		alert('Open SingleGPS');
+		
+		status_btn1 = "1";
+		if (localStorage.oid){
+			$("#Btn1.btnStyle").css("background-color", "green");
+			var chk_id ='0';
+
+			SingleInterval = setInterval(function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+					console.log(position.coords.latitude+','+position.coords.longitude);
+					console.log(localStorage.oid);
+
+					
+					
+					var php_sql = 'https://api.mlab.com/api/1/databases/location/collections/gps?apiKey=zCxIftNnbizcCTl61rydbRWUcFevJ5TR&q={"_id":{"$oid": "'+localStorage.oid+'"}}&c=true';
+					$.ajax({url: php_sql,
+							async:false,
+							success: function(result){
+									console.log('result='+result);
+									chk_id = result;
+							}
+							
+					});
+					
+					if(chk_id =='1'){
+						console.log('found');
+							
+						$.ajax( { url: 'https://api.mlab.com/api/1/databases/location/collections/gps?apiKey=zCxIftNnbizcCTl61rydbRWUcFevJ5TR&q={"_id": {"$oid": "'+localStorage.oid+'"}}',
+								  //async:false,
+								  data: '{ "$set" :{"latlng": "'+position.coords.latitude+','+position.coords.longitude+'","status": "online"}}',
+								  type: "PUT",
+								  contentType: "application/json",
+								  success: function(returnedData) {
+									  //alert('up_finnish');
+								  }		  
+						});
+					}
+					else{
+
+					}
+
+				});
+
+			}
+			else{
+				alert("Not Found Signal GPS");	
+			}
+			},10000);
+
+
+
+
+		}
+		else{
+			alert("Please Login");
+		}
+	}
+	else if (status_btn1 == "1")
+	{
+		alert('Close SingleGPS');
+
+		if (localStorage.oid){
+			$.ajax( { url: 'https://api.mlab.com/api/1/databases/location/collections/gps?apiKey=zCxIftNnbizcCTl61rydbRWUcFevJ5TR&q={"_id": {"$oid": "'+localStorage.oid+'"}}',
+					  //async:false,
+					  data: '{ "$set" :{"status": "offline"}}',
+					  type: "PUT",
+					  contentType: "application/json",
+					  //success: function(returnedData) {
+					//	  alert('up_finnish');
+					  //}		  
+			});
+		}
+		else{
+
+
+		}
+		$("#Btn1.btnStyle").css("background-color", "#fe634d");
+		status_btn1 = "0";
+		clearInterval(SingleInterval);
+
+
+
+
+
+	}
+}
+function AllGPS() {
+
+
+	if (status_btn2 == "0")
+	{
+		alert('Open AllGPS');
+		$("#Btn2.btnStyle").css("background-color", "green");
+		status_btn2 = "1";
+
+		AllInterval = setInterval(function () {
+
+		var php_sql = 'https://api.mlab.com/api/1/databases/location/collections/gps?apiKey=zCxIftNnbizcCTl61rydbRWUcFevJ5TR&q={"status": "online"}';
+		$.ajax({url: php_sql,
+				//async:false,
+				success: function(result){
+
+					var txtgeojson="";
+					txtgeojson+= '[';
+					k=1;
+
+					$.each(result, function() {
+						//alert(this._id.$oid+','+this.name+','+this.latlng);
+						var latlng = this.latlng.split(',');
+						var lat = latlng[0];
+						var lng = latlng[1];
+
+						if(k>1){
+							txtgeojson+= ',';
+						}
+						txtgeojson+= '{';
+						txtgeojson+=	'"type": "Feature",';
+						txtgeojson+=	'"properties": {';
+						txtgeojson+=		'"name": "'+this.name+'",';
+						txtgeojson+=		'"status": "'+this.status+'",';
+						txtgeojson+=		'"popupContent": "'+this.name+','+this.status+','+this.latlng+'"';
+						txtgeojson+=	'},';
+						txtgeojson+=	'"geometry": {';
+						txtgeojson+=		'"type": "Point",';
+						txtgeojson+=		'"coordinates": ['+lng+','+lat+']';
+						txtgeojson+=	'}';
+						txtgeojson+= '}';
+						//------------end each------------
+
+						k+=1;
+
+					});
+					
+					txtgeojson+= ']';
+					var geojsonFeature = JSON.parse(txtgeojson);
+					//alert(geojsonFeature[0].properties.popupContent);
+
+
+//					var geojsonFeature = 
+//					[
+//					{
+//						"type": "Feature",
+//						"properties": {
+//							"name": "Coors Field",
+//							"amenity": "Baseball Stadium",
+//							"popupContent": "This is where the Rockies play!"
+//						},
+//						"geometry": {
+//							"type": "Point",
+//							"coordinates": [104.9788452,9.6933755]
+//						}
+//					},
+//					{
+//						"type": "Feature",
+//						"properties": {
+//							"name": "Coors Field1",
+//							"amenity": "Baseball Stadium1",
+//							"popupContent": "This is where the Rockies play1111111!"
+//						},
+//						"geometry": {
+//							"type": "Point",
+//							"coordinates": [104.5788452,9.1933755]
+//						}
+//					},
+//					]
+//					
+//					;
+
+					function onEachFeature(feature, layer) {
+						// does this feature have a property named popupContent?
+						if (feature.properties && feature.properties.popupContent) {
+							layer.bindPopup(feature.properties.popupContent);
+						}
+					}
+
+				  if (Allpoint !== null) {
+						map.removeLayer(Allpoint);
+				  }
+					Allpoint = L.geoJSON(geojsonFeature, {
+						onEachFeature: onEachFeature
+					}).addTo(map);
+
+
+
+
+
+
+				}
+		});
+
+		},10000);
+
+//
+//		var planes = [
+//			["7C6B07",12.99497,101.50808],
+//			["7C6B38",12.30269,101.63696],
+//			["7C6CA1",12.49413,101.5421],
+//			["7C6CA2",12.98585,101.50659],
+//			["C81D9D",12.93163,101.81726],
+//			["C82009",12.5183,101.78081],
+//			["C82081",12.42079,101.5783],
+//			["C820AB",12.08414,101.96632],
+//			["C820B6",12.51285,101.53274],
+//			];
+//		var Allmarker;
+//			for (var i = 0; i < planes.length; i++) {
+//				Allmarker = new L.marker([planes[i][1],planes[i][2]])
+//					.bindPopup(planes[i][0])
+//					.addTo(map);
+//			}
+
+
+
+	}
+	else if (status_btn2 == "1")
+	{
+		alert('Close AllGPS');
+		$("#Btn2.btnStyle").css("background-color", "#fe634d");
+		status_btn2 = "0";
+
+		if (Allpoint !== null) {
+			map.removeLayer(Allpoint);
+		}
+		clearInterval(AllInterval);
+	}
+
+
+
+
+
+//	
+ 	
+//	
+//	//clearInterval(myInterval);
+//
+//
+//
+
+
+
+
+
+
+}
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

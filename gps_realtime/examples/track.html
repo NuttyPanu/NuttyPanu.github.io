@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+
+
+
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +   //The latitude as a decimal number (always returned)
+  "<br>Longitude: " + position.coords.longitude+  //The longitude as a decimal number (always returned)
+  "<br>accuracy: " + position.coords.accuracy+    //The accuracy of position (always returned)
+    "<br>altitude: " + position.coords.altitude+   //The altitude in meters above the mean sea level (returned if available)
+      "<br>altitudeAccuracy: " + position.coords.altitudeAccuracy+   //The altitude accuracy of position (returned if available)
+      "<br>heading: " + position.coords.heading+  	//The heading as degrees clockwise from North (returned if available)
+      "<br>speed: " + position.coords.speed+  //The speed in meters per second (returned if available)
+    "<br>timestamp: " + position.timestamp  //The date/time of the response (returned if available)
+  ;
+  //alert(position.coords.latitude+','+position.coords.longitude);
+}
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+	  alert("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+	  	  alert("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+	  	  alert("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+	  	  alert("An unknown error occurred.");
+      break;
+  }
+}
+
+//var tmstamp = new Date().getTime();
+//
+//var now = new Date;
+//var utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
+//      now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+//
+//
+//
+//function timeConverter(UNIX_timestamp){
+//  var a = new Date(UNIX_timestamp * 1000);
+//  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+//  var year = a.getFullYear();
+//  var month = months[a.getMonth()];
+//  var date = a.getDate();
+//  var hour = a.getHours();
+//  var min = a.getMinutes();
+//  var sec = a.getSeconds();
+//  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+//  return time;
+//}
+//console.log(timeConverter(0));
+//
+//
+//alert(now+', '+tmstamp+' , '+timeConverter(tmstamp));
+//
+//var d = new Date(1548920138977).toLocaleDateString("en-TH")
+//var t = new Date(1548920138977).toLocaleTimeString("en-TH") 
+//alert(d+t);
+
+
+
+
+</script>
+
+</body>
+</html>

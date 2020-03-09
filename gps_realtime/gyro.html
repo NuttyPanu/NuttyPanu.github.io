@@ -17,7 +17,9 @@ device.
 <div id="FB"></div>
 <div id="DIR"></div>
 <script type="text/javascript">
+
    if (window.DeviceOrientationEvent) {
+	   alert("DeviceOrientation is supported");
       console.log("DeviceOrientation is supported");
       window.addEventListener('deviceorientation', function(eventData) {
          // gamme is for left/right inclination

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <h2>Device Orientation with HTML5</h2>
+You need to be on a mobile device or use a laptop with accelerometer/orientation
+device.
+<p>
+<div id="LR"></div>
+<div id="FB"></div>
+<div id="DIR"></div>
+<script type="text/javascript">
+   if (window.DeviceOrientationEvent) {
+      console.log("DeviceOrientation is supported");
+      window.addEventListener('deviceorientation', function(eventData) {
+         // gamme is for left/right inclination
+         var LR = eventData.gamma;
+         // beta is for front/back inclination
+         var FB = eventData.beta;
+         // alpha is for orientation
+         var DIR = eventData.alpha;
+         // display values on screen
+         deviceOrientationHandler(LR, FB, DIR);
+      }, false);
+   } else {
+      alert("Device orientation not supported on your device or browser. Sorry.");
+   }
+function deviceOrientationHandler(LR, FB, DIR) {
+   document.querySelector("#LR").innerHTML = "gamma : " + Math.round(LR);
+   document.querySelector("#FB").innerHTML = "beta : " + Math.round(FB);
+   document.querySelector("#DIR").innerHTML = "alpha : " + Math.round(DIR);
+}
+</script>
+ </body>
+</html>

@@ -10,8 +10,8 @@ Source Code On Github : https://github.com/LookHin/google-drive-api
 
 include_once("google-drive-api.class.php");
 
-$strClientId = "966028613815-5enm1d9no2optbeg11jqh0eovpq4n1mr.apps.googleusercontent.com";
-$strClientSecret = "LKyaEJlDLSoVIVtIPnsVAj_k";
+$strClientId = "966028613815-759oogep3oukgevhvjv6gbqvim253ln2.apps.googleusercontent.com";
+$strClientSecret = "xoOuhaL7DDQXyFSYz-RmEYho";
 
 // Init Drive Object
 $obj = new GoogleDriveApi($strClientId, $strClientSecret);

@@ -11,7 +11,7 @@ Source Code On Github : https://github.com/LookHin/google-drive-api
 include_once("google-drive-api.class.php");
 
 $strClientId = "966028613815-5enm1d9no2optbeg11jqh0eovpq4n1mr.apps.googleusercontent.com";
-$strClientSecret = "UQAT-a771gG55ItJR2e9D4vo";
+$strClientSecret = "LKyaEJlDLSoVIVtIPnsVAj_k";
 $strRefreshToken = "YOUR_REFRESH_TOKEN";
 
 // Init Drive Object

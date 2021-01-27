@@ -38,10 +38,10 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" onclick="question();">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" onclick="question();">Link</a>
+        <a class="nav-link" onclick="question1();">Link</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Coming Soon</a>
@@ -385,23 +385,29 @@ var countdownfunction = setInterval(function() {
 */
 
 function question(){
-
-	/*
-	 var favDrink = prompt("What's your favorite cocktail drink?", "Daiquiri");
-	  switch(favDrink) {
-		case "Martini":
-		  text = "Excellent choice. Martini is good for your soul.";
+	
+	 var fav = prompt("ถ้าพูดถึงความรัก คุณคิดว่าอะไรคือสิ่งสำคัญ?", "");
+	  switch(fav) {
+		case "เวลา":
+		  text = "เวลาก็สำคัญครับ แต่ก็ต้องมีความเอาใจใส่กันและกันด้วยนะครับ";
+		  alert(text);
 		  break;
-		case "Daiquiri":
-		  text = "Daiquiri is my favorite too!";
+		case "ความเอาใจใส่":
+		  text = "นี่คือสิ่งสำคัญเลยนะครับ";
+		  alert(text);
 		  break;
-		case "Cosmopolitan":
-		  text = "Really? Are you sure the Cosmopolitan is your favorite?";
+		case "":
+		  text = "ถ้าไม่รู้ก็ลองเดาดูก่อนนะครับ";
+		  alert(text);
 		  break;
 		default:
-		  text = "I have never heard of that one..";
-	*/
+		  text = "ความรัก จำเป็นต้องมีความเอาใจใส่นะครับ";
+		  alert(text);
+	  }
 
+}
+
+function question1(){
 
 	var r = confirm("รักพี่นัทมั้ยครับ");
 	if (r == true) {

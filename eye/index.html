@@ -1,64 +1,444 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-      </script>
-      <script>
-         function functionConfirm(msg, myYes, myNo)
-         {
-            var confirmBox = $("#confirm");
-            confirmBox.find(".message").text(msg);
-            confirmBox.find(".yes,.no").unbind().click(function()
-            {
-              confirmBox.hide();
-            });
-            confirmBox.find(".yes").click(myYes);
-            confirmBox.find(".no").click(myNo);
-            confirmBox.show();
-         }
-      </script>
-      <style>
-         #confirm
-         {
-            display: none;
-            background-color: #91FF00;
-            border: 1px solid #aaa;
-            position: fixed;
-            width: 250px;
-            left: 50%;
-            margin-left: -100px;
-            padding: 6px 8px 8px;
-            box-sizing: border-box;
-            text-align: center;
-         }
-         #confirm button {
-            background-color: #48E5DA;
-            display: inline-block;
-            border-radius: 5px;
-            border: 1px solid #aaa;
-            padding: 5px;
-            text-align: center;
-            width: 100px;
-            cursor: pointer;
-         }
-         #confirm .message
-         {
-            text-align: left;
-         }
-      </style>
-   </head>
-   <body>
-      <div id="confirm">
-         <div class="message"></div>
-         <button class="yes">Like!</button>
-         <button class="no">No, I Like Cricket!</button>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <!-- <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width"> -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+	<meta name="description" content="Loveeye">
+	<meta name="keywords" content="eye">
+    <meta name="author" content="Nutty">
+    <title>LoVEeYE</title>
+
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            body {
+                font-family: 'Prompt', sans-serif;
+            }
+			.carousel {
+				border-radius: 10px 10px 10px 10px;
+				overflow: hidden;
+			}
+
+		</style>
+		
+  </head>
+
+
+
+  <body onload="checkbrowser()">
+
+
+    <nav class="navbar navbar-inverse" style="border-radius: 0px 0px; margin-bottom: 3px;">
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top" > -->
+		<a class="navbar-brand visible-xs visible-sm visible-md visible-lg"><img width="35px" src="img/pwa_logo.png" style ="margin-top: -8px;"/></a>
+ 		<a name="head1" class="navbar-brand visible-xs visible-xs visible-sm visible-md visible-lg" style ="margin-left:-18px; color:#00ceff;">Eye</a>
+ 		<a name="head" class="navbar-brand" style ="margin-left: -20px; margin-right: -5px; color: #00ceff;">ssssssss</a>
+    </nav>
+
+
+	<marquee  style="font-size: 20px; color: #c7254e;" class="visible-xs visible-sm visible-md visible-lg">*** Love Eye <a href="https://lin.ee/cLzsuQU"><img height="28" border="0" src="img/line.png" style="margin-top: -3px;"></a></marquee>
+
+    <!-- Begin page content -->
+    <div class="container hidden-xs hidden-sm visible-md visible-lg">
+      <div>
+        <h1 id="headname" >head1</h1>
       </div>
-      <button onclick = 'functionConfirm("Do you like Football?", function yes()
-      {
-         alert("Yes")
-      }, function no()
-      {
-         alert("no")
-      });'>submit</button>
-   </body>
+		</br>
+    </div>
+
+	<div class="container">
+
+			<div class="row">
+					<div class="panel panel-login">
+						<!--<div class="panel-body" style="border-style: dotted;">-->
+						<div class="panel-body" style="padding-top: 0px; padding-bottom: 0px;">
+							<div class="row" >
+								<div class="col-lg-5 col-md-6 hidden-xs hidden-sm visible-md visible-lg">
+									  <!--<h2>Carousel Example</h2>-->
+									  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:480px; height:300px; margin-top: 0px; padding-top: 10px;">
+										<!-- Indicators -->
+										<ol class="carousel-indicators">
+										  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+										  <li data-target="#myCarousel" data-slide-to="1"></li>
+										  <li data-target="#myCarousel" data-slide-to="2"></li>
+										  <li data-target="#myCarousel" data-slide-to="3"></li>
+										  <li data-target="#myCarousel" data-slide-to="4"></li>
+										</ol>
+
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" style="width:480px; height:300px;">
+
+										  <div class="item active">
+											<img src="img/carousel/8.jpg" alt="logo" style="width:100%;">
+											<div class="carousel-caption">
+											  <h4></h4>
+											  <p> </p>
+											</div>
+										  </div>
+
+										  <div class="item">
+											<img src="img/carousel/0_0.jpg" alt="" style="width:100%;">
+											<div class="carousel-caption">
+											  <h4>Meter Monitoring System</h4>
+											  <p> </p>
+											</div>
+										  </div>
+
+										  <div class="item">
+											<img src="img/carousel/0_1.jpg" alt="Overview" style="width:100%;">
+											<div class="carousel-caption">
+											  <h4></h4>
+											  <p> </p>
+											</div>
+										  </div>
+										
+										  <div class="item">
+											<img src="img/carousel/1.jpg" alt="" style="width:100%;">
+											<div class="carousel-caption">
+											  <h3> </h3>
+											  <p> </p>
+											</div>
+										  </div>
+
+										  <div class="item">
+											<img src="img/carousel/11.jpg" alt="" style="width:100%;">
+											<div class="carousel-caption">
+											  <h3> </h3>
+											  <p> </p>
+											</div>
+										  </div>
+
+										</div>
+
+										<!-- Left and right controls -->
+										<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+										  <span class="glyphicon glyphicon-chevron-left"></span>
+										  <span class="sr-only">Previous</span>
+										</a>
+										<a class="right carousel-control" href="#myCarousel" data-slide="next">
+										  <span class="glyphicon glyphicon-chevron-right"></span>
+										  <span class="sr-only">Next</span>
+										</a>
+									  </div>
+								</div>
+
+								<!--<div class="col-lg-5 hidden-xs hidden-sm hidden-md hidden-lg" style="border-style: dotted;">-->
+								<div class="col-lg-5 hidden-xs hidden-sm hidden-md hidden-lg">
+
+										<div class="panel-heading">
+										   <div class="panel-title text-center " style="vertical-align:center;" >
+
+												<div style="align:center;"><img class="hidden-md" style ="height:200px;" src="img/pwa_logo2.jpg"/></div>
+
+												<h3 class="title hidden-md">งานระบบภูมิสารสนเทศ กองภูมิสารสนเทศ<br>สำนักเทคโนโลยีภูมิสารสนเทศ <br>การประปาส่วนภูมิภาคสำนักงานใหญ่</h3>
+												
+												
+											</div>
+										</div> 
+								</div>
+
+
+
+								<div class="col-lg-1 col-md-1 hidden-xs hidden-sm visible-md visible-lg" >
+								</div>
+
+
+								<div class="col-lg-6 col-md-5">
+
+										<div class="col-lg-12">
+										<span style="text-align:center;">
+										<h3 class="txtBlue">
+										<span class="hidden-xs hidden-sm visible-md hidden-lg" style="margin-top:-20px"></span>
+										<i class="glyphicon glyphicon-log-in hidden-xs "></i> 
+										กรอกรหัสพนักงานและรหัสผ่านเพื่อเข้าระบบ
+										</h3>
+										</span>
+
+
+											<form class="form-horizontal" method="post" action="">
+
+												<div class="form-group">
+													<label for="username" class="cols-sm-2 control-label">รหัสพนักงาน</label>
+													<div class="cols-sm-10">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
+															<input type="text" class="form-control" name="username" id="username"  placeholder="กรอกรหัสพนักงาน"/>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label for="password" class="cols-sm-2 control-label">รหัสผ่าน</label>
+													<div class="cols-sm-10">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+															<input type="password" class="form-control" name="password" id="password"  placeholder="กรอกรหัสผ่าน"/>
+														</div>
+													</div>
+												</div>
+
+											 <div class="footer">
+											 <div class="row">
+
+											  <div class="col-md-6">
+												<p><a href="https://intranet.pwa.co.th/signup/lostpwd.php" target="_blank" name="link">ลืมรหัสผ่าน</a></p>
+											  </div>
+
+											  </div>
+											  </div>
+
+												<div class="form-group ">
+													<button type="submit" class="btn btn-primary btn-lg btn-block login-button" id="login-submit">เข้าสู่ระบบ</button>
+												</div>
+
+
+											</form>
+										</div>
+
+								</div>		
+								
+
+						</div> <!-- class="panel-body" -->
+								
+					</div>  <!-- class="panel panel-login" -->
+
+				<div id="supportweb" class="container" style="display: none;">
+					<p><b>หมายเหตุ :</b> เว็บไซต์นี้แสดงผลได้ดีบนเว็บเบราว์เซอร์ Google Chrome เวอร์ชั่น 56 ขึ้นไป</p>
+				</div>	
+
+			</div> <!-- class="row" -->
+	</div>
+
+
+
+    <!--<footer class="footer " style="border-style: dotted;">-->
+	  <div class="footer">
+		<div class="row">
+
+		  <div class="col-md-6 copyright">
+		  <p>  </p>
+
+
+		  <p> พัฒนาระบบโดย: กองภูมิสารสนเทศ  &nbsp;&nbsp;<a href="tel: 02-551-8752" style="color: #333;"><i class="fa fa-phone fa-3"></i> โทร: 02-551-8752 </a></p>
+			<!-- <img alt="Counter" src="https://counter.pwa.co.th/stats/c-114.png">-->
+			<p>Copyright © 2020 <a href="http://gis.pwa.co.th/home.php" target="_blank" name="link">กองภูมิสารสนเทศ</a> | <a href="http://www.pwa.co.th/" target="_blank"  name="link">การประปาส่วนภูมิภาค</a></p>
+		  </div>
+
+
+		  <div class="col-md-6 hidden-xs hidden-sm">
+		  <p>  </p>
+			<address class="text-right">
+			  <p><i class="fa fa-map-marker fa-3"></i> กองมาตรวัดน้ำ การประปาส่วนภูมิภาค<br>
+				ที่อยู่ 107 ม.7 ต.เขาพระ อ.เมือง จ.นครนายก 26000<br><a href="tel: 02-551-8060" style="color: #333;"><i class="fa fa-phone fa-3"></i> โทร: 02-551-8060-4 </a></p>
+			</address>
+		  </div>
+		</div>
+	  </div>
+	<!--<footer>-->
+
+
+	
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog" data-toggle="modal" data-backdrop="true" data-keyboard="true">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div class="modal-header" style="background-color:green;color:white;">
+          <h4 class="modal-title"><span class="glyphicon glyphicon-success"></span>ระบบติดตามมาตรวัดน้ำ V.2</h4>
+          <button class="close" type="button" data-dismiss="modal" aria-hidden="true" style="margin-top: -25px;">&times;</button>
+        </div>
+
+        <div class="modal-body" style="padding: 15px 10px 0px 10px;">
+
+			<div class="panel-group" id="accordion1">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <h4 class="panel-title">
+							 <a-collapse data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+							 รายละเอียดการปรับปรุง V.2 :  ปรับปรุงล่าสุดเมื่อวันที่ 22 ต.ค. 63
+							 </a-collapse>
+						 </h4>
+					</div>
+					<!--<div id="collapseOne" class="panel-collapse collapse in">-->
+					<div id="collapseOne" class="panel-collapse collapse ">
+						<div class="panel-body">
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันค้นหา) เพิ่มการค้นหามาตรฯด้วยชุดข้อมูล CUSTCODE ( รองรับไฟล์ .xlsx )</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) เพิ่มเมนูหน่วยน้ำคงที่ติดต่อกันย้อนหลัง 1- 12 เดือน (ไม่รวม 0 ลบ.ม.)</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) ปรับปรุงเงื่อนไขการกรองข้อมูลให้รองรับขนาดมาตร ยี่ห้อมาตร สถานะมาตร</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) ปรับปรุงเงื่อนไขการใช้น้ำ 0, 1-5, 6-10 ลบ.ม. เป็น 1- 12 เดือนย้อนหลัง</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มการแชร์ตำแหน่งและข้อมูลในแอปพลิเคชัน Line</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มสีอ้างอิงสถานะมาตรวัดน้ำในตารางสรุปจำนวนรายสาขา</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) ปรับปรุงการแสดงผลแผนที่ (WMS) ทุกระยะการซูม</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มมาตราส่วนแผนที่สำหรับการวัดระยะ</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มฟังก์ชันการหาค่าระดับความสูงทั้งรูปแบบจุดและแบบเส้น (อ้างอิงค่าระดับจาก Google Map)</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/newl.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มฟังก์ชันการวิเคราะห์ข้อมูลมาตรฯในขอบเขตที่กำหนด</p>
+							
+						</div>
+						<div class="panel-footer" style="padding-top: 5px;padding-bottom: 1px;">
+							<p id="demo" style="text-align:center; font-size:16px; font-color: red; padding: 0;"></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <h4 class="panel-title">
+							<a-collapse data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+								รายละเอียดการปรับปรุง V.1 : ปรับปรุงล่าสุดเมื่อวันที่ 3 ม.ค. 61
+							</a-collapse>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse">
+						<div class="panel-body">
+
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - เพิ่มการกำหนดสิทธิ์การใช้งานตามพื้นที่รับผิดชอบ</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มฟังก์ชันการค้นหามาตรฯ (ค้นหามาตรฯ จาก ชื่อ, ที่อยู่ ของผู้ใช้น้ำ)</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มฟังก์ชันการนำทางไปยังตำแหน่งของมาตรฯ (รองรับอุปกรณ์บนมือถือ)</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มตารางแสดงรายละเอียดมาตรฯ บนแผนที่</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มฟังก์ชันการส่งออกข้อมูลและการพิมพ์แผนที่</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) เพิ่มฟังก์ชัน Google Streetview</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) ปรับปรุงการแสดงผลของระบบให้รองรับอุปกรณ์บนมือถือ</p> 
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันแผนที่) ปรับปรุงการแสดงรายละเอียดข้อมูลผู้ใช้น้ำและกราฟแสดงการใช้น้ำย้อนหลัง</p> 
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) เพิ่มการกรองยี่ห้อมาตรฯและการส่งออกข้อมูล มาตรฯอายุ 10 ปี ขึ้นไป</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) เพิ่มปุ่มย้อนกลับสู่แผนที่ เมื่ออยู่ในหน้าสถิติ</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) เพิ่มการเลือกประเภทผู้ใช้น้ำให้สามารถเลือกประเภทย่อยได้</p>
+							<p style="font-size: 13px !important;"><img width="25px" src="img/blank.gif"  style ="margin-top: -5px;"/> - (ฟังก์ชันสถิติ) ปรับปรุงการแสดงผลของกราฟและเพิ่มฟังก์ชันการส่งออกข้อมูล</p>
+							
+						</div>
+						<div class="panel-footer" style="padding-top: 5px;padding-bottom: 1px;">
+							<p style="text-align:center; font-size:16px; font-color: red; padding: 0;">สถานะ : ประกาศใช้เมื่อ 19 มี.ค.61 </p>
+						</div>						
+
+					</div>
+				</div>
+				
+			</div>
+
+
+		</div>
+
+        <div class="modal-footer">
+			<div class="row">
+				<div class='col-xs-9 col-sm-10 col-md-10 col-lg-10' style="text-align:left;"> กรุณากด refresh (Ctrl + F5)<br>เมื่อเข้าสู่ระบบสำเร็จ
+				</div>
+				<div class='col-xs-2 col-sm- col-md-2 col-lg-2' style="margin-bottom: 0px;"> <button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">ปิด</button>
+				</div>
+			</div>
+		</div>
+      
+    </div><!-- Modal content-->
+
+  </div>		
+ </div>		
+	
+
+    <div class="modal fade" id="ModalAccept" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+        <div class="modal-header" style="background-color:red;color:white;">
+          <h4 class="modal-title"><span class="glyphicon glyphicon-success"></span>ข้อกำหนดการใช้งานระบบติดตามมาตรวัดน้ำ</h4>
+        </div>
+
+          <div class="modal-body" >
+          <p id="detail1">
+				<p>เงื่อนไขการใช้งาน:</p> 
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;ระบบติดตามมาตรวัดน้ำจัดทำขึ้นโดยมีวัตถุประสงค์เพื่อให้บริการข้อมูลที่เกี่ยวข้องกับมาตรวัดน้ำ <br> ผู้ใช้งานต้องใช้งานเพื่อการปฏิบัติงานตามระเบียบและข้อบังคับของกปภ. โดยไม่เปิดเผยข้อมูล ทำให้ข้อมูลรั่วไหล หรือประกาศเผยแพร่ข้อมูลของกปภ. ส่วนใดส่วนหนึ่งหรือทั้งหมด ต่อบุคคลใด ๆ </p>
+				
+				
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;หากผู้ใช้งานกระทำการฝ่าฝืนข้อตกลงการใช้งาน ผู้ใช้งานจะต้องรับผิดชอบตามกฎหมายอย่างเคร่งครัด</p>
+		  </p>
+
+		  </div>
+
+          <div class="modal-footer">
+			<div class="row">
+
+				<div align="center"  class='col-xs-12 col-sm- col-md-12 col-lg-12' > <button type="button" class="btn btn-default" data-dismiss="modal" id="accept_btn" >ยอมรับเงื่อนไขการใช้งาน</button>
+				</div>
+
+			</div>
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->		
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>-->
+
+
+	<script>
+	
+
+
+	$( document ).ready(function() {
+
+	});
+	</script>	
+	
+    <script>
+		function checkbrowser() { 
+			alert(navigator.appVersion);
+			alert(navigator.userAgent);
+			//mobile
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+			}
+			else{		
+
+
+			}
+		}
+
+    </script>
+
+
+<script>
+// Set the date we're counting down to
+//var countDownDate = new Date("Sep 1, 2017 00:00:00").getTime();
+var countDownDate = new Date("Feb 25, 2020 00:00:00").getTime();
+
+// Update the count down every 1 second
+var countdownfunction = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+    
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = days + " วัน - " + hours + " ชั่วโมง - "
+    + minutes + " นาที - " + seconds + " วินาที ";
+    
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(countdownfunction);
+        //document.getElementById("demo").innerHTML = "สถานะ : ได้รับความเห็นชอบ 25 ก.พ. 63";
+		document.getElementById("demo").innerHTML = "สถานะ : ประกาศใช้  25 ก.พ. 63";
+
+    }
+}, 1000);
+</script>
+
+
+
+  </body>
 </html>

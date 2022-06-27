@@ -725,7 +725,7 @@
       			console.log( $('#geolat').val(),$('#geolng').val(),$('#housenum').val(),$('#formFileSm').val() )
 						$.ajax({
 							 type:'POST',
-							 url:'./service/mongodb.php',
+							 url:'https://herokunutty.herokuapp.com/mongodb.php',
 							 async:false,
 							 dataType: 'json',
 							 data : {
@@ -939,7 +939,7 @@
 		function getmongo(type){
 						$.ajax({
 							 type:'POST',
-							 url:'./service/mongodb.php',
+							 url:'https://herokunutty.herokuapp.com/mongodb.php',
 							 async:false,
 							 dataType: 'json',
 							 data : {

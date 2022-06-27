@@ -1,1 +1,1532 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes/">
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="For Survey"/>
+    <meta name="author" content="GISPWA"/>
+    <meta name="keywords" content="Survey gis pwa" />
+    <!--<meta content="width=device-width,initial-scale=1.0" name="viewport" />-->
 
+	<title>GIS Survey </title>
+
+	<!-- icon shotcut-->
+	<link rel="apple-touch-icon" sizes="57x57" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicon.png?v=20200225">  
+	<link rel="apple-touch-icon" sizes="76x76" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="167x167" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=20200225">
+
+	<link rel="icon" sizes="128x128" href="favicon.png?v=20200225">
+  <link rel="icon" sizes="196x196" href="favicon.png?v=20200225">
+
+
+	<!--
+	<link rel="stylesheet" href="https://cdn.usebootstrap.com/bootstrap/latest/css/bootstrap.min.css"/>
+	<script src="https://cdn.usebootstrap.com/bootstrap/latest/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+	-->
+
+	<link rel="stylesheet" href="assets/fontawesome6.1.1/css/all.css">
+
+	<style>
+
+	    body {
+	      padding: 0;
+	      margin: 0;
+	    }
+
+	    html, body, #mappaint-map {
+	      height: 100%;
+	    }
+
+	    /*slidemenu*/
+      .content {
+        margin: 0.25rem;
+        border-top: 1px solid #000;
+        padding-top: 0.5rem;
+      }
+      .header {
+        font-size: 1.8rem;
+        color: #7f7f7f;
+      }
+      .title {
+        font-size: 1.1rem;
+        color: #7f7f7f;
+        font-weight: bold;
+      }
+      .bottom {
+        margin-top: 64px;
+        font-size: 0.8rem;
+        color: #7f7f7f;
+      }
+ 		/*slidemenu*/
+
+	    /*
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	
+		body { padding: 0; margin: 0; } #map { height: 100%; width: 100vw; }
+		*/
+
+		/*---bookmark--*/
+		span.bookmark-name{
+		  	white-space: nowrap;
+    		width: 200px;
+    		/* border: 1px solid #000000; */
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+
+		}  	
+		/*---bookmark--*/
+
+		@media print {
+				@page {
+					size: A4;
+					margin-top: 0.5;
+					/*margin-bottom: 0;*/
+					margin-bottom: 0.5;
+					margin-right: 0.5;
+					margin-left: 0.5;
+
+				}
+
+				#mappaint-map{
+					height: 100%;
+					border: 1px solid black;
+				}
+
+				.leaflet-top.leaflet-left, .leaflet-top.leaflet-right ,.leaflet-bottom.leaflet-right, .leaflet-iconLayers.leaflet-iconLayers_bottomleft.leaflet-control, .leaflet-menu{
+					display: none;
+				}
+
+				.forprint{
+					/*width: 21cm; height: 26.7cm; */
+				}
+					/*
+					#leaflet-map { border: 1px solid black; }
+		  		#leaflet-map { width: 17.5cm; height: 20cm; }
+		  		#table-with-data { width:17cm; height: 5cm; }
+					*/
+				.watermark {
+				    position: fixed;
+				    opacity: 0.2;
+				    /* Safari */
+				    -webkit-transform: rotate(-60deg);
+				    /* Firefox */
+				    -moz-transform: rotate(-60deg);
+				    /* IE */
+				    -ms-transform: rotate(-60deg);
+				    /* Opera */
+				    -o-transform: rotate(-60deg);
+
+				    /* Safari */
+				    -webkit-transform: rotate(-45deg);
+				    /* Firefox */
+				    -moz-transform: rotate(-45deg);
+				    /* IE */
+				    -ms-transform: rotate(-45deg);
+				    /* Opera */
+				    -o-transform: rotate(-45deg);
+				    /* Internet Explorer */
+				    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+				    position: absolute;
+				    font-size: 130px;
+				    margin-top: -650px;
+				    margin-left: 20px;
+				    /*
+				    margin-top: -700px;
+				    margin-left: -50px;
+							*/
+				    white-space: nowrap;
+		 		}
+		    
+		}
+		   	
+
+
+
+	</style>
+
+	<style>
+
+
+		ul.fa-ul{
+			color: #7f7f7f;
+			font-size: 14px;
+		}
+
+
+		.ui-autocomplete {
+			border: 1px solid #ced4da;
+			background: white;
+			z-index: 50000;
+			max-height: 200px;
+			max-width: 225px;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+		
+
+		/*-------custom scrollbar------------*/        	
+		.scroller {
+		  overflow-y: auto;
+		  overflow-x: clip;
+		  /*scrollbar-width: thin*/;
+		}
+		    /* Works on Firefox */
+		* {
+		  scrollbar-width: thin;
+		  /*scrollbar-color: blue orange;*/
+		  scrollbar-color: blue white;
+		}
+
+		/* Works on Chrome, Edge, and Safari */
+		*::-webkit-scrollbar {
+		  /*width: 12px;*/
+		  width: 5px;
+		}
+
+		*::-webkit-scrollbar-track {
+		  /*background: orange;*/
+		}
+
+		*::-webkit-scrollbar-thumb {
+		  background-color: #a7a7a770;
+		  border-radius: 5px;
+		  /*
+		  background-color: blue;
+		  border-radius: 20px;
+		  border: 3px solid orange;*/
+		}
+		/*-------custom scrollbar------------*/  
+
+
+
+	</style>	
+
+
+
+</head>
+
+<body>
+
+	<div id="mappaint-map"></div>
+
+	<!--<div id='map'></div>-->
+	<!--<canvas id="idCanvas" width="576" height="577"></canvas>-->
+	<!--
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin=""></script>
+	--> 
+
+    <!--
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+	-->   
+
+
+	<script src="assets/jquery/jquery-3.3.1.js?v=001"></script>	
+	<script src="assets/jquery-ui.js?v=001"></script> <!-- autocomplete-->
+	<script src="assets/FileSaver.min.js?v=001"></script> <!-- export file-->	
+
+	<link rel="stylesheet" href="assets/bootstrap5/bootstrap.min.css"/>
+	<script src="assets/bootstrap5/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="leaflet/leaflet1.6/leaflet.css"/>
+	<script src="leaflet/leaflet1.6/leaflet-src.js"></script>
+
+	<script src="leaflet/clicktolerance/src/index.js?v=001" type="text/javascript"></script>
+
+
+		<link rel="stylesheet" href="leaflet/draw/leaflet.draw.css?v=20200226"/>
+    <script src="leaflet/draw/Leaflet.draw_dev.js?v=20200225"></script>
+    <script src="leaflet/draw/Leaflet.Draw.Event.js?v=20200225"></script>
+
+    <script src="leaflet/draw/Toolbar.js?v=20200225"></script>
+    <script src="leaflet/draw/Tooltip.js?v=20200225"></script>
+
+    <script src="leaflet/draw/ext/GeometryUtil.js?v=20200225"></script>
+    <script src="leaflet/draw/ext/LatLngUtil.js?v=20200225"></script>
+    <script src="leaflet/draw/ext/LineUtil.Intersect.js?v=20200225"></script>
+    <script src="leaflet/draw/ext/Polygon.Intersect.js?v=20200225"></script>
+    <script src="leaflet/draw/ext/Polyline.Intersect.js?v=20200225"></script>
+    <script src="leaflet/draw/ext/TouchEvents.js?v=20200225"></script>
+
+    <script src="leaflet/draw/draw/DrawToolbar.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.Feature.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.SimpleShape.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.Polyline.js?v=20200226"></script>
+    <script src="leaflet/draw/draw/Draw.Marker.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.Circle.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.CircleMarker.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.Polygon.js?v=20200225"></script>
+    <script src="leaflet/draw/draw/Draw.Rectangle.js?v=20200225"></script>
+
+    <script src="leaflet/draw/edit/EditToolbar.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/EditToolbar.Edit.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/EditToolbar.Delete.js?v=20200225"></script>
+
+    <script src="leaflet/draw/Control.Draw.js?v=20200225"></script>
+
+    <script src="leaflet/draw/edit/Edit.Poly.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/Edit.SimpleShape.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/Edit.Rectangle.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/Edit.Marker.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/Edit.CircleMarker.js?v=20200225"></script>
+    <script src="leaflet/draw/edit/Edit.Circle.js?v=20200225"></script>
+
+
+	<link rel="stylesheet" href="leaflet/clustermarker/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="leaflet/clustermarker/dist/MarkerCluster.Default.css" />
+	<script src="leaflet/clustermarker/dist/leaflet.markercluster-src.js"></script>
+
+	<script src="leaflet/boxzoom/leaflet-control-boxzoom-src.js?v=001"></script>
+	<link rel="stylesheet" href="leaflet/boxzoom/leaflet-control-boxzoom.css?v=001" type="text/css" />	
+
+
+	<link rel="stylesheet" href="leaflet/zoominfo/src/L.Control.Zoominfo.css" />
+	<script src="leaflet/zoominfo/src/L.Control.Zoominfo.js" ></script>
+
+	<link rel="stylesheet" href="leaflet/locate/src/L.Control.Locate.css" />
+    <script src="leaflet/locate/src/L.Control.Locate.js" ></script>
+
+    <link rel="stylesheet" href="leaflet/slidemenu/src/L.Control.SlideMenu.css?v=001" />
+    <script src="leaflet/slidemenu/src/L.Control.SlideMenu.js?v=002"></script>
+
+    <link rel="stylesheet" href="leaflet/reticlescale/src/leaflet-reticle.css">
+    <script src="leaflet/reticlescale/src/leaflet-reticle.js"></script>
+
+    <link rel="stylesheet" href="leaflet/cascadebutton/src/L.cascadeButtons.css">
+    <script src="leaflet/cascadebutton/src/L.cascadeButtons.js"></script>
+
+
+    <script type="text/javascript" src="leaflet/iconlayer/providers.js"></script>
+    <script type="text/javascript" src="leaflet/iconlayer/src/iconLayers.js"></script>
+    <link rel="stylesheet" href="leaflet/iconlayer/src/iconLayers.css?v=001">
+
+
+	<!-- Leaflet-Rotate 
+	<script src="leaflet/rotate/dist/leaflet-rotate-src.js?v=001"></script>
+
+	<script src="leaflet/rotate/misc/route.js"></script>
+	<script src="leaflet/rotate/misc/places.js"></script>
+	<script src="leaflet/rotate/misc/loremIpsum.js"></script>
+	<script src="leaflet/rotate/lib/debug.js"></script>
+	-->
+
+	
+	<script type="text/javascript" src="leaflet/bookmarks/L.Control.Bookmarks.js?v=003"></script>
+    <link rel="stylesheet" href="leaflet/bookmarks/leaflet.contextmenu.css?v=2021" />	
+    <link rel="stylesheet" href="leaflet/bookmarks/leaflet.bookmarks_use.css?v=003" />
+    <link rel="stylesheet" href="leaflet/bookmarks/leaflet.modal.css?v=2021" />
+	
+
+    
+    <script src="leaflet/mappaint/dist/MapPaint_dev.js"></script>
+    <link rel="stylesheet" href="leaflet/mappaint/dist/MapPaint_dev.css?v=003" type="text/css" />
+	
+     <script src="leaflet/modal/src/L.Control.Window.js"></script>
+     <link rel="stylesheet" href="leaflet/modal/src/L.Control.Window.css" />
+
+	
+
+
+	<script src="leaflet/edgegrid/leaflet.edgescalebar_use.js?v=003"></script>
+	<script>
+		var edgeBar =L.edgeScaleBar();
+		//edgeBar.addTo(map);
+ 	</script>
+
+ 	<script src="leaflet/edgegrid/leaflet.latlng-graticule.js?v=001"></script>
+	<script>
+		var edgeGrat =	L.latlngGraticule({
+			    showLabel: true,
+			    opacity: 1,
+			    weight: 0.8,
+				//color: '#aaa',
+				color: '#46505a',
+				font: '12px Verdana',
+				//fontColor: '#aaa',
+				fontColor: '#46505a',					
+				//dashArray:[0,0],
+				//sides: ['N', 'S', 'E', 'W'],
+			    dashArray: [5, 5],
+			    zoomInterval: [
+				    //{start: 2, end: 2, interval: 40},
+				    //{start: 3, end: 3, interval: 20},
+				    //{start: 4, end: 4, interval: 10},
+				    {start: 5, end: 6, interval: 5},
+				    {start: 6, end: 7, interval: 3},			
+				    {start: 7, end: 8, interval: 2},				    	    
+				    {start: 8, end: 9, interval: 1},
+				    {start: 9, end: 10, interval:  0.500},
+				    {start: 10, end: 11, interval: 0.300},				    
+				    {start: 11, end: 13, interval: 0.100},
+				    {start: 13, end: 15, interval: 0.050},
+				    {start: 14, end: 15, interval: 0.025},				    
+				    {start: 15, end: 16, interval: 0.010},
+				    {start: 16, end: 17, interval: 0.005},
+
+				    {start: 17, end: 18, interval: 0.001},				    				    
+				    {start: 18, end: 19, interval: 0.0009},
+				    {start: 19, end: 21, interval: 0.0005},
+				    {start: 21, end: 30, interval: 0.00009},
+		    
+			    ],
+			  /*
+			  zoomInterval: {
+			    latitude: [
+			      {start: 4, end: 6, interval: 5},
+			      {start: 7, end: 20, interval: 1}
+			    ],
+			    longitude: [
+			      {start: 4, end: 6, interval: 10},
+			      {start: 7, end: 20, interval: 2}
+			    ]
+			  }
+				*/
+
+			});
+
+		//edgeGrat.addTo(map);
+	</script>
+
+
+	<script>
+
+
+	   /*
+		//var map = L.map('map').fitWorld();
+		var map = L.map("map", {
+			//position: bottomright,
+		    //attributionControl: false,
+		    zoomControl: true
+		}).setView(new L.LatLng(13.901111, 100.752778), 14);
+		*/
+
+
+		var map = L.map("mappaint-map", {
+		//var map = L.map('map', {
+			//zoominfoControl: true,
+
+			zoomSnap: 0.25,
+			zoomDelta: 0.25,
+			wheelPxPerZoomLevel: 180,	
+					
+			zoomControl: false,
+			zoom: 6, 
+			center: [13.901111, 100.752778], 
+			attributionControl: true,
+			//scrollWheelZoom: false,
+
+
+			/*-----rotate-----*/
+			//// worldCopyJump: true,
+			//rotate: true,
+			//touchRotate: true,
+			//rotateControl: {
+			//	closeOnZeroBearing: false
+			//},
+			//bearing: 0,
+			/*-----rotate-----*/
+
+	    });
+
+		var zoomctrl = new L.Control.Zoominfo({position: 'bottomright'}).addTo(map);
+		//var zoomctrl = new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+
+
+
+		if( navigator.userAgent.match(/Windows NT/i) || navigator.platform.indexOf('Win') > -1){
+			L.Control.boxzoom({position:'bottomright',}).addTo(map);
+			//var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
+		}
+		else if( (navigator.userAgent.match(/Macintosh|MacOS|Mac/i) && (('ontouchstart' in document.documentElement) == false ||'ontouchstart' in window == false) ) || 
+			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints <= 0)){
+			L.Control.boxzoom({position:'bottomright',}).addTo(map); 
+			//var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
+		}
+		else if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+			(navigator.userAgent.match(/Macintosh|iPad/i) && (('ontouchstart' in document.documentElement) == true ||'ontouchstart' in window == true)) || 
+			((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad')) {
+		}
+		else{
+			//var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
+		}
+
+
+
+
+		var lc = L.control.locate({
+			position: 'bottomright',
+			strings: {
+				title: "ตำแหน่งปัจจุบัน"
+			},
+			locateOptions: {
+				//setView: 1,
+				clickBehavior: {inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'inView'},			
+				//setView: always,
+				//clickBehavior: {inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'inView'},
+				maxZoom: 17,
+				//enableHighAccuracy: true,
+				showCompass: true,
+				//showPopup: true
+				timeout: 500,
+				maximumAge:500,
+				cacheLocation:false,
+				enableHighAccuracy: true
+			}
+
+
+		}).addTo(map);
+
+
+
+      /* contents slidemenu */
+      const left = '<div class="header" style="font-size:16px;font-weight:bold;">ระบบสนับสนุนการสำรวจข้อมูล GIS</div>';
+      //const right = '<div class="header">Slide Menu (Right)</div>';
+      /*
+      let contents = `
+            <div class="content">
+                <div class="title">Read Me</div>
+                <p>A simple slide menu for Leaflet.<br>
+                When you click the menu button and the menu is displayed to slide.<br>
+                Please set the innerHTML to slide menu.</p>
+                <div class="title">Usage</div>
+                <p>L.control.slideMenu("&lt;p&gt;test&lt;/p&gt;").addTo(map);</p>
+                <div class="title">Arguments</div>
+                <p>L.control.slideMenu(&lt;String&gt;innerHTML, &lt;SlideMenu options&gt;options?)</p>
+                <div class="title">Options</div>
+                <p>position<br>
+                menuposition<br>
+                width<br>
+                height<br>
+                direction<br>
+                changeperc<br>
+                delay<br>
+                icon<br>
+                hidden</p>
+                <div class="title">Methods</div>
+                <p>setContents(&lt;String&gt;innerHTML)</p>
+                <div class="bottom">
+                    <span>License <span style="font-weight: bold">MIT</span></span>
+                </div>
+            </div>`;
+       */
+
+			
+
+		
+
+
+      let contents = `
+      <div class="content">
+				<br>
+
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="ค้นหา" id="btnsearch">
+				  <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+				</div>
+
+				<hr>  
+				<ul class="fa-ul">
+				  <li><i class="fa-li fa fa-database"></i>ชั้นข้อมูล</li>
+				  <li><i class="fa-li fa fa-map"></i>เพิ่ม/แก้ไขแผนที่</li>
+				</ul>
+				<hr>           
+				<ul class="fa-ul">
+				  <li><i class="fa-li fa fa-bookmark"></i>สถานที่ของคุณ</li>
+				  <li><i class="fa-li fa fa-commenting"></i>การมีส่วนร่วมของคุณ</li>
+				  <li><i class="fa-li fa fa-map-marker-alt"></i>การแชร์ตำแหน่ง</li>
+				</ul>
+				<hr>  
+				<ul class="fa-ul">
+				  <li><i class="fa-li fa fa-print"></i>พิมพ์</li>
+				  <li><i class="fa-li fa fa-download"></i>ส่งออกข้อมูล</li>  
+				  <li><i class="fa-li fa fa-gear"></i>การตั้งค่า</li>
+				  <li><i class="fa-li fa fa-bullhorn"></i>แจ้งปัญหา</li>
+				  <li><i class="fa-li fa fa-info-circle"></i>เกี่ยวกับ</li>  
+				</ul>
+				<hr>  
+      </div>`;
+      /* left */
+      L.control.slideMenu(left + contents, {delay: "10"}).addTo(map);
+   		
+			$('.leaflet-menu').css('box-shadow', '#222 -1px -1px 0px 0px');
+			$('button.leaflet-menu-close-button').click(function(){
+				//alert('close');
+				$('.leaflet-menu').css('box-shadow', '#222 -1px -1px 0px 0px');
+			});
+
+			$('a.leaflet-bar-part.leaflet-bar-part-single').click(function(){
+				//alert('open');
+				if($('.leaflet-menu').css('left') == '0px'){
+				}
+				$('.leaflet-menu').css('box-shadow', '#222 -1px -1px 20px 0px');
+
+			});
+			
+
+      /* right 
+      const slideMenu = L.control
+        .slideMenu("", {
+          position: "topright",
+          menuposition: "topright",
+          width: "30%",
+          height: "400px",
+          delay: "50",
+          icon: "chevron-left",
+        })
+        .addTo(map);
+      slideMenu.setContents(right + contents);
+	  */
+
+	  	/*
+        var retiscale = L.control.reticle({
+                mapId: "mappaint-map",
+                metric: true,
+                fetchElevation: true
+        }).addTo(map);
+       */
+
+    var scaleM = L.control.scale({position: 'bottomleft',metric: true,imperial:false}).addTo(map);
+
+ 
+		var cascade = new L.cascadeButtons([
+		    {icon: 'fas fa-print fa-lg', title: 'พิมพ์แผนที่', ignoreActiveState:true , command: () =>{forPrint(); }},
+		    {icon: 'fas fa-expand-arrows-alt fa-lg', title: 'ซูมแผนที่ทั้งหมด', ignoreActiveState:true , command: () =>{map.setView([13.901111, 100.752778], 6); }},		    
+		    {icon: 'fas fa-edit fa-lg', title: 'เพิ่มข้อมูล GIS', items:[
+		        {icon: 'fas fa-crosshairs fa-lg', title: 'เพิ่มตำแหน่งมาตร',command: () =>{openModal()}},
+		        {icon: 'fas fa-home fa-lg', title: 'เพิ่มอาคาร',command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-arrows-alt-h fa-lg', title: 'เพิ่มท่อ',command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-search fa-lg', title: 'ดูข้อมูลมาตรทั้งหมด',command: () =>{getmongo()}},		        
+		    ]},
+		    {icon: 'fas fa-ruler-combined fa-lg', title: 'การคำนวณเชิงพื้นที่', items: [
+		        {icon: 'fas fa-tape fa-lg', title: 'คำนวณระยะทาง',command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-sign fa-lg', title: 'คำนวณพื้นที่',command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-file-export fa-lg', title: 'ดาวน์โหลดข้อมูล', items: [
+		        {icon: 'fas fa-file-archive fa-lg', title: 'ดาวน์โหลด geojson',command: () =>{exportgeojson()}},
+		        {icon: 'fas fa-file-alt fa-lg', title: 'ดาวน์โหลด .tab',command: () =>{console.log('hola')}},
+		    ]},		    
+		], {position:'topright', direction:'horizontal'}).addTo(map);
+
+		var mkGroup = new L.FeatureGroup();
+
+		let txt =`
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">พิกัด</button>
+				  </li>
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">ข้อมูลมาตร</button>
+				  </li>
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">รูปถ่าย</button>
+				  </li>
+				</ul>
+				<div class="tab-content" id="pills-tabContent">
+				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+					  <div class="input-group input-group-sm mb-3">
+					  <span class="input-group-text" id="inputGroup-sizing-sm">Lat</span>
+					  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="geolat">
+						</div>
+						<div class="input-group input-group-sm mb-3">
+						  <span class="input-group-text" id="inputGroup-sizing-sm">Lng</span>
+						  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="geolng">
+						</div>		
+					</div>
+				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+						<div class="input-group input-group-sm mb-3">
+						  <span class="input-group-text" id="inputGroup-sizing-sm">เลขมาตร</span>
+						  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="meterno">
+						</div>
+						<div class="input-group input-group-sm mb-3">
+						  <span class="input-group-text" id="inputGroup-sizing-sm">บ้านเลขที่</span>
+						  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="housenum">
+						</div>
+				  </div>
+				  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+						<div class="mb-3">
+						  <label for="formFileSm" class="form-label">อัพโหลดภาพ</label>
+						  <input class="form-control form-control-sm" id="formFileSm" type="file">
+						</div>
+						<div>
+				  </div>
+				</div>
+				
+          <div class="modal-footer" style="padding-top: 0;padding-bottom: 0;">
+		   			<button type="button" class="btn btn-default btn-sm" id='btnsubmit' style="padding-top: 0;padding-bottom: 0;">บันทึก</button>
+            <button type="button" class="btn btn-default btn-sm" style="padding-top: 0;padding-bottom: 0;" onclick="modalMeter.hide()">ยกเลิก</button>
+          </div>				
+
+			`;
+
+
+    var modalMeter = L.control.window(map,{
+			        	position:'center', // 'top', 'topRight', 'right', 'bottomRight', 'bottom', 'bottomLeft', 'left', 'topLeft'
+			        	title:'เพิ่มตำแหน่งมาตรวัดน้ำ',
+			        	maxWidth:400,
+			        	modal: false, //false
+								//visible: true,
+			        })
+      				//.title()
+              .content(txt)
+              /*
+              .prompt({
+              	buttonOK:'ต้องการ',
+              	
+              	callback:function(){
+              		alert('This is called after OK click!')
+              	},
+              	
+              	buttonAction:'ไม่ต้องการ', 
+              	
+              	action:function(){
+              		alert('This is called ACTION button is clicked.!')
+              	},
+              	
+              	buttonCancel:'ยกเลิก'
+
+              })
+              */
+              //.prompt({buttonOK:'ยกเลิก',callback:function(){alert('This is called after Cancel click!')}})                
+							//.prompt({buttonAction:'Action', action:function(){alert('This is called ACTION button is clicked.!')}})  						           //.prompt({buttonOK:'ตกลง',buttonCancel:'ยกเลิก'})
+              //.show() //.hide() .close()
+              //.show([x,y]) .showOn( [50,50])
+              //.enableBtn()
+              //.disableBtn()
+		
+			$('#btnsubmit').click(function(event){
+					
+      		if($('#geolat').val() == '' || $('#geolng').val() ==''){
+      			alert('โปรดระบุตำแหน่ง');
+      			return;
+      		}
+      		else{
+
+      			console.log( $('#geolat').val(),$('#geolng').val(),$('#housenum').val(),$('#formFileSm').val() )
+						$.ajax({
+							 type:'POST',
+							 url:'./service/mongodb.php',
+							 async:false,
+							 dataType: 'json',
+							 data : {
+
+							 		 act: 'a',
+									 lat: $('#geolat').val(), 
+									 lng: $('#geolng').val(),
+									 meterno: $('#meterno').val(),
+									 housenum: $('#housenum').val(),
+									 image: $('#formFileSm').val()
+
+							 },
+							 //dataType: 'text',
+							 //processData: false,
+							 //contentType: false,
+							 success:function(data){
+							 	alert('บันทึกลง mongodb สำเร็จ');
+							  console.log(data);
+							   //console.log(data[0].status);
+							   /*
+							   if(data[0].status == 'not found'){
+									$('#survey_modal').modal();
+									}
+								 */
+								 
+							 }
+
+						});
+						modalMeter.hide();
+      		}
+
+			});
+
+
+			$("#geolat, #geolng").keyup(function(event){	
+				//console.log($('#geolat').val());
+			  //console.log($('#geolng').val());
+
+				try{
+			      mkGroup.clearLayers();
+			      
+			      var Icon = L.icon({
+						    iconUrl: 'mymeter.png',
+						    iconSize: [30, 30],	//
+						   	//iconAnchor:   [25, 50], // point of the icon which will correspond to marker's location					    
+						    iconAnchor:   [15, 30], // point of the icon which will correspond to marker's location
+						    //popupAnchor:  [25, 40] 
+						    //shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+								/*
+			                iconSize:     [38, 95], // size of the icon
+			                shadowSize:   [50, 64], // size of the shadow
+			                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			                shadowAnchor: [4, 62],  // the same for the shadow
+			                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
+			                iconSize:     [38, 95], // size of the icon
+			                shadowSize:   [50, 64], // size of the shadow
+			                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			                shadowAnchor: [4, 62],  // the same for the shadow
+			                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+			          */
+						})
+			      var marker = L.marker( [parseFloat($('#geolat').val()),parseFloat($('#geolng').val())] , {icon: Icon});
+			      marker.bindPopup( "Lat: "+parseFloat($('#geolat').val())+", </br>Lng: "+parseFloat($('#geolng').val())+"<br><a style='text-align:center;cursor:pointer;' onclick='mkGroup.removeFrom(map)'>ลบ</a>");
+				   
+
+						//var marker = L.marker( [parseFloat($('#geolat').val()),parseFloat($('#geolng').val())]);
+
+			      //var marker = L.marker(e.latlng);
+			      mkGroup.addLayer(marker);
+			      mkGroup.addTo(map);
+
+			      marker.dragging.enable();
+
+						marker.on('dragend', function(e) {
+							//alert('wow');
+							//console.log(e.target._latlng.lat);
+							$('#geolat').val(e.target._latlng.lat);
+			  			$('#geolng').val(e.target._latlng.lng);
+
+			  			marker.bindPopup( "Lat: "+parseFloat($('#geolat').val())+", </br>Lng: "+parseFloat($('#geolng').val())+"<br><a style='text-align:center;cursor:pointer;' onclick='mkGroup.removeFrom(map)'>ลบ</a>");
+
+				   		map.setView([e.target._latlng.lat, e.target._latlng.lng], 21.25);
+						});
+						//console.log(e.latlng.lat);
+
+			  }
+			  catch(error){
+			  		//console.log(error.message);
+			  }
+
+
+				/*
+				var check = valid_search_form();
+				if (check==true){
+				   if(event.keyCode == 13){
+						search_custcode();
+					}
+				}
+				*/
+			});	
+
+		function openModal(){
+			modalMeter.show();
+		}
+
+		function saveToFile(content, filename) {
+		      var file = filename + '.geojson';
+		      saveAs(new File([JSON.stringify(content)], file, {
+		        type: "text/plain;charset=utf-8"
+		      }), file);
+		}
+
+
+		function exportgeojson(){
+
+			 	var freeBus = {
+			      "type": "FeatureCollection",
+			      "features": [{
+			          "type": "Feature",
+			          "geometry": {
+			            "type": "LineString",
+			            "coordinates": [
+			              [100.00341892242432, 12.75383843460583],
+			              [100.0008225440979, 12.751891803969535]
+			            ]
+			          },
+			          "properties": {
+			            "popupContent": "This is free bus that will take you across downtown.",
+			          },
+			          "id": 1
+			        },
+			        {
+			          "type": "Feature",
+			          "geometry": {
+			            "type": "LineString",
+			            "coordinates": [
+			              [100.0008225440979, 12.751891803969535],
+			              [100.99820470809937, 12.74979664004068]
+			            ]
+			          },
+			          "properties": {
+			            "popupContent": "This is free bus that will take you across downtown.",
+			          },
+			          "id": 2
+			        },
+			        {
+			          "type": "Feature",
+			          "geometry": {
+			            "type": "LineString",
+			            "coordinates": [
+			              [100.99820470809937, 12.74979664004068],
+			              [100.98689651489258, 12.741052354709055]
+			            ]
+			          },
+			          "properties": {
+			            "popupContent": "This is free bus that will take you across downtown.",
+			          },
+			          "id": 3
+			        }
+			      ]
+			  };
+
+			  	/*
+					if(!pointImport._leaflet_id){
+						alert('ไม่พบชั้นข้อมูล โปรดนำเข้าข้อมูลก่อนครับ');
+					}
+					else{
+						saveToFile(exportfile, 'intersect');
+					}
+					*/
+
+					/*
+				    if(exportfile != null||exportfile != undefined){
+						saveToFile(exportfile, 'intersect');
+				    }
+				    else{
+				    	//var layer = L.geoJson(freeBus).addTo(map);
+				    	//saveToFile(layer.toGeoJSON(), 'test');
+				    	saveToFile(freeBus, 'test');
+				    }
+					*/
+					saveToFile(freeBus, 'test');
+
+		}
+
+    var availableTags = [
+         {label: "55220154558", value: "id1"},
+         {label: "55220414584", value: "id2"},
+         {label: "55220112451", value: "id3"},
+         {label: "55220689987", value: "id4"}
+    ];  
+
+
+		$('#btnsearch').autocomplete({
+		  source: availableTags,
+		  /*
+		  focus: function(event, ui) {
+		    $(this).val(ui.item.label);
+		    return false;
+		  },
+		  */
+		  select: function(event, ui) {
+		    //$('#hidCidade').val(ui.item.value);
+		    $(this).val(ui.item.label);
+		    alert(ui.item.label+','+ui.item.value);
+		    return false;
+		  }
+		});
+
+		function getmongo(type){
+						$.ajax({
+							 type:'POST',
+							 url:'./service/mongodb.php',
+							 async:false,
+							 dataType: 'json',
+							 data : {
+							 		 act: 'qm'
+							 },
+							 //dataType: 'text',
+							 //processData: false,
+							 //contentType: false,
+							 success:function(data){
+							  //console.log(data);
+
+							  let markersCluster = L.markerClusterGroup({
+							  	/*
+									spiderfyOnMaxZoom: false,
+									showCoverageOnHover: false,
+									zoomToBoundsOnClick: false,
+									removeOutsideVisibleBounds:true,
+									animate:true,
+									iconCreateFunction: function(cluster) {
+										return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
+									},
+									spiderfyShapePositions: function(count, centerPt) {
+			                var distanceFromCenter = 35,
+			                    markerDistance = 45,
+			                    lineLength = markerDistance * (count - 1),
+			                    lineStart = centerPt.y - lineLength / 2,
+			                    res = [],
+			                    i;
+
+			                res.length = count;
+
+			                for (i = count - 1; i >= 0; i--) {
+			                    res[i] = new Point(centerPt.x + distanceFromCenter, lineStart + markerDistance * i);
+			                }
+
+			                return res;
+			            },
+									*/
+
+								});
+								markersCluster.on('click', function (a) {
+									console.log('marker ' + a.layer);
+								});
+
+								markersCluster.on('clusterclick', function (a) {
+									// a.layer is actually a cluster
+									console.log('cluster ' + a.layer.getAllChildMarkers().length);
+									//map.addLayer(L.polygon(a.layer.getConvexHull()));
+									//a.layer.zoomToBounds({padding: [20, 20]});
+
+								});
+
+							  let gMk = new L.featureGroup();
+
+								$.each(data['documents'],function(){	
+
+									var iconMaker = L.icon({
+									  iconUrl: 'mymeter.png',
+									  iconSize: [30, 30], // size of the icon
+							      //iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
+							      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
+									});
+
+									let mkmeter = new L.marker([this.lat,this.lng],{title: "เลขมาตร: "+this.meterno, icon: iconMaker });
+									//gMk.addLayer(mkmeter);
+									
+									markersCluster.addLayer(mkmeter);
+								});
+
+								//map.fitBounds(gMk.getBounds());
+								//map.addLayer(gMk);
+
+								map.fitBounds(markersCluster.getBounds());
+								map.addLayer(markersCluster);
+
+							 }
+
+						});
+			
+		}
+
+		(function() {
+
+		}());
+
+
+
+		/*
+		/// VERTICAL
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'topleft', direction:'vertical'}).addTo(map);
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'bottomright', direction:'vertical'}).addTo(map);
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'topright', direction:'vertical'}).addTo(map);
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'bottomleft', direction:'vertical'}).addTo(map);
+
+
+		//// HORIZONTAL
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'topleft', direction:'horizontal'}).addTo(map);
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'bottomright', direction:'horizontal'}).addTo(map);
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'topright', direction:'horizontal'}).addTo(map);
+
+		new L.cascadeButtons([
+		    {icon: 'fas fa-home', ignoreActiveState:true , command: () =>{console.log('test') }},
+		    {icon: 'fas fa-home', items:[
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		    {icon: 'fas fa-home', items: [
+		        {icon: 'fas fa-home', command: () =>{console.log('hola')}},
+		        {icon: 'fas fa-globe', command: () =>{console.log('hola')}},
+		    ]},
+		], {position:'bottomleft', direction:'horizontal'}).addTo(map);
+		*/
+
+
+
+
+		
+		//map.MapPaint.disable();
+		//map.MapPaint.enable();
+		var mappaintctrl = new MapPaint.SwitchControl({position: 'bottomright'}).addTo(map);
+		//map.addControl(new MapPaint.SwitchControl({position: 'bottomright'}));
+		map.on("zoomstart", function(e) {
+		  if(zoomLock){
+		  	//console.log('zoom disabled');
+		    throw 'zoom disabled';
+		  }
+		});		
+
+		
+		var bookmarkctrl = new L.Control.Bookmarks({
+			position: 'bottomright',
+		    name: 'bm-survey', // defaults to 'leaflet-bookmarks'
+		    localStorage: true // if you want to use local variable for storage
+		}).addTo(map);
+		//$('div.leaflet-bar.leaflet-bookmarks-control.leaflet-control').attr('title','Bookmarks');
+		//$('div.leaflet-bar.leaflet-bookmarks-control.leaflet-control').css('z-index','1');
+		//$('div.bookmarks-container.list-with-button').append('<div class="add-bookmark-button"><span class="plus">-</span><span class="content">ลบจุด Bookmark</span></div>');
+		//bookmarkControl._storage.getItem('bm', callback);
+		//bookmarkControl._storage.setItem(key, value, callback);
+		//bookmarkControl._storage.removeItem(key, callback);
+		//bookmarkControl._storage.getAllItems(callback);	
+		
+
+
+
+        var layers = [];
+        for (var providerId in providers) {
+            layers.push(providers[providerId]);
+        }
+        /*
+        layers.push({
+            layer: {
+                onAdd: function() {},
+                onRemove: function() {}
+            },
+            title: 'empty'
+        })
+		*/
+        var ctrl = L.control.iconLayers(layers).addTo(map);
+		
+
+
+
+		/*
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, '
+		}).addTo(map);
+		
+	    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	      maxZoom: 15,
+	      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+	    }).addTo(map);
+		*/
+
+
+		/*
+		function onLocationFound(e) {
+			var radius = e.accuracy / 2;
+
+			L.marker(e.latlng).addTo(map)
+				.bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+			L.circle(e.latlng, radius).addTo(map);
+		}
+
+		function onLocationError(e) {
+			alert(e.message);
+		}
+
+		map.on('locationfound', onLocationFound);
+		map.on('locationerror', onLocationError);
+
+		map.locate({setView: true, maxZoom: 16});
+		*/
+		
+
+		/*
+	
+		L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
+			subdomains: ['a', 'b', 'c', 'd'],
+			minZoom: 3,
+		    detectRetina: true,
+		    maxNativeZoom: 17
+		}).addTo(map);
+
+		*/
+
+		/*
+    var marker = L.marker([13,101],{title:"Click to show window." }).addTo(map);
+    var win
+    marker.on('click',function(){
+        win =  L.control.window(map,{
+				        	position:'center', // 'top', 'topRight', 'right', 'bottomRight', 'bottom', 'bottomLeft', 'left', 'topLeft'
+				        	title:'Hello world!',
+				        	maxWidth:400,
+				        	modal: true, //false
+									//visible: true,
+				        })
+        				//.title()
+                .content('ทดสอบ Modal.<a onclick="moveModal(win)">Move</a>')
+                .prompt({buttonOK:'ต้องการ',callback:function(){alert('This is called after OK click!')},buttonAction:'ไม่ต้องการ', action:function(){alert('This is called ACTION button is clicked.!')},buttonCancel:'ยกเลิก'})
+                //.prompt({buttonOK:'ยกเลิก',callback:function(){alert('This is called after Cancel click!')}})                
+								//.prompt({buttonAction:'Action', action:function(){alert('This is called ACTION button is clicked.!')}})  						           //.prompt({buttonOK:'ตกลง',buttonCancel:'ยกเลิก'})
+
+                .show() //.hide() .close()
+                //.show([x,y]) .showOn( [50,50])
+                //.enableBtn()
+                //.disableBtn()                
+    });
+    function moveModal(){
+    	console.log(win)
+			win.options.modal = false;
+			win.show()
+    }
+		*/
+	</script>
+
+
+	<script>
+		/*
+		draw();
+
+		function draw() {
+
+		    var canvas = document.getElementById('idCanvas');
+		    var context = canvas.getContext('2d');
+
+		    var imageObj = new Image();
+
+
+		  imageObj.onload = function() {
+		    context.drawImage(imageObj, 0, 0);
+		    context.font = "40px Calibri";
+		    context.fillStyle = "red";
+		    context.fillText("My TEXT!", 50, 300);
+
+		    var canvas = document.getElementById('idCanvas');
+		    var dataURL = canvas.toDataURL();
+
+		    alert(dataURL);
+		  }
+		imageObj.setAttribute('crossOrigin', 'anonymous');
+		imageObj.src = "http://lorempixel.com/400/200/";
+		};
+		*/
+
+	</script>
+
+	<!--
+  <script src="leaflet/antpath/dist/leaflet-ant-path.js?v=001"></script>
+	<script>
+
+		var latlngsline = [[12.9237, 101.0090],[12.90877, 101.028856],[12.8855, 101.022578]];
+
+  // Using the constructor...
+    let antPolyline = new L.Polyline.AntPath(latlngsline, {
+    					color: '#0000FF', 
+  						weight: 5,
+							//paused:false,
+							//reverse:false,
+							//hardwareAccelerated:false,
+							pulseColor:'#FFFFFF',
+							delay:'800',
+							dashArray:[40, 60]//"15, 30"*/ตัวเลขสีอ่อนเยอะ ตัวสองสีเข้มเยอะ
+		});
+    
+    // ... or use the factory
+    //antPolyline = L.polyline.antPath(latlngs, options);
+    
+    antPolyline.addTo(map);
+
+
+//"use": L.rectangle,
+
+// Using a polygon
+let antPolygon = new L.Polyline.AntPath([
+  [12.8789, 100.98],
+  [12.8680, 101.06],
+  [12.8558, 101.096],  
+  [12.86883, 100.997]
+], { use: L.polygon, fillColor: "red" }).addTo(map);
+
+// Using a circle
+let antCircle = new L.Polyline.AntPath(
+  [12.838, 100.9611],
+  {
+    use: L.circle,
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+  }
+).addTo(map);
+
+
+    map.fitBounds(antPolyline.getBounds());
+
+
+
+
+/*
+antPolyline.pause()
+antPolyline.resume()
+antPolyline.reverse()
+*/
+ 	</script>
+-->
+
+
+
+<!--
+  <script src="leaflet/animatedmaker/src/AnimatedMarker.js?v=001"></script>
+	<script>
+
+		var myIcon = L.icon({
+		  iconUrl: 'car.png',
+		  iconSize: [30, 30], // size of the icon
+      //iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
+      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
+		});
+
+		var line = L.polyline([[12.9237, 101.0090],[12.90877, 101.028856],[12.88533, 101.025978]]);
+
+		var animatedMarker = L.animatedMarker(line.getLatLngs(), {
+			icon: myIcon,
+		  distance: 300,  // meters
+		  interval: 2000, // milliseconds
+		  autoStart: false,
+		  onEnd: function() {
+		    // TODO: blow up this marker
+		  }
+		});
+
+		map.addLayer(animatedMarker);
+
+		// Start when you're ready
+		animatedMarker.start();
+
+		setTimeout(function() {
+		  // Stop the animation
+		  animatedMarker.stop();
+		}, 10000);
+
+ 	</script>
+-->
+
+
+
+
+	<script src="leaflet/measure-path/leaflet-measure-path_dev.js?v=004" type="text/javascript"></script>
+	<link rel="stylesheet" href="leaflet/measure-path/leaflet-measure-path_dev.css?v=002" />
+
+	<script src="leaflet/number-marker/leaflet_numbered_markers.js?v=001" type="text/javascript"></script>
+	<link rel="stylesheet" href="leaflet/number-marker/leaflet_numbered_markers.css?v=001" />
+
+	<script src="core/js/measure.js?v=004" type="text/javascript"></script>
+
+
+
+	<script>
+
+		(function() {
+
+		    var beforePrint = function() {
+		        //console.log('Functionality to run before printing.');
+						//$('.sharebtn').hide();
+						$('#mappaint-map').css('height','27.5cm');
+						$('#mappaint-map').css('border','1px solid black');
+		  				map.invalidateSize();
+
+
+		  				
+						edgeGrat.addTo(map);
+						//$('canvas.leaflet-zoom-animated').css('background-color','');
+						$('canvas.leaflet-zoom-animated').css('opacity','0.6');
+						$('canvas.leaflet-zoom-animated').css('filter',' alpha(opacity=60)');					
+						//$('.leaflet-zoom-hide').css('opacity','0.5');
+					  //$('.leaflet-zoom-animated').css('display','none');
+						//$('.leaflet-zoom-hide').css('background','transparent');
+						//$('.leaflet-zoom-animated').css('background','transparent');
+						//$('.leaflet-zoom-animated').css('opacity','0.5');
+						//$('.leaflet-zoom-animated').css('filter',' alpha(opacity=50)');
+						
+						edgeBar.addTo(map);
+						//$('.leaflet-image-layer').css('background','');
+						$('.leaflet-image-layer').css('opacity','0.5');
+						$('.leaflet-image-layer').css('filter',' alpha(opacity=50)');
+						//edgeBar.bringToBack();
+						//edgeBar.bringToFront();
+						//opacity: 0; //tran
+		  				//filter: alpha(opacity=0); // For IE8 and earlier  //tran
+		  				
+						/*
+		  				$.ajax({
+							 type:'POST',
+							 url:'service/printby.php',
+							 async:false,
+							 dataType: 'json',
+							 success:function(res){
+							   //console.log(data);
+							   if(res[0]['data'] == '-'){
+							   	res[0]['data'] += 'NONE';
+							   }
+								$('#map').after('<div class="watermark" style="z-index:9999;">PWA'+res[0]['data']+'</div>');
+							 }
+							}).done(function() { 
+							  //alert('Done!');
+							});
+		  				
+		  				//$('#map').after('<div class="watermark" style="z-index:9999;">PWA'+localStorage.getItem('acc-m')+'</div>');
+		  				*/
+		    };
+
+		    var afterPrint = function() {
+		        //console.log('Functionality to run after printing');
+		        //$('.sharebtn').show();
+		        //$('.watermark').remove();
+		        $('#mappaint-map').css('height','100%');
+		        $('#mappaint-map').css('border','0px solid black'); 
+
+
+				$('leaflet-image-layer').css('opacity','1');
+				$('leaflet-image-layer').css('filter',' alpha(opacity=100)');
+				edgeGrat.removeFrom(map);					
+
+				//$('.leaflet-image-layer').css('background','');
+				$('leaflet-image-layer').css('opacity','1');
+				$('leaflet-image-layer').css('filter',' alpha(opacity=100)');
+		        edgeBar.removeFrom(map);
+				
+		         
+		        return;
+		    };
+		    
+		    if (window.matchMedia) {
+		        var mediaQueryList = window.matchMedia('print');
+		        mediaQueryList.addListener(function(mql) {
+		            if (mql.matches) {
+		            			map.invalidateSize();
+		                //beforePrint();
+		            } else {
+		            			map.invalidateSize();
+		                //afterPrint();
+		            }
+		        });
+		    }
+				
+		    window.onbeforeprint = beforePrint;
+		    window.onafterprint = afterPrint;
+
+		}());
+
+		function forPrint(){
+
+		  var defer = $.Deferred(),
+		    filtered = defer.then(function( value ) {
+		    	console.log('1');
+				$('#mappaint-map').css('height','27.5cm');
+				$('#mappaint-map').css('border','1px solid black');
+				map.invalidateSize();
+		    });
+		 
+		  defer.resolve( 1 );
+		  filtered.done(function( value ) {
+
+			console.log('2');
+			setTimeout(function(){ 
+			  	map.invalidateSize();
+			  	window.print();
+			}, 1000);
+
+		  });
+
+			  				
+		}
+
+	</script>
+
+
+
+
+
+</body>
+</html>

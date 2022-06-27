@@ -30,7 +30,7 @@
 /** Leaflet Zoom Styles **/
 .leaflet-container .leaflet-control-zoominfo {
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 .leaflet-control-zoominfo a {
   width: 26px;

@@ -252,7 +252,7 @@
 	<link rel="stylesheet" href="leaflet/leaflet1.6/leaflet.css"/>
 	<script src="leaflet/leaflet1.6/leaflet-src.js"></script>
 
-	<script src="leaflet/clicktolerance/src/index.js?v=001" type="text/javascript"></script>
+	<!--<script src="leaflet/clicktolerance/src/index.js?v=001" type="text/javascript"></script>-->
 
 
 		<link rel="stylesheet" href="leaflet/draw/leaflet.draw.css?v=20200226"/>
@@ -298,14 +298,13 @@
 	<script src="leaflet/clustermarker/dist/leaflet.markercluster-src.js"></script>
 
 	<script src="leaflet/boxzoom/leaflet-control-boxzoom-src.js?v=001"></script>
-	<link rel="stylesheet" href="leaflet/boxzoom/leaflet-control-boxzoom.css?v=001" type="text/css" />	
+	<link rel="stylesheet" href="leaflet/boxzoom/leaflet-control-boxzoom.css?v=002" type="text/css" />	
 
 
 	<link rel="stylesheet" href="leaflet/zoominfo/src/L.Control.Zoominfo.css" />
 	<script src="leaflet/zoominfo/src/L.Control.Zoominfo.js" ></script>
 
-	<link rel="stylesheet" href="leaflet/locate/src/L.Control.Locate.css" />
-    <script src="leaflet/locate/src/L.Control.Locate.js" ></script>
+
 
     <link rel="stylesheet" href="leaflet/slidemenu/src/L.Control.SlideMenu.css?v=001" />
     <script src="leaflet/slidemenu/src/L.Control.SlideMenu.js?v=002"></script>
@@ -346,7 +345,8 @@
      <link rel="stylesheet" href="leaflet/modal/src/L.Control.Window.css" />
 
 	
-
+	<link rel="stylesheet" href="leaflet/locate/dist/L.Control.Locate.css" />
+    <script src="leaflet/locate/dist/L.Control.Locate.js" ></script>
 
 	<script src="leaflet/edgegrid/leaflet.edgescalebar_use.js?v=003"></script>
 	<script>
@@ -725,7 +725,7 @@
       			console.log( $('#geolat').val(),$('#geolng').val(),$('#housenum').val(),$('#formFileSm').val() )
 						$.ajax({
 							 type:'POST',
-							 url:'https://herokunutty.herokuapp.com/mongodb.php',
+							 url:'./service/mongodb.php',
 							 async:false,
 							 dataType: 'json',
 							 data : {
@@ -937,17 +937,14 @@
 		});
 
 		function getmongo(type){
-			
 						$.ajax({
-							 type:'GET',
-							 url:'https://herokunutty.herokuapp.com/mongodb.php?act=qm',
+							 type:'POST',
+							 url:'./service/mongodb.php',
 							 async:false,
-							 /*
 							 dataType: 'json',
 							 data : {
 							 		 act: 'qm'
 							 },
-							 */
 							 //dataType: 'text',
 							 //processData: false,
 							 //contentType: false,
@@ -1149,6 +1146,7 @@
 		//map.MapPaint.enable();
 		var mappaintctrl = new MapPaint.SwitchControl({position: 'bottomright'}).addTo(map);
 		//map.addControl(new MapPaint.SwitchControl({position: 'bottomright'}));
+
 		map.on("zoomstart", function(e) {
 		  if(zoomLock){
 		  	//console.log('zoom disabled');

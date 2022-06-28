@@ -1045,18 +1045,6 @@
 									*/
 
 								});
-								markersCluster.on('click', function (a) {
-									console.log('marker ' + a.layer);
-								});
-
-								markersCluster.on('clusterclick', function (a) {
-									// a.layer is actually a cluster
-									console.log('cluster ' + a.layer.getAllChildMarkers().length);
-									//map.addLayer(L.polygon(a.layer.getConvexHull()));
-									//a.layer.zoomToBounds({padding: [20, 20]});
-									var visibleOne = markersCluster.getVisibleParent(mkmeter);
-									console.log(visibleOne.getLatLng());
-								});
 
 							  let gMk = new L.featureGroup();
 
@@ -1080,6 +1068,21 @@
 
 								map.fitBounds(markersCluster.getBounds());
 								map.addLayer(markersCluster);
+
+								markersCluster.on('click', function (a) {
+									console.log('marker ' + a.layer);
+								});
+
+								markersCluster.on('clusterclick', function (a) {
+									// a.layer is actually a cluster
+									console.log('cluster ' + a.layer.getAllChildMarkers().length);
+									//map.addLayer(L.polygon(a.layer.getConvexHull()));
+									//a.layer.zoomToBounds({padding: [20, 20]});
+									var visibleOne = markersCluster.getVisibleParent(gMk);
+									console.log(visibleOne.getLatLng());
+
+								});
+
 
 							 }
 

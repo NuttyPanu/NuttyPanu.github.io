@@ -797,7 +797,8 @@
 			      //var marker = L.marker(e.latlng);
 			      mkGroup.addLayer(marker);
 			      mkGroup.addTo(map);
-
+			      map.setView([parseFloat($('#geolat').val()), parseFloat($('#geolng').val())], 21.25);
+					
 			      marker.dragging.enable();
 
 						marker.on('dragend', function(e) {
@@ -829,6 +830,66 @@
 			});	
 
 		function openModal(){
+
+			$('#geolat').val(map.getCenter().lat)
+			$('#geolng').val(map.getCenter().lng)
+
+				try{
+			      mkGroup.clearLayers();
+			      
+			      var Icon = L.icon({
+						    iconUrl: 'mymeter.png',
+						    iconSize: [30, 30],	//
+						   	//iconAnchor:   [25, 50], // point of the icon which will correspond to marker's location					    
+						    iconAnchor:   [15, 30], // point of the icon which will correspond to marker's location
+						    //popupAnchor:  [25, 40] 
+						    //shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+								/*
+			                iconSize:     [38, 95], // size of the icon
+			                shadowSize:   [50, 64], // size of the shadow
+			                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			                shadowAnchor: [4, 62],  // the same for the shadow
+			                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
+			                iconSize:     [38, 95], // size of the icon
+			                shadowSize:   [50, 64], // size of the shadow
+			                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			                shadowAnchor: [4, 62],  // the same for the shadow
+			                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+			          */
+						})
+			      var marker = L.marker( [parseFloat($('#geolat').val()),parseFloat($('#geolng').val())] , {icon: Icon});
+			      marker.bindPopup( "Lat: "+parseFloat($('#geolat').val())+", </br>Lng: "+parseFloat($('#geolng').val())+"<br><a style='text-align:center;cursor:pointer;' onclick='mkGroup.removeFrom(map)'>ลบ</a>");
+				   
+
+						//var marker = L.marker( [parseFloat($('#geolat').val()),parseFloat($('#geolng').val())]);
+
+			      //var marker = L.marker(e.latlng);
+			      mkGroup.addLayer(marker);
+			      mkGroup.addTo(map);
+
+			      marker.dragging.enable();
+
+						marker.on('dragend', function(e) {
+							//alert('wow');
+							//console.log(e.target._latlng.lat);
+							$('#geolat').val(e.target._latlng.lat);
+			  			$('#geolng').val(e.target._latlng.lng);
+
+			  			marker.bindPopup( "Lat: "+parseFloat($('#geolat').val())+", </br>Lng: "+parseFloat($('#geolng').val())+"<br><a style='text-align:center;cursor:pointer;' onclick='mkGroup.removeFrom(map)'>ลบ</a>");
+
+				   		map.setView([e.target._latlng.lat, e.target._latlng.lng], 21.25);
+						});
+						//console.log(e.latlng.lat);
+
+			  }
+			  catch(error){
+			  		//console.log(error.message);
+			  }
+
+			//map.getCenter()		
+			//map.getCenter().toString()
+
 			modalMeter.show();
 		}
 

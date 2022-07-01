@@ -69,6 +69,12 @@
         font-size: 0.8rem;
         color: #7f7f7f;
       }
+					
+			ul.fa-ul li{
+				cursor:pointer;
+				padding: 5px 0px 5px 0px;
+			}
+
  		/*slidemenu*/
 
 	    /*
@@ -94,6 +100,32 @@
 
 		}  	
 		/*---bookmark--*/
+		/*
+		.bookmarks-list-wrapper {
+			max-height: 150px!important;
+		}
+		*/
+		@media (max-height: 479px) {
+			.bookmarks-list-wrapper {
+				max-height: 120px!important;
+			}
+		}		
+		@media (min-height: 480px) and (max-height: 600px) {
+			.bookmarks-list-wrapper {
+				max-height: 150px!important;
+			}
+		}
+		@media (min-height: 601px) and (max-height: 880px) {
+			.bookmarks-list-wrapper {
+				max-height: 230px!important;
+			}
+		}
+		@media (min-height: 881px) {
+			.bookmarks-list-wrapper {
+				max-height: 100hv-150px!important;
+			}
+		}
+
 
 		@media print {
 				@page {
@@ -159,8 +191,6 @@
 		}
 		   	
 
-
-
 	</style>
 
 	<style>
@@ -221,7 +251,6 @@
 	</style>	
 
 
-
 </head>
 
 <body>
@@ -230,6 +259,290 @@
 
 	<!--<div id='map'></div>-->
 	<!--<canvas id="idCanvas" width="576" height="577"></canvas>-->
+
+
+  <!-- The Modal -->
+<div class="modal" id="myModal" style="z-index:50000;/*background-color: rgba(0, 0, 0, 0.7);*/" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-md-down">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">เข้าสู่ระบบ</button>      	
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="messageModal" style="z-index:49999;" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="messageModalLabel">แจ้งปัญหา</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+					<div class="form-floating">
+					  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+					    <option selected>โปรดระบุหัวข้อ</option>
+					    <option value="1">ข้อผิดพลาดของระบบ</option>
+					    <option value="2">ชมเชย/ให้รางวัล</option>
+					  </select>
+					  <label for="floatingSelect">หัวข้อ</label>
+					</div>
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">เรื่อง:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">รายละเอียด:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+					<div class="form-floating">
+					  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+					  <label for="floatingTextarea2">ความเห็น</label>
+					</div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="exampleModalToggle" style="z-index:49999;" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">เกี่ยวกับระบบ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>ระบบสนับสนุนการสำรวจข้อมูล GIS พัฒนาขึ้นเพื่ออำนวยความสะดวกแก่ผู้ใช้งานในการสำรวจข้อมูล GIS</p>
+        <p>ผู้ใช้งานสามารถใช้งานได้โดยไม่มีค่าใช้จ่าย
+        <p>สถานะ: อยู่ระหว่างการพัฒนา</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">เงื่อนไขการใช้งาน</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="exampleModalToggle2" style="z-index:49999;" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">เงื่อนไขการใช้งาน</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ปัจจุบัน ยังไม่มีการกำหนดสิทธิ์ของผู้ใช้งาน เนื่องจากระบบยังไม่แล้วเสร็จ
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">เกี่ยวกับระบบ</button>
+      	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" style="z-index:49999;" id="exportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exportModalLabel">ส่งออกข้อมูล</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+				<div class="form-floating">
+				  <select class="form-select" id="ex_src" aria-label="Floating label select example1">
+				    <option selected>โปรดระบุแหล่งข้อมูล</option>
+				    <option value="1">Database (ตำแหน่งมาตรฯ)</option>
+				    <option value="2">Localstorage (สถานที่ของคุณ)</option>
+				  </select>
+				  <label for="ex_src">เลือกแหล่งข้อมูล</label>
+				</div>
+				</br>
+				<div class="form-floating">
+				  <select class="form-select" id="ex_project" aria-label="Floating label select example1" onchange="if(this.value != 'โปรดระบุโครงการ'){$('#ex_name').val(this.value)}else{$('#ex_name').val('ExportProjectAll')}">
+				    <option selected>โปรดระบุโครงการ</option>
+				    <option value="ExportProjectAll">โครงการทั้งหมด</option>
+				    <option value="ExportProject1">โครงการ1</option>
+				    <option value="ExportProject2">โครงการ2</option>				    
+				  </select>
+				  <label for="ex_project">เลือกโครงการ</label>
+				</div>
+				</br>
+				<div class="form-floating">
+				  <select class="form-select" id="ex_type" aria-label="Floating label select example1" >
+				    <option selected>โปรดระบุประเภทไฟล์</option>
+				    <option value="1">JSON - File Format</option>
+				    <option value="2">GeoJSON - File Format</option>
+				    <option value="3">TAB - MAPINFO File - File Format</option>					    
+				    <option value="4">SHP - ESRI Shapefile - File Format</option>				    
+				  </select>
+				  <label for="ex_type">เลือกประเภทไฟล์ส่งออก</label>
+				</div>	
+				</br>
+				
+					<div class="input-group mb-3">
+					  <div class="input-group-text">
+					    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="" checked onclick="if(this.checked == false){$('#ex_name').removeAttr('disabled')}else{$('#ex_name').attr('disabled','disabled')}">
+					  </div>
+					  <input type="text" class="form-control" aria-label="Text input with checkbox" disabled="disabled" id="ex_name" value="ExportProjectAll">
+					  <span class="input-group-text">ชื่อไฟล์</span>
+					</div>
+				  
+				
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" onclick="export_data()">ตกลง</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" style="z-index:49999;" id="projectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered "> <!--modal-dialog-scrollable-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectModalLabel">จัดการโครงการ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">จัดการโครงการ</a>
+					    <ul class="dropdown-menu">
+					      <li><a class="dropdown-item" href="#">Action</a></li>
+					      <li><a class="dropdown-item" href="#">Another action</a></li>
+					      <li><a class="dropdown-item" href="#">Something else here</a></li>
+					      <li><hr class="dropdown-divider"></li>
+					      <li><a class="dropdown-item" href="#">Separated link</a></li>
+					    </ul>
+					  </li>
+
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
+					  </li>
+					</ul>
+
+
+					<div class="tab-content" id="myTabContent">
+					  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">...</div>
+					  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+					  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
+					  <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+					</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" >ตกลง</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<div id="widgetModal" class="modal fade" role="dialog" style="z-index: 20000" >
+		<div class="modal-dialog modal-lg">
+
+			<div class="modal-content">
+			  <div class="modal-header">
+				
+				<h4 class="modal-title" id="widgethead">ฟังก์ชันวิเคราะห์ข้อมูล GIS</h4>
+			  </div>
+			  <div class="modal-body" id="widgetbody">
+
+						ตัวอย่างไฟล์สำหรับทดสอบ: 
+							<a href="data/1point.json" download="1point">1point</a>
+							<a href="data/2point.json" download="2point">2point</a>
+							<a href="data/3point.json" download="3point">3point</a>
+
+                          <div class="row ">
+                          <form name="form1" method="post" action="\upload_img.php" enctype="multipart/form-data" style="width: 100%;padding: 10px;">
+                            <div class="col-md-12">
+                            <span id="helpFileupload" class="help-block"style="display:inline;">***นำเข้าข้อมูล GIS เฉพาะไฟล์นามสกุล json, geojson</span> 
+                            </div>
+			                  <div class="col-lg-12 col-md-12 col-xs-12" id="namePoint_up">โหลดข้อมูล:</div>                            
+                            <div class="col-lg-12 col-md-12 col-xs-12" style="padding-top: 5px; padding-bottom: 5px; border-color: #d2d1d1; border-width: thin; border-style: dashed;">
+                            
+                              <div class="form-group">
+                                <button id="Point" type="button" class="btn btn-success btn-sm" style="display: none;">Point</button>
+                                
+                                <input style="width:100%;" type="file" name="PointInp[]" id="PointInp" accept="application/json,.geojson" multiple="multiple"  onchange="readURL_Point();" aria-describedby="helpFileupload">
+                                  <input id="txt_Point" type="hidden" class="form-control" readonly>
+                                  <input id="inp_Point" name="url_Point" type="hidden" value="">
+                                  <input id="inp_Point_Thumbnails" name="url_Point" type="hidden" value="">
+
+                                <!--<img style="width:100px;" id='img-upload-preview'/>-->
+                                <output id="preview_Point" />
+                                <a style="cursor:pointer;display:inline;" onclick="resetImport();">ล้างข้อมูล</a>
+                              </div>
+                            </div>
+			                  
+			                  <button id="import" style="display: none;">Import</button>
+			                  <div class="col-lg-12 col-md-12 col-xs-12" id="namePoint_up">รายละเอียดข้อมูล:</div>
+                              <div class="col-lg-12 col-md-12 col-xs-12" id="imgPoint_up"></div>
+			                  <textarea class="col-lg-12 col-md-12 col-xs-12 form-control" row="20" id="result" style="min-height:100px;overflow:auto;resize:vertical;" wrap="virtual">
+			                    
+			                  </textarea>
+		
+                          </form>               
+                          </div>
+
+			  </div>
+			  
+			  <div class="modal-footer" id="widgetfooter">
+				
+			  </div>
+			  
+			</div>
+
+			</div>
+		</div>
+	</div>
+ 	
 	<!--
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin=""></script>
@@ -245,9 +558,13 @@
 	<script src="assets/jquery-ui.js?v=001"></script> <!-- autocomplete-->
 	<script src="assets/FileSaver.min.js?v=001"></script> <!-- export file-->	
 
+	<!--
 	<link rel="stylesheet" href="assets/bootstrap5/bootstrap.min.css"/>
 	<script src="assets/bootstrap5/bootstrap.min.js"></script>
+	-->
 
+	<link rel="stylesheet" href="assets/bootstrap5/css/bootstrap.css"/>
+	<script src="assets/bootstrap5/js/bootstrap.bundle.js"></script>
 
 	<link rel="stylesheet" href="leaflet/leaflet1.6/leaflet.css"/>
 	<script src="leaflet/leaflet1.6/leaflet-src.js"></script>
@@ -293,6 +610,9 @@
     <script src="leaflet/draw/edit/Edit.Circle.js?v=20200225"></script>
 
 
+   <link rel="stylesheet" href="leaflet/grouplayercontrol/leaflet.groupedlayercontrol.css?v=20170830">
+   <script src="leaflet/grouplayercontrol/leaflet.groupedlayercontrol.js?v=20170831"></script>
+
 	<link rel="stylesheet" href="leaflet/clustermarker/dist/MarkerCluster.css" />
 	<link rel="stylesheet" href="leaflet/clustermarker/dist/MarkerCluster.Default.css" />
 	<script src="leaflet/clustermarker/dist/leaflet.markercluster-src.js"></script>
@@ -331,22 +651,44 @@
 	-->
 
 	
-	<script type="text/javascript" src="leaflet/bookmarks/L.Control.Bookmarks.js?v=003"></script>
+	<script type="text/javascript" src="leaflet/bookmarks/L.Control.Bookmarks.js?v=005"></script>
     <link rel="stylesheet" href="leaflet/bookmarks/leaflet.contextmenu.css?v=2021" />	
     <link rel="stylesheet" href="leaflet/bookmarks/leaflet.bookmarks_use.css?v=003" />
     <link rel="stylesheet" href="leaflet/bookmarks/leaflet.modal.css?v=2021" />
 	
 
     
-    <script src="leaflet/mappaint/dist/MapPaint_dev.js"></script>
+    <script src="leaflet/mappaint/dist/MapPaint_dev.js?v=001"></script>
     <link rel="stylesheet" href="leaflet/mappaint/dist/MapPaint_dev.css?v=003" type="text/css" />
 	
-     <script src="leaflet/modal/src/L.Control.Window.js"></script>
+     <script src="leaflet/modal/src/L.Control.Window.js?v=001"></script>
      <link rel="stylesheet" href="leaflet/modal/src/L.Control.Window.css" />
 
 	
-	<link rel="stylesheet" href="leaflet/locate/dist/L.Control.Locate.css" />
-    <script src="leaflet/locate/dist/L.Control.Locate.js" ></script>
+		<link rel="stylesheet" href="leaflet/locate/dist_custom/L.Control.Locate.css?v=001" />
+    <script src="leaflet/locate/dist_custom/L.Control.Locate.js?v=001" ></script>
+
+
+	 	<script src="leaflet/mouseposition/L.LatLng.UTM.js?v=001" ></script>
+		<link rel="stylesheet" href="leaflet/mouseposition/L.Control.MousePosition.css?v=001"/>	 	
+		<script src="leaflet/mouseposition/L.Control.MousePosition.js?v=002"></script>
+
+
+	<script src="leaflet/togeojson.js?v=20211100"></script>
+	<script src="leaflet/geojson.js"></script>
+
+	
+
+    <!--<script src="turf/exportfile/FileSaver.min.js?v=20210110"></script>--> 
+    <script src="turf/turf.min.js" charset="utf-8"></script>
+
+	<!--<script src='https://unpkg.com/@turf/turf@6.3.0/turf.min.js'></script>-->
+
+    <link rel="stylesheet" href="widget/widget.css?v=0033">
+	<script src="widget/widget.js?v=0036"></script>
+    <script src="turf/turfanalysis.js?v=20210121"></script>  
+
+
 
 	<script src="leaflet/edgegrid/leaflet.edgescalebar_use.js?v=003"></script>
 	<script>
@@ -408,6 +750,88 @@
 		//edgeGrat.addTo(map);
 	</script>
 
+	<!--
+	<style>
+
+		#btn1, #btn2, #btn3{
+			position: relative;
+			z-index: 49999;
+		}
+		#sect1,#sect2,#sect3,#sect4,#sect5,#sect6,#sect7,#sect8,#sect9,#sect10{
+			position: relative;
+			z-index: 49999;
+		}
+
+		.shown1{
+		  display: block !important;
+		  animation: fade_in_anim 0.5s;
+		  animation-duration: 0.5s;
+		}
+		.btn_active_state{
+		  background-color: #FFCC00 !important;
+		}
+		@keyframes fade_in_anim {
+		  0% {
+		    opacity: 0;
+		    transform: translateY(-30px);
+		  }
+		  100% {
+		    opacity: 1;
+		    transform: translateY(0px);
+		  }
+		}
+		[id^='sect'] {
+		  display: none;
+		}
+		.fade1 {
+		    transition: opacity .15s linear;
+		}
+
+	</style>
+
+	<button id="btn1">btn1</button>
+	<button id="btn2">btn2</button>
+	<button id="btn3">btn3</button>
+	<button id="sect1">sect1</button>
+	<button id="sect2">sect2</button>
+	<button id="sect3">sect3</button>
+	<button id="sect4">sect4</button>
+	<button id="sect5">sect5</button>
+	<button id="sect6">sect6</button>
+	<button id="sect7">sect7</button>
+	<button id="sect8">sect8</button>
+	<button id="sect9">sect9</button>
+	<button id="sect10">sect10</button>
+	<button id="sect11">sect11</button>
+	<button id="sect12">sect12</button>
+
+	<script>
+		const buttons = [...document.querySelectorAll("[id^='btn']")]
+		const mapping = [[0, 4], [4, 8], [8,12]]
+		const sections = [...document.querySelectorAll("[id^='sect']")]
+
+		for(let i = 0; i < 3; i++) {
+		  buttons[i].addEventListener('click', function(event) {
+		    event.preventDefault();
+		    toggleDivs(this)
+		    for(let j = mapping[i][0]; j < mapping[i][1]; j++) {
+		      sections[j].classList.add("shown1", "fade1")
+		    }
+		  })
+		}
+
+		function toggleDivs(btn){
+		  buttons.forEach(b => b.classList.remove("btn_active_state"))
+		  btn.classList.add("btn_active_state")
+		  sections.forEach(s => s.classList.remove('shown1'))
+		}
+
+		//force button1 state initialise, if required
+		btn1.focus();
+		btn1.click();	
+
+	</script>
+	-->
 
 	<script>
 
@@ -449,19 +873,32 @@
 
 	    });
 
+
+		if( navigator.userAgent.match(/Windows NT/i) || navigator.platform.indexOf('Win') > -1){
+			var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
+		}
+		else if( (navigator.userAgent.match(/Macintosh|MacOS|Mac/i) && (('ontouchstart' in document.documentElement) == false ||'ontouchstart' in window == false) ) || 
+			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints <= 0)){
+			var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
+		}
+		else if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+			(navigator.userAgent.match(/Macintosh|iPad/i) && (('ontouchstart' in document.documentElement) == true ||'ontouchstart' in window == true)) || 
+			((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad')) {
+		}
+		else{
+			//var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
+		}
+
 		var zoomctrl = new L.Control.Zoominfo({position: 'bottomright'}).addTo(map);
 		//var zoomctrl = new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 
 
-
 		if( navigator.userAgent.match(/Windows NT/i) || navigator.platform.indexOf('Win') > -1){
 			L.Control.boxzoom({position:'bottomright',}).addTo(map);
-			//var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
 		}
 		else if( (navigator.userAgent.match(/Macintosh|MacOS|Mac/i) && (('ontouchstart' in document.documentElement) == false ||'ontouchstart' in window == false) ) || 
 			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints <= 0)){
 			L.Control.boxzoom({position:'bottomright',}).addTo(map); 
-			//var mouselocation = L.control.mousePosition({ position: 'bottomright' }).addTo(map);
 		}
 		else if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
 			(navigator.userAgent.match(/Macintosh|iPad/i) && (('ontouchstart' in document.documentElement) == true ||'ontouchstart' in window == true)) || 
@@ -472,32 +909,161 @@
 		}
 
 
+    var LocationMarker = L.Marker.extend({
+        initialize: function (latlng, options) {
+            L.Util.setOptions(this, options);
+            this._latlng = latlng;
+            this.createIcon();
+        },
+
+        /**
+         * Create a styled circle location marker
+         */
+        createIcon: function() {
+            var opt = this.options;
+
+            var style = '';
+
+            if (opt.color !== undefined) {
+                style += 'stroke:'+opt.color+';';
+            }
+            if (opt.weight !== undefined) {
+                style += 'stroke-width:'+opt.weight+';';
+            }
+            if (opt.fillColor !== undefined) {
+                style += 'fill:'+opt.fillColor+';';
+            }
+            if (opt.fillOpacity !== undefined) {
+                style += 'fill-opacity:'+opt.fillOpacity+';';
+            }
+            if (opt.opacity !== undefined) {
+                style += 'opacity:'+opt.opacity+';';
+            }
+
+            var icon = this._getIconSVG(opt, style);
+
+            this._locationIcon = L.divIcon({
+                className: icon.className,
+                html: icon.svg,
+                iconSize: [icon.w,icon.h],
+            });
+
+            this.setIcon(this._locationIcon);
+        },
+
+        /**
+         * Return the raw svg for the shape
+         *
+         * Split so can be easily overridden
+         */
+        _getIconSVG: function(options, style) {
+            var r = options.radius;
+            var w = options.weight;
+            var s = r + w;
+            var s2 = s * 2;
+            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+s2+'" height="'+s2+'" version="1.1" viewBox="-'+s+' -'+s+' '+s2+' '+s2+'">' +
+            '<circle r="'+r+'" style="'+style+'" />' +
+            '</svg>';
+            return {
+                className: 'leaflet-control-locate-location',
+                svg: svg,
+                w: s2,
+                h: s2
+            };
+        },
+
+        setStyle: function(style) {
+            L.Util.setOptions(this, style);
+            this.createIcon();
+        }
+    });
+
+    var CompassMarker = LocationMarker.extend({
+        initialize: function (latlng, heading, options) {
+            L.Util.setOptions(this, options);
+            this._latlng = latlng;
+            this._heading = heading;
+            this.createIcon();
+            //alert(heading);
+        },
+
+        setHeading: function(heading) {
+            //alert(heading);
+            this._heading = heading;
+        },
+
+        /**
+         * Create a styled arrow compass marker
+         */
+        _getIconSVG: function(options, style) {
+            var r = options.radius;
+            var w = (options.width + options.weight);
+            var h = (r+options.depth + options.weight)*2;
+            var path = 'M0,0 l'+(options.width/2)+','+options.depth+' l-'+(w)+',0 z';
+            var svgstyle = 'transform: rotate('+this._heading+'deg)';
+            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+(w)+'" height="'+h+'" version="1.1" viewBox="-'+(w/2)+' 0 '+w+' '+h+'" style="'+svgstyle+'">'+
+            '<path d="'+path+'" style="'+style+'" />'+
+            '</svg>';
+            return {
+                className: 'leaflet-control-locate-heading',
+                svg: svg,
+                w: w,
+                h: h
+            };
+        },
+    });
 
 
 		var lc = L.control.locate({
 			position: 'bottomright',
-			strings: {
-				title: "ตำแหน่งปัจจุบัน"
-			},
+
+      strings: {
+          title: "ตำแหน่งปัจจุบัน",
+          metersUnit: "เมตร",
+          //feetUnit: "feet",
+					popup: "{latlng} <br>ระยะรัศมี {distance} {unit} จากตำแหน่งนี้",
+    			outsideMapBoundsMsg: "ตำแหน่งของคุณออกนอกขอบเขตของแผนที่",        
+      },
+      flyTo: false,
+      returnToPrevBounds: false,
+			cacheLocation:false,
+			enableHighAccuracy: true,
+      showPopup: true,
+			metric: true,
+
+			showCompass: true,
+      compassClass: CompassMarker,				
+      compassStyle: {
+          fillColor:   '#2A93EE',
+          fillOpacity: 1,
+          weight:      0,
+          color:       '#fff',
+          opacity:     1,
+          radius:      9, // How far is the arrow is from the center of of the marker
+          width:       9, // Width of the arrow
+          depth:       6  // Length of the arrow
+      },
+      //followCompassStyle: {},
+			clickBehavior: {inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'inView'},	
+
 			locateOptions: {
+				//watch: true,  // if you overwrite this, visualization cannot be updated
+        //setView: false // have to set this to false because we have to
 				//setView: 1,
-				clickBehavior: {inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'inView'},			
+				//setView: false, 'once', 'always', 'untilPan', or 'untilPanOrZoom',
 				//setView: always,
-				//clickBehavior: {inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'inView'},
-				maxZoom: 17,
-				//enableHighAccuracy: true,
-				showCompass: true,
-				//showPopup: true
+				maxZoom: 17,//Infinity
 				timeout: 500,
 				maximumAge:500,
-				cacheLocation:false,
-				enableHighAccuracy: true
-			}
+			},
 
 
 		}).addTo(map);
 
-
+		map.on('locationfound', function (evt) {
+		 var savedLatLng = evt.latlng;
+		  console.log(savedLatLng);
+		});
 
       /* contents slidemenu */
       const left = '<div class="header" style="font-size:16px;font-weight:bold;">ระบบสนับสนุนการสำรวจข้อมูล GIS</div>';
@@ -532,25 +1098,49 @@
        */
 
 			
-
-		
-
-
       let contents = `
       <div class="content">
-				<br>
 
-				<div class="input-group mb-3">
+				<div class="input-group input-group-sm mt-1 mb-1">
 				  <input type="text" class="form-control" placeholder="ค้นหา" id="btnsearch">
 				  <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 				</div>
 
 				<hr>  
-				<ul class="fa-ul">
-				  <li><i class="fa-li fa fa-database"></i>ชั้นข้อมูล</li>
+				<div class="mx-3">
+					พื้นที่เก็บข้อมูล
+					<div class="progress" style="height: 15px;">
+					  <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">0%</div>
+						<div class="progress-bar" role="progressbar" style="color: #000000;position: relative;width: 80%;display: initial;/* float: left; */background: #e9ecef00;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80"></div>
+
+					</div>
+					ใช้ไป <span id="localstorage">0 MB</span> จาก 10 MB <pre>(Memory On Browser)</pre>
+				</div>
+
+
+						  <div class="row-fluid" style="padding: 0px 20px 0px 20px;">
+
+								<button type="button" class="btn btn-sm btn-default pull-left" id="proj" name="gis" title="จัดการโครงการ" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick="$('#projectModal').modal('show');"><img width="25px" src="img/import.png" style="">
+								</button>
+
+								<select class="" aria-label="Disabled select example" disabled style="width: 70%;height: 36px;font-size: 14px;">
+								  <option selected> ยังไม่มีโครงการ</option>
+								  <option value="1">One</option>
+								  <option value="2">Two</option>
+								  <option value="3">Three</option>
+								</select>
+					
+							</div>
+
+
+				<hr> 
+				
+				<!--<ul class="fa-ul">
+				  <li><i class="fa-li fa fa-database"></i>โครงการ</li>
 				  <li><i class="fa-li fa fa-map"></i>เพิ่ม/แก้ไขแผนที่</li>
 				</ul>
-				<hr>           
+				<hr>-->  
+				        
 				<ul class="fa-ul">
 				  <li><i class="fa-li fa fa-bookmark"></i>สถานที่ของคุณ</li>
 				  <li><i class="fa-li fa fa-commenting"></i>การมีส่วนร่วมของคุณ</li>
@@ -558,13 +1148,63 @@
 				</ul>
 				<hr>  
 				<ul class="fa-ul">
-				  <li><i class="fa-li fa fa-print"></i>พิมพ์</li>
-				  <li><i class="fa-li fa fa-download"></i>ส่งออกข้อมูล</li>  
+				  
+				  <li onclick="import_data()"><i class="fa-li fa fa-upload"></i>นำเข้าข้อมูล</li> 
+				  <li data-bs-toggle="modal" href="#exportModal" role="button""><i class="fa-li fa fa-download"></i>ส่งออกข้อมูล</li> 
+				  <li onclick="forPrint();"><i class="fa-li fa fa-print"></i>พิมพ์แผนที่</li> 
 				  <li><i class="fa-li fa fa-gear"></i>การตั้งค่า</li>
-				  <li><i class="fa-li fa fa-bullhorn"></i>แจ้งปัญหา</li>
-				  <li><i class="fa-li fa fa-info-circle"></i>เกี่ยวกับ</li>  
+				  <li data-bs-toggle="modal" href="#messageModal" role="button"><i class="fa-li fa fa-bullhorn"></i>แจ้งปัญหา</li>
+				  <li data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="fa-li fa fa-info-circle"></i>เกี่ยวกับ</li> 
+
+
 				</ul>
 				<hr>  
+				<ul class="fa-ul">
+				  <li onclick="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-li fa -hdd-o"></i>ฟังก์ชันวิเคราะห์ข้อมูลเชิงพื้นที่</li> 				
+				</ul>
+				<hr>  
+				<div class="collapse" id="collapseExample">
+						<div class="panel-body" style="margin-top: 0px;">
+							<div id="reg_all">
+
+							</div>
+
+						  <h5 id="head-pwa">ฟังก์ชันวิเคราะห์ข้อมูลเชิงพื้นที่</h5>
+
+						  <div class="row-fluid" style="padding: 5px 20px 5px 20px;">
+								<button type="button" class="btn btn-sm btn-default pull-left" id="gis1" name="gis" title="นำเข้าข้อมูล GIS" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick="widgetModal('about');"><img width="25px" src="img/import.png" style=""></button>
+
+								<button type="button" class="btn btn-sm btn-default pull-left" id="gis2" name="gis" title="ทำบัฟเฟอร์" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick="widgetModal('buffer');"><img width="25px" src="img/buffer.png" style=""></button>
+								<button type="button" class="btn btn-sm btn-default pull-left" id="gis3" name="gis" title="หาพื้นที่ซ้อนทับ" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick="widgetModal('intersect');"><img width="25px" src="img/intersect.png" style=""></button>
+								<button type="button" class="btn btn-sm btn-default pull-left" id="gis4" name="gis" title="export geoJSON" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick="widgetModal('export');"><img width="25px" src="img/download.png" style=""></button>
+							</div>
+
+							<div class="row-fluid" style="padding:  0px 20px 5px 20px;"></div>
+
+
+						  	<div class="row-fluid" style="padding: 0px 20px;">
+								<button type="button" class="btn btn-sm btn-default pull-left" id="gis5" name="gis" title="Union" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick=""><img width="25px" src="img/union.png" style=""></button>
+
+								<button type="button" class="btn btn-sm btn-default pull-left" id="gis6" name="gis" title="สอบถามข้อมูล" style="border: 1px solid #8f8f8f; width: 44px; margin-top: -6px; display: inline-block;" onclick=""><img width="25px" src="img/search.png" style=""></button>
+								
+							</div>	
+
+							<div class="row-fluid" style="padding: 5px;"></div>
+
+							<div class="row-fluid" style="padding: 5px;">*** อยู่ระหว่างการพัฒนา</div>
+
+							
+						</div>
+					
+				</div>
+
+				<div class="panel-body" style="margin-top: 0px;width:100%; text-align:center;">
+				  <div id="resampled"></div>
+					<!--<img src="" id="resampled">-->
+				</div>
+ 
+
+
       </div>`;
       /* left */
       L.control.slideMenu(left + contents, {delay: "10"}).addTo(map);
@@ -582,8 +1222,68 @@
 				$('.leaflet-menu').css('box-shadow', '#222 -1px -1px 20px 0px');
 
 			});
-			
 
+
+			var stat_login=0;
+			function login(){
+
+				$('#myModal .modal-title').html('เข้าสู่ระบบ');
+				$('#myModal .modal-body').html(`
+					<div class="container-sm">
+						<div class="grid" style="--bs-rows: 3; --bs-columns: 5;">
+				 					<div class="mt-5 mb-3 px-5"><h6> <img src="favicon.png" width="25" height="25" > กรอกรหัสพนักงานและรหัสผ่านเพื่อเข้าระบบ</h6></div>
+									<div class="input-group mb-3 g-start-3 px-5" >
+									  <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+									  <input type="text" class="form-control" placeholder="รหัสพนักงาน" aria-label="Username" aria-describedby="basic-addon1">
+									</div>
+
+									<div class="input-group mb-3 g-start-3 px-5" style="grid-row: 2">
+									  <span class="input-group-text" id="basic-addon2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+									  <input type="password" class="form-control" placeholder="รหัสผ่าน" aria-label="Username" aria-describedby="basic-addon1">
+									</div>
+
+									<div class="form-check g-start-3 px-5 ms-4" style="grid-row: 3">
+									  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+									  <label class="form-check-label" for="flexCheckDefault">
+									    จำรหัสผ่าน
+									  </label>
+									</div>
+									</br>
+									</br>
+
+						</div>
+					</div>
+
+				`);
+
+
+
+				$('#myModal').modal('show');
+				if(stat_login==0){
+					$('button.fas.fa-sign-in.fa-lg').removeClass('fa-sign-in').addClass('fa-user-circle').attr('title','พ.12974');
+					stat_login=1;
+				}
+				else{
+					$('button.fas.fa-user-circle.fa-lg').removeClass('fa-user-circle').addClass('fa-sign-in').attr('title','เข้าสู่ระบบ');
+					stat_login=0;					
+				}
+				
+			}		
+
+			function import_data(){
+				widgetModal('about');
+				//alert('อยู่ระหว่างพัฒนา');
+			}			
+			function export_data(){
+
+				if($('#ex_src option:selected').val() == 2 && ($('#ex_type option:selected').val() == 1 || $('#ex_type option:selected').val() == 2) && $('#ex_name').val() != ''){
+					exportgeojson($('#ex_name').val(),$('#ex_type option:selected').val());
+				}
+				else{
+					alert('รองรับการส่งออกข้อมูล สำหรับสถานที่ของคุณ ในรูปแบบไฟล์ JSON หรือ GeoJSON และโปรดตั้งชื่อไฟล์ (อยู่ระหว่างพัฒนา)');
+				}
+
+			}			
       /* right 
       const slideMenu = L.control
         .slideMenu("", {
@@ -608,27 +1308,148 @@
 
     var scaleM = L.control.scale({position: 'bottomleft',metric: true,imperial:false}).addTo(map);
 
- 
 		var cascade = new L.cascadeButtons([
+		    {icon: 'fas fa-sign-in fa-lg', title: 'เข้่าสู่ระบบ', ignoreActiveState:true , command: () =>{login(); }},			
 		    {icon: 'fas fa-print fa-lg', title: 'พิมพ์แผนที่', ignoreActiveState:true , command: () =>{forPrint(); }},
 		    {icon: 'fas fa-expand-arrows-alt fa-lg', title: 'ซูมแผนที่ทั้งหมด', ignoreActiveState:true , command: () =>{map.setView([13.901111, 100.752778], 6); }},		    
-		    {icon: 'fas fa-edit fa-lg', title: 'เพิ่มข้อมูล GIS', items:[
-		        {icon: 'fas fa-crosshairs fa-lg', title: 'เพิ่มตำแหน่งมาตร',command: () =>{openModal()}},
-		        {icon: 'fas fa-home fa-lg', title: 'เพิ่มอาคาร',command: () =>{console.log('hola')}},
-		        {icon: 'fas fa-arrows-alt-h fa-lg', title: 'เพิ่มท่อ',command: () =>{console.log('hola')}},
-		        {icon: 'fas fa-search fa-lg', title: 'ดูข้อมูลมาตรทั้งหมด',command: () =>{getmongo()}},		        
+		    {icon: 'fas fa-edit fa-lg btn-main-4', title: 'เพิ่มข้อมูล GIS', items:[
+		        {icon: 'fas fa-crosshairs fa-lg btn-sub-41', title: 'เพิ่มตำแหน่งมาตร',command: () =>{openModal()}},
+		        {icon: 'fas fa-home fa-lg btn-sub-42', title: 'เพิ่มอาคาร',command: () =>{alert('อยู่ระหว่างหาผู้รับจ้าง')}},
+		        {icon: 'fas fa-arrows-alt-h fa-lg btn-sub-43', title: 'เพิ่มท่อ',command: () =>{alert('อยู่ระหว่างหาผู้รับจ้าง')}},
+		        {icon: 'fas fa-search fa-lg btn-sub-44', title: 'ดูข้อมูลมาตรทั้งหมด',command: () =>{getmongo()}},		        
 		    ]},
-		    {icon: 'fas fa-ruler-combined fa-lg', title: 'การคำนวณเชิงพื้นที่', items: [
-		        {icon: 'fas fa-tape fa-lg', title: 'คำนวณระยะทาง',command: () =>{console.log('hola')}},
-		        {icon: 'fas fa-sign fa-lg', title: 'คำนวณพื้นที่',command: () =>{console.log('hola')}},
+		    {icon: 'fas fa-ruler-combined fa-lg btn-main-2', title: 'การคำนวณเชิงพื้นที่', items: [
+		        {icon: 'fas fa-tape fa-lg btn-sub-21', title: 'คำนวณระยะทาง',command: () =>{console.log('distance')}},
+		        {icon: 'fas fa-sign fa-lg btn-sub-22', title: 'คำนวณพื้นที่',command: () =>{alert('มีบั๊ค เคสเพิ่มหลายๆpolygon ลบได้แค่ล่าสุด (แก้โดย add group layer)')}},
 		    ]},
-		    {icon: 'fas fa-file-export fa-lg', title: 'ดาวน์โหลดข้อมูล', items: [
-		        {icon: 'fas fa-file-archive fa-lg', title: 'ดาวน์โหลด geojson',command: () =>{exportgeojson()}},
-		        {icon: 'fas fa-file-alt fa-lg', title: 'ดาวน์โหลด .tab',command: () =>{console.log('hola')}},
-		    ]},		    
+		    /*
+		    {icon: 'fas fa-file-export fa-lg btn-main-2', title: 'ดาวน์โหลดข้อมูล', items: [
+		        {icon: 'fas fa-file-archive fa-lg btn-sub-21', title: 'ดาวน์โหลดข้อมูลจากสถานที่ของคุณเป็น geojson',command: () =>{exportgeojson()}},
+		        {icon: 'fas fa-file-alt fa-lg btn-sub-22', title: 'ดาวน์โหลด .tab',command: () =>{console.log('hola')}},
+		    ]},	
+		    */	    
 		], {position:'topright', direction:'horizontal'}).addTo(map);
 
+		//$(".btn-main-2").css({'margin-top':'-33px','display':'none'});
+		$(".btn-sub-21").css({'margin-top':'-33px','display':'none'});
+		$(".btn-sub-22").css({'margin-top':'-33px','display':'none'});
+
+		//$(".btn-main-4").css({'margin-top':'-33px','display':'none'});
+		$(".btn-sub-41").css({'margin-top':'-33px','display':'none'});
+		$(".btn-sub-42").css({'margin-top':'-33px','display':'none'});
+		$(".btn-sub-43").css({'margin-top':'-33px','display':'none'});
+		$(".btn-sub-44").css({'margin-top':'-33px','display':'none'});
+
+		$("button.fas.fa-file-export.fa-lg.btn-main-2").on('click', function(e) {
+		  console.log('clicked');
+		  //el.addEventListener('focus', addLabel );
+		  //el.addEventListener('keydown', removeLabel );
+		  //el.focus();
+		  //activeButton
+		}, false );
+				var pointData;
+				var points = L.geoJson(pointData, {
+				  pointToLayer: function (feature, latlng) {
+				    return L.marker(latlng, {
+				      icon: L.icon({
+				        iconUrl: "img/meter.png",
+				        iconSize: [30, 30]
+				        /*,
+				        iconAnchor: [12, 28],
+				        popupAnchor: [0, -25]
+				        */
+				      }),
+				      title: "เลขมาตร "+feature.properties.name,
+				      riseOnHover: true
+				    });
+				  },
+				  onEachFeature: function (feature, layer) {
+					 
+				    if (feature.properties) {
+							/*
+				      var content = 
+				      "<table id='tblpwa' class='table table-striped table-bordered table-condensed'>" + 
+				      "<tr><th>สังกัด</th><td>การประปาส่วนภูมิภาคเขต "+feature.properties.area + "</td></tr>" + 
+				      //"<tr><th>ชื่อหน่วยงาน</th><td>" + feature.properties.pwaname + "</td></tr>" + 
+				      //"<tr><th>ที่อยู่</th><td>" + feature.properties.pwaaddress + "</td></tr>" +  
+				      //"<tr><th>โทรศัพท์</th><td>" + feature.properties.tel + "</td></tr>" +  
+				      //"<tr><th>โทรสาร</th><td>" + feature.properties.fax + "</td></tr>" +
+				      "<table>";
+							*/
+				      layer.on({
+				        click: function (e) {
+				        	/*
+				          $("#latlng_m").text(layer.feature.geometry.coordinates[1]+","+layer.feature.geometry.coordinates[0]);
+				          $("#feature-title").html("การประปาส่วนภูมิภาคเขต "+feature.properties.area);
+				          $("#feature-info").html(content);
+				          $("#featureModal").modal("show");		  
+						      highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+						      */
+				        },
+				        mouseover: function (e) {
+				        	/*
+				           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+				           */
+				        },
+				        mouseout: function (e) {
+				        	/*
+				          highlight.clearLayers();
+				          */
+				        },
+
+
+				      });
+
+
+				    }
+				  }
+				}).addTo(map);
+
+        //layerControl.addOverlay(points,"<img src='img/office.png' width='17' height='17'>&nbsp;&nbsp;กปภ.เขต",'ชั้นข้อมูล GIS กปภ.');
+
+
+		var baseLayers = {
+		  
+		};
+		/*
+		var baseLayers = {
+		  "Google Street": googleStreets,
+		  //"Google Terrain": googleTerrain,  
+		  "Google Sat": googleSat,
+		  "Google Hybrid": googleHybrid
+		};
+		*/
+
+		var groupedOverlays = {
+			/*
+		  "ข้อมูลพื้นฐาน": {
+		    "<img src='assets/img/zone.png' width='18' height='22'>&nbsp;กปภ.ข.": zone
+		  },
+		  */
+		  
+		  "ชั้นข้อมูล GIS กปภ.": {
+		    "<img src='img/pwa.png' width='20' height='20'>&nbsp;กปภ.สาขา": points
+		  },
+		  
+		};
+
+		var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+		  collapsed: true, position:'topright'}).addTo(map);
+
+		//var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+		//  collapsed: true, }).addTo(map);
+
+
+
 		var mkGroup = new L.FeatureGroup();
+
+
+	  var camAndroid_='';
+
+	  if( /Android/i.test(navigator.userAgent)){
+	    camAndroid_  = ' capture="camera" ';
+	    //alert('android');
+	  }
 
 		let txt =`
 				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -665,16 +1486,26 @@
 				  </div>
 				  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 						<div class="mb-3">
-						  <label for="formFileSm" class="form-label">อัพโหลดภาพ</label>
-						  <input class="form-control form-control-sm" id="formFileSm" type="file">
+						  <label for="upload_img_meter" class="form-label">อัพโหลดภาพ</label>
+						  <input name="upload_img_meter"  class="form-control form-control-sm" id="upload_img_meter" type="file" accept=".jpg, .png, .jpeg, .gif" {{ camAndroid_ }}>
+						  <span id="helpFileupload1" class="help-block">*เฉพาะไฟล์นามสกุล jpg, png, gif ขนาดไม่เกิน 1 Mb (แนบได้สูงสุด 1 ไฟล์)</span>
+						  </br>
+							<div style="width:100%;text-align:center;">
+						  <img id="image" style="max-width:100%;text-align:center;max-height:250px;"/>
+							</div>
+						  </br>
+						  <div style="width:100%;text-align:center;">
+						  <img src="img/default.png" style="max-width:100px;max-height:100px;" id="imagelocal" />
+						  </div>
 						</div>
+
 						<div>
 				  </div>
 				</div>
 				
           <div class="modal-footer" style="padding-top: 0;padding-bottom: 0;">
 		   			<button type="button" class="btn btn-default btn-sm" id='btnsubmit' style="padding-top: 0;padding-bottom: 0;">บันทึก</button>
-            <button type="button" class="btn btn-default btn-sm" style="padding-top: 0;padding-bottom: 0;" onclick="modalMeter.hide()">ยกเลิก</button>
+            <button type="button" class="btn btn-default btn-sm" style="padding-top: 0;padding-bottom: 0;" onclick="modalMeter.hide();mkGroup.removeFrom(map);">ยกเลิก</button>
           </div>				
 
 			`;
@@ -714,6 +1545,9 @@
               //.enableBtn()
               //.disableBtn()
 		
+
+
+
 			$('#btnsubmit').click(function(event){
 					
       		if($('#geolat').val() == '' || $('#geolng').val() ==''){
@@ -722,10 +1556,16 @@
       		}
       		else{
 
+						//upload_img_meter(1);
+
       			console.log( $('#geolat').val(),$('#geolng').val(),$('#housenum').val(),$('#formFileSm').val() )
+      			
 						$.ajax({
-							 type:'POST',
-							 url:'https://herokunutty.herokuapp.com/mongodb.php',
+							
+               type:'POST',
+               url:'https://herokunutty.herokuapp.com/mongodb.php',	
+							 				
+
 							 async:false,
 							 dataType: 'json',
 							 data : {
@@ -742,25 +1582,27 @@
 							 //processData: false,
 							 //contentType: false,
 							 success:function(data){
+
 							 	alert('บันทึกลง mongodb สำเร็จ');
 							  console.log(data);
 							   //console.log(data[0].status);
-							   /*
-							   if(data[0].status == 'not found'){
-									$('#survey_modal').modal();
-									}
-								 */
+							  
+							   //if(data[0].status == 'not found'){
+									//$('#survey_modal').modal();
+									//}
 								 
 							 }
 
 						});
+						
 						modalMeter.hide();
+						mkGroup.removeFrom(map);
       		}
 
 			});
 
 
-			$("#geolat, #geolng").keyup(function(event){	
+		$("#geolat, #geolng").keyup(function(event){	
 				//console.log($('#geolat').val());
 			  //console.log($('#geolng').val());
 
@@ -797,8 +1639,8 @@
 			      //var marker = L.marker(e.latlng);
 			      mkGroup.addLayer(marker);
 			      mkGroup.addTo(map);
-			      map.setView([parseFloat($('#geolat').val()), parseFloat($('#geolng').val())], 21.25);
-					
+						map.setView([parseFloat($('#geolat').val()), parseFloat($('#geolng').val())], 13.00);
+
 			      marker.dragging.enable();
 
 						marker.on('dragend', function(e) {
@@ -809,7 +1651,8 @@
 
 			  			marker.bindPopup( "Lat: "+parseFloat($('#geolat').val())+", </br>Lng: "+parseFloat($('#geolng').val())+"<br><a style='text-align:center;cursor:pointer;' onclick='mkGroup.removeFrom(map)'>ลบ</a>");
 
-				   		map.setView([e.target._latlng.lat, e.target._latlng.lng], 21.25);
+				   		//map.setView([e.target._latlng.lat, e.target._latlng.lng], 21.25);
+
 						});
 						//console.log(e.latlng.lat);
 
@@ -827,12 +1670,308 @@
 					}
 				}
 				*/
-			});	
+		});	
+
+		chksizelocalstorage();
+		function chksizelocalstorage(){
+
+				//เช็คขนาดไฟล์ localstorage
+				//var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};
+
+				var _lsTotal = 0,
+	    			_xLen, _x;
+				for (_x in localStorage) {
+				    if (!localStorage.hasOwnProperty(_x)) {
+				        continue;
+				    }
+				    _xLen = ((localStorage[_x].length + _x.length) * 2);
+				    _lsTotal += _xLen;
+				    console.log(_x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB")
+				};
+				//_lsTotal = 1200000;
+				//_lsTotal = 3000000;
+				//_lsTotal = 5000000;
+				//_lsTotal = 9000000;		
+				//_lsTotal = 10500000;
+				console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+				console.log("Total = " + addCommasmb((_lsTotal / 1024).toFixed(2)));
+
+				//$('#localstorage').html((_lsTotal / 1024).toFixed(2) + " KB");
+				$('#localstorage').html(addCommasmb((_lsTotal / 1024).toFixed(2)));
+				$('div.progress-bar:first-child').html( parseInt((_lsTotal / 1024)/10240*100)+'%');
+				$('div.progress-bar:first-child').attr('aria-valuenow', parseInt((_lsTotal / 1024)/10240*100) );
+				$('div.progress-bar:first-child').css('width', parseInt((_lsTotal / 1024)/10240*100)+'%');			
+			
+				if(parseInt( (_lsTotal / 1024)/10240*100) == 0){
+					$('div.progress-bar:first-child').addClass('bg-success');
+					$('div.progress-bar:first-child').html('');
+					//$('div.progress-bar:first-child').html(((_lsTotal / 1024)/10240*100).toFixed(2)+'%');
+					$('div.progress-bar:first-child').css('width',parseFloat( (_lsTotal / 1024)/10240*100).toFixed(2)+'%');		//default
+					//$('div.progress-bar:first-child').css('background','#e9ecef');			
+					//$('div.progress-bar:first-child').css('color','#000000');	
+					$('div.progress-bar:last-child').html(((_lsTotal / 1024)/10240*100).toFixed(2)+'%');
+					$('div.progress-bar:last-child').css('width','80%');								
+				}
+				else if(parseInt( (_lsTotal / 1024)/10240*100) <= 20){
+					$('div.progress-bar:first-child').addClass('bg-success');
+					$('div.progress-bar:first-child').html('');
+					//$('div.progress-bar:first-child').html(((_lsTotal / 1024)/10240*100).toFixed(2)+'%');
+					$('div.progress-bar:first-child').css('width',parseFloat( (_lsTotal / 1024)/10240*100).toFixed(2)+'%');		//default
+					//$('div.progress-first-child').css('background','#e9ecef');			
+					//$('div.progress-bar:first-child').css('color','#000000');	
+					$('div.progress-bar:last-child').html(((_lsTotal / 1024)/10240*100).toFixed(2)+'%');		
+					$('div.progress-bar:last-child').css('width','80%');											
+				}
+				else if(parseInt( (_lsTotal / 1024)/10240*100) >= 100){
+					$('div.progress-bar:first-child').addClass('bg-danger');
+					$('div.progress-bar:first-child').addClass('progress-bar-striped');
+					$('div.progress-bar:first-child').addClass('progress-bar-animated');
+					//$('div.progress-bar:last-child').html( '100%');
+					$('div.progress-bar:last-child').html('');	
+				}				
+				else if(parseInt( (_lsTotal / 1024)/10240*100) >= 90){
+					$('div.progress-bar:first-child').addClass('bg-danger');
+					$('div.progress-bar:first-child').addClass('progress-bar-striped');
+					$('div.progress-bar:first-child').addClass('progress-bar-animated');
+					$('div.progress-bar:last-child').html('');									
+				}
+				else if(parseInt( (_lsTotal / 1024)/10240*100) >= 80){
+					$('div.progress-bar:first-child').addClass('bg-warning');
+					$('div.progress-bar:first-child').addClass('progress-bar-striped');
+					$('div.progress-bar:first-child').addClass('progress-bar-animated');
+					$('div.progress-bar:last-child').html('');									
+				}			
+				else{
+					$('div.progress-bar:first-child').addClass('bg-primary');
+					$('div.progress-bar:first-child').addClass('progress-bar-striped');
+					$('div.progress-bar:first-child').addClass('progress-bar-animated');
+					$('div.progress-bar:last-child').html('');									
+				}
+				
+				/*
+				var _lsTotal = 0,
+	    			_xLen, _x;
+				for (_x in localStorage) {
+				    if (!localStorage.hasOwnProperty(_x)) {
+				        continue;
+				    }
+				    _xLen = ((localStorage[_x].length + _x.length) * 2);
+				    _lsTotal += _xLen;
+				    console.log(_x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB")
+				};
+				console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+				*/
+				/*
+					var localStorageSpace = function(){
+			        var allStrings = '';
+			        for(var key in window.localStorage){
+			            if(window.localStorage.hasOwnProperty(key)){
+			                allStrings += window.localStorage[key];
+			            }
+			        }
+			        return allStrings ? 3 + ((allStrings.length*16)/(8*1024)) + ' KB' : 'Empty (0 KB)';
+			    };
+				*/
+				
+		}
+
+
+		document.getElementById('upload_img_meter').onchange = function () {
+
+		  var src = URL.createObjectURL(this.files[0])
+		  document.getElementById('image').src = src;
+
+			setTimeout(function(){ 
+						getBase64ImageResize(document.getElementById('image'));
+			}, 1000);
+			
+		}
+
+		function img_to_localstorage(){
+			//แปลงเป็นbase64
+			var previewimg = document.getElementById('image');
+			var imgData = getBase64Image(previewimg);
+			localStorage.setItem("imgData", imgData);
+		}
+		function localstorage_to_img(){
+			//เอารูป base64 มาแสดง
+			//<img src="" id="imagelocal" />
+			var dataImage = localStorage.getItem('imgData');
+			var showImg = document.getElementById('imagelocal');
+			showImg.src = "data:image/png;base64," + dataImage;
+		}
+
+		function getBase64Image(img) {
+		    var canvas = document.createElement("canvas");
+		    canvas.width = img.width;
+		    canvas.height = img.height;
+
+		    var ctx = canvas.getContext("2d");
+		    ctx.drawImage(img, 0, 0);
+
+		    var dataURL = canvas.toDataURL("image/png");
+
+		    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+
+				//var dataURL = getDataURL(document.querySelector('#myimg'));
+		    /*
+				var _URL = window.URL || window.webkitURL;
+				$("#file-input").change(function(e) {
+				    var file, img;
+				    if ((file = this.files[0])) {
+				        img = new Image();
+				        img.onload = function() {
+				            $("#file-h").val(this.height);
+				            $("#file-w").val(this.width);
+				        };
+				        img.onerror = function() {
+				            alert( "not a valid file: " + file.type);
+				        };
+				        img.src = _URL.createObjectURL(file);
+				    }
+				});
+
+		    var canvas = document.createElement("canvas");
+		    	canvas.width = img.width;
+		    	canvas.height = img.height;
+		        var canvas = document.createElement("canvas");
+    				canvas.width = $("#file-w").val();
+    				canvas.height = $("#file-h").val();
+				*/
+		}
+		function getBase64ImageResize(img) {
+			/*
+			alert(img);
+				if(!img || img==null){
+					img = document.getElementById('image');
+				}
+				*/
+		    var canvas = document.createElement("canvas");
+		    //canvas.width = img.width;
+		    //canvas.height = img.height;
+
+				canvas.width = 64; // target width
+				canvas.height = 64; // target height
+
+		    var ctx = canvas.getContext("2d");
+		    //ctx.drawImage(img, 0, 0);
+				ctx.drawImage(img, 0, 0 ,canvas.width, canvas.height);
+		    /*
+		    ctx.drawImage(img, 
+		        0, 0, img.width, img.height, 
+		        0, 0, canvas.width, canvas.height
+		    );
+				*/
+		    // create a new base64 encoding
+		    var resampledImage = new Image();
+		    resampledImage.src = canvas.toDataURL();
+		    document.getElementById("resampled").appendChild(resampledImage);
+				//getBase64ImageResize(document.getElementById('image'));
+		    /* //example
+		    image.src = "data:image/png; base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABaFBMVEVMoUNNoURNokROokVPokZQo0dRpEhSpElTpUpUpUtVpk1Wpk1Xp09ZqFBZqFFaqFJbqVJbqVNdqlVeqlVeq1Zgq1hgrFhirFpirVtlrl5mr15nr2BpsGFqsWNssmRus2dvs2hwtGlxtGlytWtztWx4uHF5uXJ6uXR+u3d/vHiAvHqBvXqCvXyDvn2Evn6HwIGMw4aPxImRxYuUx46Vx5CWyJGbypacy5egzZuizp2kz5+kz6Cm0KGn0aKp0qSp0qWs1Kiu1Kmw1ayy1q602LC12LG627e83Lm+3bvF4cPI4sXJ48bK48jL5MjM5MrN5cvP5szQ5s7R58/S59DU6dLV6dPa7Nnf7t7g79/h79/i8OHj8OLk8ePm8uXn8ubp9Ojq9Onr9ers9evt9ezu9u3v9+7w9+/x+PDy+PHy+PL0+fP0+fT1+vX2+vX3+/f4+/j5/Pj5/Pn6/Pr7/fv9/v3+/v7+//7////VxbUKAAABVElEQVR4Ae3L65cKcQDH4e9YYe2utMnFsuu+rCyFKDVyKSTG/X6RVO5Ums+/r3HQOZz5zcyb7U3P+0drbcLKVRVF/DacVQSbnkL/oCJY+Axv4orgpAvOlMJYvJXU0GWgqBBSDd4ekhR7CINjClYGellJ21rwfocCWYUBcDUmHfkBj2IKlv4EPEhI54GKQlh4DjQOyKoBp2Syf1qemZtAN6PZV/Btr/xNdz5cnNeQVXKBK+uXvsNd+TsH9K4taujEF+D+1iw35uTP7gK4zlFL2vMCeL1vWUaJC208jzMbNFsHzijIxtPP8LzLz62z3UsKwTp+D8/Xyq7DUzKZ36nflq73AXpbZFSi49irKXm2lz9CVWZ3+KVVL6aT0ubcy90ye8JIs1ZYiStIYqVQa/JXXr4A/ZFMF+stPMsSYAojqVXbac+EDiPmwD/GH/431mAwhmA28RMGFbXqgVfHnwAAAABJRU5ErkJggg==";
+				*/
+				
+		    //var dataURL = canvas.toDataURL("image/png");
+		    //return dataURL.replace(/^data:image\/(png|jpg|gif|jpeg);base64,/, "");
+				
+		}
+
+
+
+		/*
+		// get user's uploaded image
+		const imgPath = document.querySelector('input[type=file]').files[0];
+		const reader = new FileReader();
+
+		reader.addEventListener("load", function () {
+		    // convert image file to base64 string and save to localStorage
+		    localStorage.setItem("image", reader.result);
+		}, false);
+
+		if (imgPath) {
+		    reader.readAsDataURL(imgPath);
+		}
+		let img = document.getElementById('image');
+		img.src = localStorage.getItem('image');
+		*/
+
+		/*
+		document.getElementById('file').addEventListener('change', (e) => {
+		  const file = e.target.files[0];
+		  const reader = new FileReader();
+		  reader.onloadend = () => {
+		    // convert file to base64 String
+		    const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+		    // store file
+		    localStorage.setItem('wallpaper', base64String);
+		    // display image
+		    document.body.style.background = `url(data:image/png;base64,${base64String})`;
+		  };
+		  reader.readAsDataURL(file);
+		});
+		*/
+
+		function readURL(input) 
+		{
+		    document.getElementById("bannerImg").style.display = "block";
+
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+
+		        reader.onload = function (e) {
+		            document.getElementById('bannerImg').src =  e.target.result;
+		        }
+
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		function upload_img_meter(id){
+			act ='image';
+			var form_data = new FormData();
+			var files = $('#upload_img_meter')[0].files;
+
+			for (var i = 0; i < files.length; i++) {
+				form_data.append("upload_img_meter[]", files[i]);
+			}	
+			//alert(ref_no);
+			form_data.append("act", act);
+			form_data.append("id", id);
+
+			$.ajax({
+				url: 'upload_img_meter.php', // point to server-side PHP script 
+				type: 'POST',
+				async:false, //= Code paused. (Other code waiting for this to finish.)
+				//async:true, //= Code continued. (Nothing gets paused. Other code is not waiting.)
+				dataType: 'text', // what to expect back from the PHP script
+				data: form_data,
+
+				cache: false,
+				contentType: false,
+				processData: false,
+
+				success: function (response) {
+					//$('#msg').html(response); // display success response from the PHP script
+					localStorage.setItem('upload_img_meter',response);
+					//upload_img_thumbnail(localStorage.getItem('act'));
+					
+					return response;
+				},
+				error: function (response) {
+					//$('#msg').html(response); // display error response from the PHP script
+					localStorage.setItem('upload_img_meter','');
+					return "";
+				}
+
+			});
+
+		}
+
 
 		function openModal(){
 
-			$('#geolat').val(map.getCenter().lat)
-			$('#geolng').val(map.getCenter().lng)
+			$('#geolat').val(map.getCenter().lat);
+			$('#geolng').val(map.getCenter().lng);
 
 				try{
 			      mkGroup.clearLayers();
@@ -878,7 +2017,7 @@
 
 			  			marker.bindPopup( "Lat: "+parseFloat($('#geolat').val())+", </br>Lng: "+parseFloat($('#geolng').val())+"<br><a style='text-align:center;cursor:pointer;' onclick='mkGroup.removeFrom(map)'>ลบ</a>");
 
-				   		map.setView([e.target._latlng.lat, e.target._latlng.lng], 21.25);
+				   		//map.setView([e.target._latlng.lat, e.target._latlng.lng], 21.25);
 						});
 						//console.log(e.latlng.lat);
 
@@ -893,63 +2032,114 @@
 			modalMeter.show();
 		}
 
-		function saveToFile(content, filename) {
-		      var file = filename + '.geojson';
+		function saveToFile(content, filename, type) {
+
+					if(type==1){
+						type ='.json';
+					}
+					else if(type==2){
+						type='.geojson';
+					}
+		      var file = filename + type;
 		      saveAs(new File([JSON.stringify(content)], file, {
 		        type: "text/plain;charset=utf-8"
 		      }), file);
 		}
 
 
-		function exportgeojson(){
+		function exportgeojson(name,type){
 
-			 	var freeBus = {
+				console.log(this.bookmarkctrl._data);
+
+			 	var tmp_geojson = {
 			      "type": "FeatureCollection",
-			      "features": [{
-			          "type": "Feature",
-			          "geometry": {
-			            "type": "LineString",
-			            "coordinates": [
-			              [100.00341892242432, 12.75383843460583],
-			              [100.0008225440979, 12.751891803969535]
-			            ]
-			          },
-			          "properties": {
-			            "popupContent": "This is free bus that will take you across downtown.",
-			          },
-			          "id": 1
-			        },
-			        {
-			          "type": "Feature",
-			          "geometry": {
-			            "type": "LineString",
-			            "coordinates": [
-			              [100.0008225440979, 12.751891803969535],
-			              [100.99820470809937, 12.74979664004068]
-			            ]
-			          },
-			          "properties": {
-			            "popupContent": "This is free bus that will take you across downtown.",
-			          },
-			          "id": 2
-			        },
-			        {
-			          "type": "Feature",
-			          "geometry": {
-			            "type": "LineString",
-			            "coordinates": [
-			              [100.99820470809937, 12.74979664004068],
-			              [100.98689651489258, 12.741052354709055]
-			            ]
-			          },
-			          "properties": {
-			            "popupContent": "This is free bus that will take you across downtown.",
-			          },
-			          "id": 3
-			        }
-			      ]
+			      "features": []
 			  };
 
+
+			  if(this.bookmarkctrl._data.length >0){
+
+
+					$.each(this.bookmarkctrl._data, function() {
+
+							if(!this.imgbase64){
+								this.imgbase64 = '';
+							}
+							var subfeature = 				
+							{
+							  "type": "Feature",
+							  "geometry": {
+							    "type": "Point",
+							    "coordinates": [this.latlng[1], this.latlng[0]]
+							  },
+							  "properties": {
+							  	"id": this.id,
+							    "name": this.name,
+							    "zoom": this.zoom,
+							    "imgbase64": this.imgbase64
+							  }
+							};
+							tmp_geojson.features.push(subfeature);
+
+					});
+					saveToFile(tmp_geojson, name, type);
+
+			  }
+
+
+			  	/*
+				 	var freeBus = {
+				      "type": "FeatureCollection",
+				      "features": [
+
+				      	{
+				          "type": "Feature",
+				          "geometry": {
+				            "type": "LineString",
+				            "coordinates": [
+				              [100.00341892242432, 12.75383843460583],
+				              [100.0008225440979, 12.751891803969535]
+				            ]
+				          },
+				          "properties": {
+				            "popupContent": "This is free bus that will take you across downtown.",
+				          },
+				          "id": 1
+				        },
+
+				        {
+				          "type": "Feature",
+				          "geometry": {
+				            "type": "LineString",
+				            "coordinates": [
+				              [100.0008225440979, 12.751891803969535],
+				              [100.99820470809937, 12.74979664004068]
+				            ]
+				          },
+				          "properties": {
+				            "popupContent": "This is free bus that will take you across downtown.",
+				          },
+				          "id": 2
+				        },
+
+				        {
+				          "type": "Feature",
+				          "geometry": {
+				            "type": "LineString",
+				            "coordinates": [
+				              [100.99820470809937, 12.74979664004068],
+				              [100.98689651489258, 12.741052354709055]
+				            ]
+				          },
+				          "properties": {
+				            "popupContent": "This is free bus that will take you across downtown.",
+				          },
+				          "id": 3
+				        }
+
+				      ]
+				  };
+					*/
 			  	/*
 					if(!pointImport._leaflet_id){
 						alert('ไม่พบชั้นข้อมูล โปรดนำเข้าข้อมูลก่อนครับ');
@@ -969,7 +2159,7 @@
 				    	saveToFile(freeBus, 'test');
 				    }
 					*/
-					saveToFile(freeBus, 'test');
+					//saveToFile(freeBus, 'test');
 
 		}
 
@@ -998,17 +2188,18 @@
 		});
 
 		function getmongo(type){
+
 						$.ajax({
+							
 							 type:'GET',
 							 url:'https://herokunutty.herokuapp.com/mongodb.php?act=qm',
+							 crossDomain: true,
+
 							 async:false,
-							 crossDomain: true,	
 							 dataType: 'json',
-							 /*
 							 data : {
 							 		 act: 'qm'
 							 },
-							 */
 							 //dataType: 'text',
 							 //processData: false,
 							 //contentType: false,
@@ -1016,9 +2207,9 @@
 							  //console.log(data);
 
 							  let markersCluster = L.markerClusterGroup({
-								   disableClusteringAtZoom: 17,
+							  	 disableClusteringAtZoom: 17,
 							  	/*
-									maxClusterRadius: 120,
+							  	maxClusterRadius: 120,
 									spiderfyOnMaxZoom: false,
 									showCoverageOnHover: false,
 									zoomToBoundsOnClick: false,
@@ -1060,7 +2251,7 @@
 
 									let mkmeter = new L.marker([this.lat,this.lng],{title: "เลขมาตร: "+this.meterno, icon: iconMaker });
 									//gMk.addLayer(mkmeter);
-									
+									//mkmeter.bindPopup(title);
 									markersCluster.addLayer(mkmeter);
 								});
 
@@ -1088,11 +2279,83 @@
 								});
 
 
+
 							 }
 
 						});
 			
 		}
+
+
+
+      function addCommas(nStr) {
+          nStr += '';
+          var x = nStr.split('.');
+          var x1 = x[0];
+          var x2 = x.length > 1 ? '.' + x[1] : '';
+          var rgx = /(\d+)(\d{3})/;
+          while (rgx.test(x1)) {
+              x1 = x1.replace(rgx, '$1' + ',' + '$2');
+          }
+          return x1 + x2;
+      }
+      function addCommasmb(nStr) {
+
+        nStr += '';
+        var x = nStr.split('.');
+        var x1 = x[0];
+        var x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        var rgxmore = /(\d+)(\d{6})/;
+        if(rgx.test(x1) == true){ // more999
+
+          if(rgxmore.test(x1) == true){
+            //addCommas(x1)
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            x1 = x1.split(',');
+            var sum='';
+            for ($i=0; $i<x1.length; $i++){
+              if($i == x1.length-2){
+                //console.log(x1[$i]);
+                sum +=x1[$i]+'.';
+              }              
+              else if($i == x1.length-1){
+                //console.log(x1[$i]);
+                sum += x1[$i].substring(0,2);
+              }
+              else{
+                //console.log(x1[$i]);
+                sum +=x1[$i]+',';
+              }
+            }
+
+            return sum +' MB'; 
+          }
+          else{
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            //console.log(x1);
+            //console.log(x2);
+            return parseFloat(x1.replace(',', '.')).toFixed(2) +' MB'; 
+          }
+          
+
+        }
+        else{
+
+          while (rgx.test(x1)) {
+              x1 = x1.replace(rgx, '$1' + ',' + '$2');
+          }
+          //console.log(x1);หลักหน่วยเมตร
+          //console.log(x2);//ทศนิยม
+          return parseFloat(x1 + x2).toFixed(2)+' KB';
+
+        }
+
+      }
 
 		(function() {
 
@@ -1217,20 +2480,34 @@
 		
 		//map.MapPaint.disable();
 		//map.MapPaint.enable();
-		var mappaintctrl = new MapPaint.SwitchControl({position: 'bottomright'}).addTo(map);
-		//map.addControl(new MapPaint.SwitchControl({position: 'bottomright'}));
+
+	  var mappaintctrl = new MapPaint.SwitchControl({position: 'bottomright'}).addTo(map);
+
+	  //map.addControl(new MapPaint.SwitchControl({position: 'bottomright'}));
+	  var overlaypaint = [];
+	  map.MapPaint.saveMethod = function(image, bounds) {
+	   		var c_paint=overlaypaint.length;
+	   		console.log('save paint: ' + overlaypaint.length );
+	  		overlaypaint[c_paint] = new L.imageOverlay(image, bounds).addTo(this._map);
+	     //layerControl.removeLayer(pipe_all);
+	      //layerControl._update();
+	      layerControl.addOverlay(overlaypaint[c_paint] ,'Paint '+ c_paint +'<i title="ลบ" class="fa fa-trash" aria-hidden="true" style="margin-left:2px;border-radius: 5px;cursor: pointer;color: red;border: 1px solid #ff92928c;padding: 3px;" onclick="overlaypaint['+ c_paint +'] .removeFrom(map);map.removeLayer(overlaypaint['+ c_paint +'] );layerControl.removeLayer(overlaypaint['+ c_paint +'] );layerControl._update();"></i>','ภาพวาด');
+	      layerControl._update();
+	  }
+
+	  //$( ".mappaint-control.leaflet-control" ).draggable();
 
 		map.on("zoomstart", function(e) {
 		  if(zoomLock){
 		  	//console.log('zoom disabled');
-		    throw 'zoom disabled';
+		    throw 'ไม่สามารถซูมแผนที่ได้ โปรดปิดฟังก์ชันวาดรูป';
 		  }
 		});		
 
-		
+	
 		var bookmarkctrl = new L.Control.Bookmarks({
 			position: 'bottomright',
-		    name: 'bm-survey', // defaults to 'leaflet-bookmarks'
+		    name: 'fav-survey', // defaults to 'leaflet-bookmarks'
 		    localStorage: true // if you want to use local variable for storage
 		}).addTo(map);
 		//$('div.leaflet-bar.leaflet-bookmarks-control.leaflet-control').attr('title','Bookmarks');
@@ -1369,6 +2646,229 @@
 	</script>
 
 	<!--
+	<script src="leaflet/motion/dist/leaflet.motion.min.js"></script>
+	<script>
+		/*
+		L.motion.polyline([], options, motionOptions, markerOptions).addTo(map); //  as L.polyline
+		L.motion.polygon([], options, motionOptions, markerOptions).addTo(map); //  as L.polygon
+		L.motion.group([], options).addTo(map); //  as L.featureGroup - to run all animation at same time
+		L.motion.seq([], options).addTo(map); //  as L.featureGroup - to setup seq for animations.
+		motionStart() // to start motion.
+		motionStop() // to stop motion.
+		motionPause() // to pause motion.
+		motionResume() // to resume paused motion.
+		motionToggle() // to pause motion, if it's running. To start motion if it's not. Or just resume.
+		getMarkers() // to get multi-dimensional array of markers from all motion sub components.
+
+
+		//L.motion.polyline and L.motion.polygon
+		// - expected duration for motion in milliseconds, can be used after motion is created to start animation
+		// and can be used during animation to change object animation duration.
+		motionDuration(duration) 
+
+		// - expected motion speed in KM/H, can be used after motion is created to start animation
+		// and can be used during animation to change object speed.
+		motionSpeed(speed)
+
+		addLatLng(latLng) // - allows to add additional point in the end for the motion animation.
+
+		 // Returns marker (if markerOptions is passed on creation) to attach needed behavior.
+		 // Marker will be added to the map only during animation
+		getMarker()
+
+		L.motion.seq
+		addLayer(layer, autostart) // to append layer to the end of sequence and autostart it if needed
+
+
+		L.motion.polyline([[13,100], [13,100.5]], {
+			color: "transparent"
+		}, {
+			auto: true,
+			duration: 3000,
+			easing: L.Motion.Ease.easeInOutQuart
+		}, {
+			removeOnEnd: true,
+			showMarker: true,
+			icon: L.divIcon({html: "<i class='fa fa-car fa-2x' aria-hidden='true'></i>", iconSize: L.point(27.5, 24)})
+		}).addTo(map);
+
+		L.motion.polyline([{"lat":10,"lng":100},{"lat":11.15611417450841,"lng":99.1906730905175213}], {
+			color:"khaki"
+		}, null, {
+			removeOnEnd: true,
+			icon: L.divIcon({html: "<i class='fa fa-plane fa-2x' aria-hidden='true' motion-base='-48'></i>", iconSize: L.point(19, 24)})
+		}).motionDuration(7000)
+
+		
+		var planePolyline = L.motion.polyline(planeRoute).motionDuration(2000);
+
+		// Build the Sequence Group:
+		var seqGroup = L.motion.seq([
+			trackPolyline, shipPolyline
+		]).addTo(map);
+
+		seqGroup.addLayer(planePolyline, true);
+		*/
+
+		/*
+			var options = {
+		        draw: {
+		            circle: false, // Turns off this drawing tool
+		            rectangle: false,
+		            marker: false,
+					circlemarker: false
+		        }
+		    };
+
+			var drawControl = new L.Control.Draw(options);
+		    map.addControl(drawControl);
+
+		    map.on(L.Draw.Event.CREATED, function (e) {
+		        var type = e.layerType,
+		            layer = e.layer;
+
+				if (type === "polyline") {
+					var line = L.motion.polyline(layer.getLatLngs(), {
+						color: "orange"
+					}, {
+						auto: true,
+						easing: L.Motion.Ease.swing
+					}).motionSpeed(100000).addTo(map);
+				}
+
+				if (type === "polygon") {
+					L.motion.polygon(layer.getLatLngs(), {
+						color: "red",
+						fill: true,
+						fillOpacity: 0.4
+					},{
+						auto: true
+					}, {
+						removeOnEnd: true,
+						icon: L.divIcon({className:"red", html: "<i class='fa fa-superpowers fa-spin fa-2x' aria-hidden='true' motion-base='0'></i>", iconSize: L.point(24, 24), iconAnchor: L.point(5, 22)})
+					}).motionDuration(10000).addTo(map);
+				}
+		    });
+
+			var trackRoute = JSON.parse('[{"lat":51.15815239612826,"lng":-2.2055053710937504},{"lat":51.18569785341817,"lng":-2.1615600585937504},{"lat":51.19120493896969,"lng":-2.122009252198041},{"lat":51.22698519222996,"lng":-2.0187377929687504},{"lat":51.20221718842518,"lng":-1.979186986573041},{"lat":51.24211458943536,"lng":-1.8956908676773312},{"lat":51.22285808183325,"lng":-1.8429565429687502},{"lat":51.253114667550555,"lng":-1.7726440262049439},{"lat":51.25036488157529,"lng":-1.7023315094411375},{"lat":51.264112114656214,"lng":-1.6276245284825566},{"lat":51.28472525702113,"lng":-1.56829833984375},{"lat":51.26960987786426,"lng":-1.5309448074549437},{"lat":51.27510698339771,"lng":-1.4891967270523312},{"lat":51.29296795605501,"lng":-1.4474487304687502},{"lat":51.286099169144734,"lng":-1.3837279938161375},{"lat":51.27922935475756,"lng":-1.3397826813161373},{"lat":51.31494117540117,"lng":-1.2694701645523312},{"lat":51.32866911860522,"lng":-1.2057494278997185},{"lat":51.35611262745693,"lng":-1.1266478989273312},{"lat":51.39039390837808,"lng":-1.0695190262049439},{"lat":51.382168736719194,"lng":-1.0057982895523312},{"lat":51.37394211276064,"lng":-0.9596557449549438},{"lat":51.353369031707764,"lng":-0.9025268722325565},{"lat":51.347881294944216,"lng":-0.8651732560247184},{"lat":51.32866911860522,"lng":-0.8234251756221057},{"lat":51.31082203572863,"lng":-0.7860717270523311},{"lat":51.28335135620783,"lng":-0.6981811020523311},{"lat":51.291594301829406,"lng":-0.5905150528997184},{"lat":51.32043285621175,"lng":-0.5267943162471057},{"lat":51.36434245505222,"lng":-0.43670645914971834},{"lat":51.37805558339966,"lng":-0.35321029834449297},{"lat":51.3506252193158,"lng":-0.313659617677331},{"lat":51.32180564750844,"lng":-0.3004760574549437},{"lat":51.29296795605501,"lng":-0.27191153727471834},{"lat":51.27510698339771,"lng":-0.20159910432994368},{"lat":51.31631415723791,"lng":-0.12249740771949293},{"lat":51.361599352206966,"lng":-0.08074949495494367},{"lat":51.36022772609213,"lng":-0.0038450304418802266},{"lat":51.32866906624522,"lng":0.04449474625289441},{"lat":51.30807559747286,"lng":0.08184819482266904},{"lat":51.28747293535334,"lng":0.1367800030857325},{"lat":51.26686102604075,"lng":0.20709243603050712},{"lat":51.2599882819768,"lng":0.2444462198764086},{"lat":51.22148222615174,"lng":0.33453390933573246},{"lat":51.18156698919849,"lng":0.3960574138909579},{"lat":51.14988546610741,"lng":0.4663701821118594},{"lat":51.109908194320916,"lng":0.5718386638909579},{"lat":51.107149852721776,"lng":0.6751100812107326},{"lat":51.053329467578955,"lng":0.7805788982659579},{"lat":51.014650651391285,"lng":0.8377076033502817},{"lat":50.9690233345503,"lng":0.9036255721002818},{"lat":50.93996435333021,"lng":0.9585572127252818},{"lat":50.921966522212145,"lng":0.9651490766555072}]');
+			var shipRoute = JSON.parse('[{"lat":50.921966522212145,"lng":0.9651490766555072},{"lat":50.926120475839824,"lng":1.0437014233320954},{"lat":50.94965276094792,"lng":1.1008302960544827},{"lat":50.96210622406778,"lng":1.184326456859708},{"lat":50.98700308620511,"lng":1.2678226176649334},{"lat":51.014650625032424,"lng":1.3710940349847078},{"lat":51.018796350737,"lng":1.4677737560123207},{"lat":51.062994180347005,"lng":1.5600588452070954},{"lat":51.07265684948244,"lng":1.65234393440187},{"lat":51.08093750173957,"lng":1.7358400952070954},{"lat":51.11680330181327,"lng":1.7973634321242573},{"lat":51.136104124419646,"lng":1.8940431531518698},{"lat":51.137482451626596,"lng":2.0126956980675463},{"lat":51.18845145219318,"lng":2.1203612443059687},{"lat":51.1898282161464,"lng":2.2412108536809687},{"lat":51.18569780089507,"lng":2.335693342611194},{"lat":51.207632884080915,"lng":2.427429333329201},{"lat":51.18836197273001,"lng":2.519714422523976},{"lat":51.1677055637131,"lng":2.618591375648976},{"lat":51.129466960517135,"lng":2.6630860380828385}]');
+			var carRoute = JSON.parse('[{"lat":51.129466960517135,"lng":2.6630860380828385},{"lat":51.07664802198799,"lng":2.738342452794314},{"lat":51.055941653758396,"lng":2.749328780919314},{"lat":51.00067931792692,"lng":2.7778932172805075},{"lat":50.943967078334666,"lng":2.826233077794314},{"lat":50.89794502437422,"lng":2.867431640625},{"lat":50.846655509682435,"lng":2.9003906250000004},{"lat":50.824458803489804,"lng":2.9619141295552254},{"lat":50.79669804718136,"lng":3.0190430022776127},{"lat":50.76475273687021,"lng":3.1025391630828385},{"lat":50.72444284265441,"lng":3.1772460602223873},{"lat":50.65207604172236,"lng":3.282714877277613},{"lat":50.60469890778924,"lng":3.357421942055226},{"lat":50.562855920362125,"lng":3.425537142902613},{"lat":50.5181824559931,"lng":3.495849743485451},{"lat":50.47905843134065,"lng":3.570556808263064},{"lat":50.47626260659788,"lng":3.629882913082838},{"lat":50.492339146862776,"lng":3.772155828773976},{"lat":50.514693454200405,"lng":3.903991766273976},{"lat":50.510502790942944,"lng":3.9633178710937504},{"lat":50.49792872905663,"lng":4.024841375648976},{"lat":50.48185790425272,"lng":4.073730502277614},{"lat":50.47347053735934,"lng":4.133056774735452},{"lat":50.4776644868276,"lng":4.20336937531829},{"lat":50.479062245100565,"lng":4.231933560222388}]');
+			var planeRoute1 = JSON.parse('[{"lat":50.48445898955202,"lng":4.251709654927255},{"lat":50,"lng":0}]');
+			var planeRoute2 = JSON.parse('[{"lat":50,"lng":0},{"lat":51.15815239612826,"lng":-2.2055053710937504}]');
+
+			var seqGroup = L.motion.seq([
+					L.motion.polyline(trackRoute, {
+					color: "orangered"
+					}, {
+						easing: L.Motion.Ease.easeInOutQuad
+					}, {
+						removeOnEnd: true,
+						icon: L.divIcon({html: "<i class='fa fa-truck fa-2x fa-flip-horizontal' aria-hidden='true'></i>", iconSize: L.point(27.5, 24)})
+					}).motionDuration(8000),
+					L.motion.polyline(shipRoute, {
+						color: "steelblue"
+					}, {
+						easing: L.Motion.Ease.easeInOutQuart
+					}, {
+						removeOnEnd: true,
+						showMarker: true,
+						icon: L.divIcon({html: "<i class='fa fa-ship fa-2x' aria-hidden='true'></i>", iconSize: L.point(27.5, 24)})
+					}).motionDuration(9000),
+					L.motion.polyline(carRoute, {
+						colors: "SlateGrey"
+					}, {
+						easing: L.Motion.Ease.easeInOutElastic
+					}, {
+						removeOnEnd: true,
+						icon: L.divIcon({html: "<i class='fa fa-car fa-2x' aria-hidden='true'></i>", iconSize: L.point(27.5, 24)})
+					}).motionDuration(7000),
+					L.motion.seq([L.motion.polyline(planeRoute1, {
+									color:"indigo"
+								}, null, {
+									removeOnEnd: false,
+									icon: L.divIcon({html: "<i class='fa fa-plane fa-2x' aria-hidden='true' motion-base='-43'></i>", iconSize: L.point(19, 24)})
+								}).motionDuration(5000),
+								L.motion.polyline(planeRoute2, {
+									color:"khaki"
+								}, null).motionDuration(7000)
+							])
+				]).addTo(map);
+
+
+			seqGroup.on("click", function(){
+				seqGroup.motionStart();
+			});
+
+			seqGroup.on("dblclick", function(e){
+				seqGroup.motionToggle();
+			});
+
+			setTimeout(function () {
+				seqGroup.motionStart();
+			}, 1000);
+
+
+			*/
+
+	</script>
+
+
+	<script src="leaflet/PathDashFlow/L.Path.DashFlow.js"></script>
+	<script>
+
+	var routedash = [[10.452339,98.96291],[10.452011,99.06479],[11.457001,99.26758],[12.45797,100.06776]];
+
+		for (var i = 0, latlngs_ = [], len = routedash.length; i < len; i++) {
+			latlngs_.push(new L.LatLng(routedash[i][0], routedash[i][1]));
+		}
+
+		var path = L.polyline(latlngs_, {
+			dashArray: "15,15",
+			dashSpeed: -30
+		});
+
+		map.fitBounds(L.latLngBounds(latlngs_));
+
+		map.addLayer(L.marker(latlngs_[0]));
+		map.addLayer(L.marker(latlngs_[len - 1]));
+
+		map.addLayer(path);
+
+		L.circleMarker([10, 99], {
+			dashArray: "15,15",
+			dashSpeed: -30,
+			radius: 147.5
+		}).addTo(map);
+
+		/*
+		var line = L.polyline(latlngs, {dashArray: "15 15", dashSpeed: 30});
+		line.addTo(map);
+		*/
+
+	</script>
+
+
+	<script src="leaflet/PolylineSnakeAnim/L.Polyline.SnakeAnim.js"></script>
+	<script>
+
+		var latlngs__ = [[11.452339,99.00291],[12.05,99.02479],[12.119,99.46758],[12.53797,99.42776]];
+		var airport1 = [11.792339,99.80291];
+		var airport2 = [12.102339,102.22291];
+
+
+		var linet = L.polyline(latlngs__, {snakingSpeed: 40});
+		linet.addTo(map).snakeIn();
+
+		var routet = L.layerGroup([
+			L.marker(airport1),
+			L.polyline([airport1, airport2]),
+			L.marker(airport2)
+		], { snakingPause: 200 });
+		routet.addTo(map).snakeIn();
+	</script>
+
+
+	
   <script src="leaflet/antpath/dist/leaflet-ant-path.js?v=001"></script>
 	<script>
 
@@ -1392,45 +2892,40 @@
     antPolyline.addTo(map);
 
 
-//"use": L.rectangle,
+		//"use": L.rectangle,
 
-// Using a polygon
-let antPolygon = new L.Polyline.AntPath([
-  [12.8789, 100.98],
-  [12.8680, 101.06],
-  [12.8558, 101.096],  
-  [12.86883, 100.997]
-], { use: L.polygon, fillColor: "red" }).addTo(map);
+		// Using a polygon
+		let antPolygon = new L.Polyline.AntPath([
+		  [12.8789, 100.98],
+		  [12.8680, 101.06],
+		  [12.8558, 101.096],  
+		  [12.86883, 100.997]
+		], { use: L.polygon, fillColor: "red" }).addTo(map);
 
-// Using a circle
-let antCircle = new L.Polyline.AntPath(
-  [12.838, 100.9611],
-  {
-    use: L.circle,
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-  }
-).addTo(map);
+		// Using a circle
+		let antCircle = new L.Polyline.AntPath(
+		  [12.838, 100.9611],
+		  {
+		    use: L.circle,
+		    color: 'red',
+		    fillColor: '#f03',
+		    fillOpacity: 0.5,
+		    radius: 500
+		  }
+		).addTo(map);
 
 
     map.fitBounds(antPolyline.getBounds());
 
-
-
-
-/*
-antPolyline.pause()
-antPolyline.resume()
-antPolyline.reverse()
-*/
+		/*
+		antPolyline.pause()
+		antPolyline.resume()
+		antPolyline.reverse()
+		*/
  	</script>
--->
 
 
 
-<!--
   <script src="leaflet/animatedmaker/src/AnimatedMarker.js?v=001"></script>
 	<script>
 
@@ -1464,8 +2959,8 @@ antPolyline.reverse()
 		}, 10000);
 
  	</script>
--->
 
+	-->
 
 
 
@@ -1480,6 +2975,15 @@ antPolyline.reverse()
 
 
 	<script>
+
+		$( document ).ready(function() {
+
+		});
+
+		map.on('click', function(e) {
+		    console.log(e.latlng); // e is an event object (MouseEvent in this case)
+		    $('.leaflet-bar.leaflet-bookmarks-control.leaflet-control.expanded').removeClass('expanded');
+		}); 
 
 		(function() {
 
@@ -1515,7 +3019,7 @@ antPolyline.reverse()
 						/*
 		  				$.ajax({
 							 type:'POST',
-							 url:'service/printby.php',
+							 url:'printby.php',
 							 async:false,
 							 dataType: 'json',
 							 success:function(res){
@@ -1585,16 +3089,21 @@ antPolyline.reverse()
 		  defer.resolve( 1 );
 		  filtered.done(function( value ) {
 
-			console.log('2');
-			setTimeout(function(){ 
-			  	map.invalidateSize();
-			  	window.print();
-			}, 1000);
+				console.log('2');
+				setTimeout(function(){ 
+						setTimeout(function(){ 
+						  	map.invalidateSize();
+						}, 1000);
+					  	window.print();
+				}, 1000);
 
 		  });
 
 			  				
 		}
+
+
+
 
 	</script>
 

@@ -86,7 +86,7 @@ var MapPaint;
 
             var previousC = container.firstChild;
             previousC.onclick(null);
-
+            //$( "div.mappaint-control.leaflet-control" ).draggable();
             return parentContainer;
         }
     });
@@ -165,10 +165,11 @@ var MapPaint;
 
             var previousC = container.children[2];
             previousC.onclick(null);
-
+            //$( ".mappaint-control.leaflet-control" ).draggable();
             return parentContainer;
         }
     });
+
 })(MapPaint || (MapPaint = {}));
 L.MapPaint = L.Handler.extend({
     includes: L.Mixin.Events,
@@ -213,6 +214,7 @@ L.MapPaint = L.Handler.extend({
         });
 
         this._map.on('resize', this._onResize, this);
+
     },
     _onMouseDown: function (e) {
         if (e.button) {
@@ -273,6 +275,11 @@ L.MapPaint = L.Handler.extend({
     },
     disableMapInteractions: function () {
         console.log('disableMapInteractions');
+
+        setTimeout(function(){ 
+            $( ".mappaint-control.leaflet-control" ).draggable();
+        }, 100);
+
         var map = this._map;
         
         this._interactionsStates = {
@@ -285,7 +292,7 @@ L.MapPaint = L.Handler.extend({
             tap: map.tap && map.tap.enabled()
         };
 
-        console.log(map);
+        //console.log(map);
 
         map.dragging.disable();
         map.touchZoom.disable();
@@ -296,10 +303,12 @@ L.MapPaint = L.Handler.extend({
         map.tap && map.tap.disable();
 
         zoomLock = true; //true
+
    
     },
     restoreMapInteractions: function () {
         console.log('restoreMapInteractions');
+
         var map = this._map, interactions = this._interactionsStates;
         zoomLock = false; //true
 
@@ -331,6 +340,7 @@ L.MapPaint = L.Handler.extend({
         if (interactions.tap) {
             map.tap.enable();
         }
+
     },
     _enhanceContext: function () {
         var canvas = this._canvas;
@@ -362,7 +372,7 @@ L.MapPaint = L.Handler.extend({
     removeHooks: function () {
         var _this = this;
         this.pencil.SavePicture(this._map, function (image, bounds) {
-            if (window.confirm("Do you want to save your drawing?")) {
+            if (window.confirm("ต้องการบันทึกสิ่งที่วาดลงบนแผนที่หรือไม่?")) {
                 _this.saveMethod(image, bounds);
             }
         });

@@ -1,11 +1,15 @@
 /* Compatible with Leaflet 0.7 */
+.leaflet-control-locate.leaflet-bar.leaflet-control{
+  margin-bottom:  0px!important;
+}
+
 .leaflet-control-locate a {
   cursor: pointer;
 }
 .leaflet-control-locate a .leaflet-control-locate-location-arrow {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   margin: 7px;
   background-color: black;
   -webkit-mask-image: url("../location-arrow-solid.svg");
@@ -17,8 +21,8 @@
 }
 .leaflet-control-locate a .leaflet-control-locate-spinner {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   margin: 7px;
   background-color: black;
   -webkit-mask-image: url("../spinner-solid.svg");

@@ -39,6 +39,108 @@ L.Control.cascadeButtons = L.Control.extend({
                 })
 
                 mainButton.addEventListener('click', function(){
+                    console.log(container.childNodes[0].classList.contains('activeButton'));
+                    if(container.childNodes[0].classList.contains('activeButton') == false){
+                        //'expand'
+
+                        container.childNodes.forEach( (child, index) => {
+                            if(index==0){
+
+                            }
+                            else if(index==1){
+                                console.log(child);
+                                child.style.display = 'block';
+                                child.style.marginTop = "40px";
+                                child.style.position = 'fixed';
+                            }     
+                            else if(index==2){
+                                console.log(child);
+                                child.style.display = 'block';
+                                child.style.marginTop = "80px";
+                                child.style.position = 'fixed';
+                            }   
+                            else if(index==3){
+                                console.log(child);
+                                child.style.display = 'block';
+                                child.style.marginTop = "120px";
+                                child.style.position = 'fixed';
+                            }   
+                            else if(index==4){
+                                console.log(child);
+                                child.style.display = 'block';
+                                child.style.marginTop = "160px";
+                                child.style.position = 'fixed';
+                            }   
+                            else if(index==5){
+                                console.log(child);
+                                child.style.display = 'block';
+                                child.style.marginTop = "200px";
+                                child.style.position = 'fixed';
+                            }                                                                                                                                          
+                            else{
+                                console.log(child);
+                                //child.style.display = 'block';
+                                //child.style.marginTop = "160px";
+                                //child.style.position = 'fixed';
+                            }
+                        });
+
+                    }
+                    else{
+                        //hide
+                        container.childNodes.forEach( (child, index) => {
+                            if(index==0){
+
+                            }
+                            else if(index==1){
+                                console.log(child);
+                                child.style.display = 'none';
+                                child.style.marginTop = "-40px";
+                                child.style.position = 'fixed';
+                            }     
+                            else if(index==2){
+                                console.log(child);
+                                child.style.display = 'none';
+                                child.style.marginTop = "-80px";
+                                child.style.position = 'fixed';
+                            }   
+                            else if(index==3){
+                                console.log(child);
+                                child.style.display = 'none';
+                                child.style.marginTop = "-120px";
+                                child.style.position = 'fixed';
+                            }   
+                            else if(index==4){
+                                console.log(child);
+                                child.style.display = 'none';
+                                child.style.marginTop = "-160px";
+                                child.style.position = 'fixed';
+                            }   
+                            else if(index==5){
+                                console.log(child);
+                                child.style.display = 'none';
+                                child.style.marginTop = "-200px";
+                                child.style.position = 'fixed';
+                            }                                                                                                                                          
+                            else{
+                                console.log(child);
+                                //child.style.display = 'block';
+                                //child.style.marginTop = "160px";
+                                //child.style.position = 'fixed';
+                            }
+
+                        });                        
+
+                    }
+
+                    //มีปุ่มย่อย
+                    
+                    console.log(button.items.length);
+                    console.log(button); //ปุ่มmain
+                    console.log(container);//ยกชุดทั้งclass vertical-right
+                    console.log(container.childNodes); // อ้างถึงปุ่ม มีปุ่ม main และ sub index 0 1 2
+                    
+
                     container.childNodes.forEach( (child, index) => {
                         if(index!==0) child.classList.toggle('hidden');
                     });
@@ -47,12 +149,28 @@ L.Control.cascadeButtons = L.Control.extend({
                     mainButton.setAttribute('aria-expanded', !isAriaExpanded);
 
                     (!button.ignoreActiveState) ? mainButton.classList.toggle('activeButton') : '';
+
+                    /*
+                    var hasName = 'N';
+                    if (name == "true") {
+                        hasName = 'Y';
+                    }
+                    */
+                    //var hasName = (name == "true") ? "Y" : "N" ;
+                    //var hasName = (name) ? "Y" : "N" ;
+
                 })
             } 
             else {
                 mainButton.addEventListener('click', function(){
                     (!button.ignoreActiveState) ? mainButton.classList.toggle('activeButton') : '';
                     button.command();
+
+                    //ไม่มีปุ่มย่อย
+                    console.log(button); //ปุ่มmain
+                    console.log(container);//ยกชุดทั้งclass vertical-right
+                    console.log(container.childNodes); // อ้างถึงปุ่ม มีปุ่ม main และ sub index 0 1 2
+
                 })
             }
         })

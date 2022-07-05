@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,  width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes/">
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="For Survey amp"/>
+    <meta name="author" content="amp"/>
+    <meta name="keywords" content="Survey amp" />
+    <!--<meta content="width=device-width,initial-scale=1.0" name="viewport" />-->
+
+	<title>Amp Survey </title>
+
+	<!-- icon shotcut-->
+	<link rel="apple-touch-icon" sizes="57x57" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicon.png?v=20200225">  
+	<link rel="apple-touch-icon" sizes="76x76" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="167x167" href="favicon.png?v=20200225">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=20200225">
+
+	<link rel="icon" sizes="128x128" href="favicon.png?v=20200225">
+  <link rel="icon" sizes="196x196" href="favicon.png?v=20200225">
+
+
+	<style>
+
+	    body {
+	      padding: 0;
+	      margin: 0;
+	    }
+
+	    html, body, #map {
+	      height: 100%;
+	      width: 100vw;
+	    }
+
+	</style>
+
+	<style>
+
+		/*-------custom scrollbar------------*/        	
+		.scroller {
+		  overflow-y: auto;
+		  overflow-x: clip;
+		  /*scrollbar-width: thin*/;
+		}
+		    /* Works on Firefox */
+		* {
+		  scrollbar-width: thin;
+		  /*scrollbar-color: blue orange;*/
+		  scrollbar-color: blue white;
+		}
+
+		/* Works on Chrome, Edge, and Safari */
+		*::-webkit-scrollbar {
+		  /*width: 12px;*/
+		  width: 5px;
+		}
+
+		*::-webkit-scrollbar-track {
+		  /*background: orange;*/
+		}
+
+		*::-webkit-scrollbar-thumb {
+		  background-color: #a7a7a770;
+		  border-radius: 5px;
+		  /*
+		  background-color: blue;
+		  border-radius: 20px;
+		  border: 3px solid orange;*/
+		}
+		/*-------custom scrollbar------------*/  
+
+	</style>	
+
+
+</head>
+
+<body>
+
+	<div id="map"></div>
+
+
+	<script src="assets/jquery/jquery-3.3.1.js?v=001"></script>	
+	<script src="assets/jquery-ui.js?v=001"></script> <!-- autocomplete-->
+	<script src="assets/jquery.ui.touch-punch.js?v=001"></script> <!-- drageble for mobile-->
+
+	<script src="assets/FileSaver.min.js?v=001"></script> <!-- export file-->	
+
+
+	<!--bootstrap-->
+	<link rel="stylesheet" href="https://cdn.usebootstrap.com/bootstrap/latest/css/bootstrap.min.css"/>
+	<script src="https://cdn.usebootstrap.com/bootstrap/latest/js/bootstrap.min.js"></script>
+
+	<!-- font-->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+	
+
+	<script src="assets/popper.min.js"></script>
+	<!--
+	<link rel="stylesheet" href="assets/bootstrap5/bootstrap.min.css"/>
+	<script src="assets/bootstrap5/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="assets/bootstrap5/css/bootstrap.css"/>
+	<script src="assets/bootstrap5/js/bootstrap.bundle.js"></script>	
+	-->
+
+	
+	<!--
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin=""></script>
+	--> 
+  <!--
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+	-->   
+
+	<link rel="stylesheet" href="plugin/leaflet1.6/leaflet.css"/>
+	<script src="plugin/leaflet1.6/leaflet-src.js"></script>
+
+  <link rel="stylesheet" href="plugin/grouplayercontrol/leaflet.groupedlayercontrol.css?v=001">
+  <script src="plugin/grouplayercontrol/leaflet.groupedlayercontrol.js?v=001"></script>
+
+	<link rel="stylesheet" href="plugin/clustermarker/MarkerCluster.css?v=001" />
+	<link rel="stylesheet" href="plugin/clustermarker/MarkerCluster.Default.css?v=001" />
+	<script src="plugin/clustermarker/leaflet.markercluster-src.js?v=001"></script>
+
+
+	<link rel="stylesheet" href="plugin/zoominfo/L.Control.Zoominfo.css?v=001" />
+	<script src="plugin/zoominfo/L.Control.Zoominfo.js?v=001" ></script>
+
+
+  <link rel="stylesheet" href="plugin/reticlescale/leaflet-reticle.css?v=001">
+  <script src="plugin/reticlescale/leaflet-reticle.js?v=001"></script>
+
+  <link rel="stylesheet" href="plugin/cascadebutton/L.cascadeButtons.css?v=001">
+  <script src="plugin/cascadebutton/L.cascadeButtons.js?v=001"></script>
+
+	<link rel="stylesheet" href="plugin/locate/dist_custom/L.Control.Locate.css?v=001" />
+  <script src="plugin/locate/dist_custom/L.Control.Locate.js?v=001" ></script>
+
+  <script src="plugin/geosearch/Control.OSMGeocoder.js?v=001"></script>
+  <link rel="stylesheet" href="plugin/geosearch/Control.OSMGeocoder.css?v=001">
+
+  <script src="plugin/geosearch/L.Control.OpenCageSearch.js?v=002"></script>
+  <link rel="stylesheet" href="plugin/geosearch/L.Control.OpenCageSearch.css?v=001">
+
+	<link rel="stylesheet" href="plugin/easybutton/easy-button.css">
+  <script src="plugin/easybutton/easy-button.js"></script>
+                            
+  <script>
+
+		var landmark_reg = {
+		  "1": "13.350653506275144, 100.978958590485010",
+		  "2": "14.537162354400428, 100.952542754080450",
+		  "3": "13.847887979265531, 99.854035837558770",
+		  "4": "9.113397277466937, 99.287727565608800",
+		  "5": "7.212631185711461, 100.590097741195040",
+		  "6": "16.447412815474630, 102.836741539442040",
+		  "7": "17.395662498179846, 102.824744483633810",
+		  "8": "15.276512384182766, 104.852280541274640",
+		  "9": "18.822972613790093, 99.048897397095670",
+		  "10":"15.668407000000000, 100.136784000000000"
+		}
+
+
+		var map = L.map("map", {
+		//var map = L.map('map', {
+			//zoominfoControl: true,
+
+		  minZoom: 5.00,	
+		  zoom: 6.00,
+		  //center: [13.123236, 101.207514],  
+
+			zoomSnap: 0.25,
+			zoomDelta: 0.25,
+			wheelPxPerZoomLevel: 180,	
+					
+			zoomControl: false,
+			center: [13.901111, 100.752778], 
+			attributionControl: true,
+			//scrollWheelZoom: false,
+
+			/*
+	    dragging: !L.Browser.mobile,
+	    tap: !L.Browser.mobile,
+			*/
+	    });
+
+
+		var geocoder;
+		var cageGeocoder;
+		var osmGeocoder;
+		
+	    function resetsearchfree(){
+	        if(geocoder!=undefined){
+	            //geocoder.remove();
+	            cageGeocoder.remove();
+	        }
+	        if(osmGeocoder!=undefined){
+	            osmGeocoder.remove();
+	        }   
+	    }
+
+	    function searchfree(){
+	        if(geocoder){
+	            cageGeocoder.remove();
+	        }
+	        var options = {
+	        	position:'topleft',
+	          key: '3c38d15e76c02545181b07d3f8cfccf0', // REPLACE WITH YOUR API-KEY. This key might go away any time!
+	          limit: 10
+	        };
+	        geocoder = new L.Control.OpenCageSearch.geocoder(options);
+	        cageGeocoder = new L.Control.openCageSearch(options).addTo(map);
+	        if(osmGeocoder){
+	            osmGeocoder.remove();
+	        }
+	        osmGeocoder = new L.Control.OSMGeocoder({position:'topleft',placeholder: 'โปรดระบุสถานที่...'}).addTo(map);
+	    }
+
+		searchfree();
+
+
+		var zoomctrl = new L.Control.Zoominfo({position: 'bottomright'}).addTo(map);
+		//var zoomctrl = new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+
+
+	    var LocationMarker = L.Marker.extend({
+	        initialize: function (latlng, options) {
+	            L.Util.setOptions(this, options);
+	            this._latlng = latlng;
+	            this.createIcon();
+	        },
+
+	        /**
+	         * Create a styled circle location marker
+	         */
+	        createIcon: function() {
+	            var opt = this.options;
+
+	            var style = '';
+
+	            if (opt.color !== undefined) {
+	                style += 'stroke:'+opt.color+';';
+	            }
+	            if (opt.weight !== undefined) {
+	                style += 'stroke-width:'+opt.weight+';';
+	            }
+	            if (opt.fillColor !== undefined) {
+	                style += 'fill:'+opt.fillColor+';';
+	            }
+	            if (opt.fillOpacity !== undefined) {
+	                style += 'fill-opacity:'+opt.fillOpacity+';';
+	            }
+	            if (opt.opacity !== undefined) {
+	                style += 'opacity:'+opt.opacity+';';
+	            }
+
+	            var icon = this._getIconSVG(opt, style);
+
+	            this._locationIcon = L.divIcon({
+	                className: icon.className,
+	                html: icon.svg,
+	                iconSize: [icon.w,icon.h],
+	            });
+
+	            this.setIcon(this._locationIcon);
+	        },
+
+	        /**
+	         * Return the raw svg for the shape
+	         *
+	         * Split so can be easily overridden
+	         */
+	        _getIconSVG: function(options, style) {
+	            var r = options.radius;
+	            var w = options.weight;
+	            var s = r + w;
+	            var s2 = s * 2;
+	            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+s2+'" height="'+s2+'" version="1.1" viewBox="-'+s+' -'+s+' '+s2+' '+s2+'">' +
+	            '<circle r="'+r+'" style="'+style+'" />' +
+	            '</svg>';
+	            return {
+	                className: 'leaflet-control-locate-location',
+	                svg: svg,
+	                w: s2,
+	                h: s2
+	            };
+	        },
+
+	        setStyle: function(style) {
+	            L.Util.setOptions(this, style);
+	            this.createIcon();
+	        }
+	    });
+
+	    var CompassMarker = LocationMarker.extend({
+	        initialize: function (latlng, heading, options) {
+	            L.Util.setOptions(this, options);
+	            this._latlng = latlng;
+	            this._heading = heading;
+	            this.createIcon();
+	            //alert(heading);
+	        },
+
+	        setHeading: function(heading) {
+	            //alert(heading);
+	            this._heading = heading;
+	        },
+
+	        /**
+	         * Create a styled arrow compass marker
+	         */
+	        _getIconSVG: function(options, style) {
+	            var r = options.radius;
+	            var w = (options.width + options.weight);
+	            var h = (r+options.depth + options.weight)*2;
+	            var path = 'M0,0 l'+(options.width/2)+','+options.depth+' l-'+(w)+',0 z';
+	            var svgstyle = 'transform: rotate('+this._heading+'deg)';
+	            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+(w)+'" height="'+h+'" version="1.1" viewBox="-'+(w/2)+' 0 '+w+' '+h+'" style="'+svgstyle+'">'+
+	            '<path d="'+path+'" style="'+style+'" />'+
+	            '</svg>';
+	            return {
+	                className: 'leaflet-control-locate-heading',
+	                svg: svg,
+	                w: w,
+	                h: h
+	            };
+	        },
+	    });
+
+
+		var lc = L.control.locate({
+			position: 'bottomright',
+
+		      strings: {
+		          title: "ตำแหน่งปัจจุบัน",
+		          metersUnit: "เมตร",
+		          //feetUnit: "feet",
+							popup: "{latlng} <br>ระยะรัศมี {distance} {unit} จากตำแหน่งนี้",
+		    			outsideMapBoundsMsg: "ตำแหน่งของคุณออกนอกขอบเขตของแผนที่",        
+		      },
+		      flyTo: false,
+		      returnToPrevBounds: false,
+					cacheLocation:false,
+					enableHighAccuracy: true,
+		      showPopup: true,
+					metric: true,
+
+					showCompass: true,
+		      compassClass: CompassMarker,				
+		      compassStyle: {
+		          fillColor:   '#2A93EE',
+		          fillOpacity: 1,
+		          weight:      0,
+		          color:       '#fff',
+		          opacity:     1,
+		          radius:      9, // How far is the arrow is from the center of of the marker
+		          width:       9, // Width of the arrow
+		          depth:       6  // Length of the arrow
+		      },
+		      //followCompassStyle: {},
+			clickBehavior: {inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'inView'},	
+
+			locateOptions: {
+				//watch: true,  // if you overwrite this, visualization cannot be updated
+        		//setView: false // have to set this to false because we have to
+				//setView: 1,
+				//setView: false, 'once', 'always', 'untilPan', or 'untilPanOrZoom',
+				//setView: always,
+				maxZoom: 17,//Infinity
+				timeout: 500,
+				maximumAge:500,
+			},
+
+
+		}).addTo(map);
+
+		map.on('locationfound', function (evt) {
+			//console.log(evt.timestamp);
+			var accuracy = evt.accuracy;
+			var timestamp = evt.timestamp;
+		 	var latlng = evt.latlng;
+		  console.log(latlng,accuracy,timestamp);
+		});
+
+    	var scaleM = L.control.scale({position: 'bottomleft',metric: true,imperial:false}).addTo(map);
+
+
+
+	  	var Clusterpwa = L.markerClusterGroup({
+	  		disableClusteringAtZoom: 17,
+			spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false,
+		});	
+
+		var shownLayer, polygon;
+
+		function removePolygon() {
+			if (shownLayer) {
+				shownLayer.setOpacity(1);
+				shownLayer = null;
+			}
+			if (polygon) {
+				map.removeLayer(polygon);
+				polygon = null;
+			}
+		};
+
+		Clusterpwa.on('clusterclick', function (a) {
+			console.log('Clusterpwa ' + a.layer.getAllChildMarkers().length);
+			console.log(a.layer);
+
+			if(a.layer.getAllChildMarkers().length <= 5){
+				a.layer.spiderfy({elementsPlacementStrategy:'original-locations'});
+				return;
+			}
+			else{
+					a.layer.zoomToBounds({padding: [20, 20]});
+			}
+			
+			//a.layer.zoomToBounds();
+			//
+			//var latLngBounds = a.layer.getBounds();
+			//map.addLayer(L.polygon(a.layer.getConvexHull()));
+			
+			//if (markerGroup.getChildCount() < 5) {
+     	//	a.layer.Spiderfy()
+			//}
+			
+		});
+
+		Clusterpwa.on('click', function (a) {
+			console.log('Clusterpwa ' + a.layer);
+			console.log(a.layer);
+		});
+
+		Clusterpwa.on('clustermouseover', function (a) {
+			removePolygon();
+
+			a.layer.setOpacity(0.2);
+			shownLayer = a.layer;
+			polygon = L.polygon(a.layer.getConvexHull());
+			map.addLayer(polygon);
+		});
+
+		Clusterpwa.on('clustermouseout', removePolygon);
+
+		map.on('zoomend', removePolygon);
+
+
+		const googleRoad =  L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+		  maxZoom: 22.25,
+		  maxNativeZoom:22.25,
+		  subdomains:['mt0','mt1','mt2','mt3'],
+		  attribution: 'Tiles &copy; Google Maps &mdash; Source: Road'
+		}).addTo(map);
+		const googleHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+		  maxZoom: 21.25,
+		  maxNativeZoom:21.25,
+		  subdomains:['mt0','mt1','mt2','mt3'],
+		  attribution: 'Tiles &copy; Google Maps &mdash; Source: Hybrid'
+		}); 
+		const googleSat = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+		  maxZoom: 21.25,
+		  maxNativeZoom:21.25,
+		  subdomains:['mt0','mt1','mt2','mt3'],
+		  attribution: 'Tiles &copy; Google Maps &mdash; Source: Satellite'
+		});
+		const googleTerrain = L.tileLayer('https://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+		  maxZoom: 22.25,
+		  maxNativeZoom:22.25,
+		  subdomains:['mt0','mt1','mt2','mt3'],
+		  attribution: 'Tiles &copy; Google Maps &mdash; Source: Terrain'
+		});
+
+    	//layerControl.addOverlay(points,"<img src='img/office.png' width='17' height='17'>&nbsp;&nbsp;กปภ.เขต",'ชั้นข้อมูล GIS กปภ.');
+
+		var baseLayers = {
+		  "Google Road": googleRoad,
+		  "Google Terrain": googleTerrain,  
+		  "Google Sat": googleSat,
+		  "Google Hybrid": googleHybrid		  
+		};
+
+		var groupedOverlays = {
+			/*
+		  "ชั้นข้อมูล": {
+		  	"<img src='img/office.png' width='17' height='17' style='margin-top:-8px;'>&nbsp;&nbsp;ที่ตั้ง กปภ.เขต": pwa,
+		    "<img src='img/pwa.png' width='18' height='18' style='margin-top:-8px;'>&nbsp;ที่ตั้ง กปภ.สาขา": pwa_office,
+		    "<img src='img/zone.png' width='18' height='20' style='margin-top:-8px;'>&nbsp;พื้นที่รับผิดชอบ": zone,
+		  },
+			*/  
+		};
+
+		var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+		  collapsed: true, position:'topright'}).addTo(map);
+
+		//var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+		//  collapsed: true, }).addTo(map);
+
+
+        var marker_arr = [];
+        var resultLayer = null;
+        var markerLayer = null;
+
+	    var mp;
+
+
+        L.easyButton('<img src="img/focus.png" style="width:20px;height:20px; margin-top: -5px; margin-left: -3px;">', function(btn, map){
+            var pwamk = [13,100];
+            map.setView(pwamk);
+        }).addTo( map );
+
+        
+	    L.easyButton('<img src="img/location-pin.png" style="width:20px;height:20px; margin-top: -5px; margin-left: -3px;">', function(btn, map){
+
+	    }).addTo(map);
+
+	    L.easyButton('<img src="img/query.png" id = "show" style="width:20px;height:20px; margin-top: -5px; margin-left: -2px;">', function(btn, map){
+	                   
+	    }).addTo(map);
+
+
+	    $('#show').click(function(){
+	      //alert('QueryMongo');
+	      showPOINT('all');
+	    });
+
+
+	    showPOINT('all');
+
+	    var gMk;
+	    function showPOINT(type) {
+	        
+	          if ( gMk != null){
+	            gMk.clearLayers();
+	            map.removeLayer(gMk)
+	            layerControl.removeLayer(gMk);
+	          } 
+	          $.ajax({
+	            type:'GET',
+	            url:'https://botaengja.herokuapp.com/mongodb.php?act=qm',
+	            async:false,
+	            crossDomain: true,	
+	            dataType: 'json',
+	            /*
+	            data : {
+	                act: 'qm'
+	            },
+	            */
+	            //dataType: 'text',
+	            //processData: false,
+	            //contentType: false,
+	            success:function(data){
+
+	               gMk = new L.featureGroup();
+
+	                $.each(data['documents'],function(){	
+	                  if($.isNumeric( this.lat ) == true && $.isNumeric( this.lng ) == true){
+	                    var iconMaker = L.icon({
+	                      iconUrl: 'img/info.png',
+	                      iconSize: [30, 30], // size of the icon
+	                      //iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
+	                      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
+	                    });
+
+	                    var dl = "<button id = 'delete' onclick ='deletePOINT(\""+this._id+"\")'>Delete</button> ";                        
+	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\")'>Edit</botton> ";  
+
+	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dl + ed);
+	                    //let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id );
+	                    gMk.addLayer(mkmeter);
+	                  }
+	                  else{
+	                    alert('พบ latlng ผิดพลาด id-'+this._id+': '+this.lat+','+this.lng);
+	                  }
+	                  
+	                });
+
+
+
+	                //map.fitBounds(gMk.getBounds());
+	                //map.addLayer(gMk);
+
+	                map.fitBounds(gMk.getBounds());
+	                map.addLayer(gMk);
+	            	layerControl.addOverlay(gMk,"<img src='img/info.png' width='20' height='20'>&nbsp;&nbsp;ข้อมูลตำแหน่ง",'ชั้นข้อมูล GIS');
+
+					Clusterpwa.addLayer(gMk);
+					Clusterpwa.addTo(map);
+					map.fitBounds(Clusterpwa.getBounds());
+				  	//layerControl.addOverlay(Clusterpwa,"<img src='img/layer.png' width='17' height='17' style='margin-top:-8px;'>&nbsp;&nbsp;กลุ่มข้อมูลตำแหน่ง",'Cluster');
+
+	            }
+	          });
+	    }
+
+       
+	    function deletePOINT(id) {
+	            //alert('id');
+	            let text;
+	            if (confirm("คุณต้องการจะลบ id: " + id +" ใช่ไหม") == true) {
+	              text = "You pressed OK!";
+	              $.ajax({
+	              type:'GET',
+	              url:'https://botaengja.herokuapp.com/mongodb.php?act=d&id='+id,
+	              async:false,
+	              crossDomain: true,	
+	              dataType: 'json',
+	              
+	              //data : {act: 'd'},
+	              
+	              //dataType: 'text',
+	              //processData: false,
+	              //contentType: false,
+	              success:function(data){
+	                console.log(data);
+	              }
+	              });
+	            } else {
+	              text = "You canceled!";
+	            } 
+	            
+	    }
+
+	    var mkactive;
+	    function editPOINT(id) {
+	          
+	          if ( mkactive != null){
+	            map.removeLayer(mkactive)
+	           //mkactive.removeFrom(map);
+	          } 
+	       
+	        console.log('edit'+id);
+
+	        $.each(gMk._layers,function(index, layer){ 
+	            //console.log( gMk._layers[layer._leaflet_id]._popup._content.id);
+	            //console.log( gMk._layers[layer._leaflet_id]._popup._content);
+	            var strId = gMk._layers[layer._leaflet_id]._popup._content.split("<button id =")[0].split("id: ")[1].split("<br>")[0];
+	            console.log(id,strId);
+	          
+	            //gMk._layers[layer._leaflet_id].dragging.enable();
+	           
+	            if (id == strId){
+	              //gmk.removeLayer(gMk._layers[layer._leaflet_id])
+	              //gMk._layers[layer._leaflet_id].remove();
+	              //gMk._layers[layer._leaflet_id].dragging.enable();
+
+
+	              var ltln = `id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${gMk._layers[layer._leaflet_id]._latlng.lat} disabled><br>
+	                         Lng: <input type='number' name='lng' id='lng' value=${gMk._layers[layer._leaflet_id]._latlng.lng} disabled><br> 
+	                         <button id = 'Update' onclick = 'updatePOINT("${strId}","${gMk._layers[layer._leaflet_id]._latlng.lat}","${gMk._layers[layer._leaflet_id]._latlng.lng}")'>Update</button> 
+	                         <button id = 'Remove' onclick = 'map.removeLayer("${strId}")'>Remove</button>`
+	                       //  <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
+	                       //  <button id = 'Remove' onclick = 'map.removeLayer(e.target._map._layers[e.target._leaflet_id])'>Remove</botton> 
+	              
+	              mkactive = L.marker([gMk._layers[layer._leaflet_id]._latlng.lat, gMk._layers[layer._leaflet_id]._latlng.lng]).addTo(map).bindPopup(ltln).openPopup();
+	              mkactive.dragging.enable();
+	              mkactive.on('dragend', function(e){
+	                console.log(e);
+	                //alert(e.target._latlng.lat,e.target._latlng.lng);
+	                //e.target._map._layers[e.target._leaflet_id].bindPopup(e.target._latlng.lat,e.target._latlng.lng).openPopup();
+	                console.log(e.target._map._layers[e.target._leaflet_id]);
+	                var popup = L.popup()
+	                    //.setContent("I am a standalone popup.");
+	                    .setContent(`id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${e.target._latlng.lat} disabled><br>
+	                         Lng: <input type='number' name='lng' id='lng' value=${e.target._latlng.lng} disabled><br><br> 
+	                         <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
+	                         <button id = 'Remove' onclick = 'map.removeLayer(mkactive)'>Remove</button>`);
+
+	                          
+	                    e.target._map._layers[e.target._leaflet_id].bindPopup(popup).openPopup();
+
+	                   // map.removeLayer(e.target._map._layers[e.target._leaflet_id]) //remove marker
+	          	  });
+	              
+	              
+	            }
+	            else{
+	              gMk._layers[layer._leaflet_id].dragging.disable();
+	            }
+
+             });
+              
+            } 	          
+
+	        
+	        function updatePOINT(id,lat,lng) {
+	          console.log('update submit');
+	          /*
+	          if(lat == '' || lng == ''){
+	                alert('โปรดระบุพิกัด');
+	                return;
+	          }
+	          else if ( $.isNumeric( lat ) != true || $.isNumeric( lng ) != true){
+	                alert('โปรดระบุพิกัดให้ถูกต้อง');
+	                return;
+	          }
+	          else{
+	            */
+	              $.ajax({
+	                  type:'POST',
+	                  url: "https://botaengja.herokuapp.com/mongodb.php",
+	                  async:false,
+	                  crossDomain: true,	
+	                  dataType: 'json',
+	                  
+	                  data : {act: 'e', id: id, lat: lat, lng:lng},
+	                  
+	                  dataType: 'json',
+	                  //processData: false,
+	                  //contentType: false,
+	                  success:function(data){
+	                    console.log(data);
+	                    if(data == '{"matchedCount":1,"modifiedCount":1}1,11'){
+	                      alert('อัพเดทสำเร็จ');
+	                    }
+	                    else{
+	                      alert('อัพเดทไม่สำเร็จ');
+	                    }
+	                    
+	                  }
+	                });
+	                map.removeLayer(mkactive); //เคลียร์ marker temp ออก
+	                showPOINT('all');
+	          //}
+	        } 
+	        
+	        function addPOINT(lat,lng){
+	          /*
+	          if(lat == '' || lng == ''){
+	                alert('โปรดระบุพิกัด');
+	                return;
+	          }
+	          else if ( $.isNumeric( lat ) != true || $.isNumeric( lng ) != true){
+	                alert('โปรดระบุพิกัดให้ถูกต้อง');
+	                return;
+	          }
+	          else{
+	            */
+	                console.log('add');
+	                mp.removeFrom(map);
+	                $.ajax({
+	                  type: "POST",
+	                  async: false,
+	                  url: "https://botaengja.herokuapp.com/mongodb.php",
+	                  //data: {act:layer,kwhere: $('#pipeType select option:selected').text(),kgroup:'group by pipetype',ksort: 'asc pipsize',kjoin: 'pwacode'},
+	                  //data: {act:layer,pipeSize: $('#pipeSize').find(":selected").val()},
+	                  //data: {act:layer, LAYING: LAYING },
+	                  data: {act:'a', lat: lat, lng: lng},
+	                  dataType: "json",
+	                  success: function(resultData){
+	                      console.log(resultData);
+	                  }
+	                });
+	          //}
+	        }                    
+
+
+	    var state_btn_add=0;
+	    $( "button img[src='img/location-pin.png']" ).click(function() {
+
+	        if(state_btn_add ==0){
+	          $('.leaflet-container').css('cursor','crosshair');
+	          $( "button img[src='img/location-pin.png']" ).parent().parent().css('outline','2px red solid');
+
+	          map.on('click', function (e) {
+
+
+	            if (marker_arr.length > 0) {
+	                for (i = 0; i < marker_arr.length; i++) {
+	                    map.removeLayer(marker_arr[i]);
+	                }
+	            }
+
+	            var ct = ` Lat: <input type='number' name='lat' id='lat' value=${e.latlng.lat} disabled><br>
+	                    Lng: <input type='number' name='lng' id='lng' value=${e.latlng.lng} disabled><br>
+	                    <input type='hidden' name='distance' id='distance' value='' >
+	                    <button onclick="addPOINT('${e.latlng.lat}','${e.latlng.lng}')">Add</button>                          
+	                    <button onclick="map.removeLayer(mp)">Remove</button>`;
+
+	            mp = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map).bindPopup(ct).openPopup();
+	            marker_arr.push(mp);
+
+
+	          });
+
+	          //alert('เปิดฟังก์ชันการเพิ่มจุด');
+	          state_btn_add=1;
+	        }
+	        else{
+	          $('.leaflet-container').css('cursor','');
+	          $( "button img[src='img/location-pin.png']" ).parent().parent().css('outline','');     
+	          map.off('click');                 
+	          //alert('ปิดฟังก์ชันการเพิ่มจุด');
+	          state_btn_add=0;
+	          if(mp!=null){
+	            mp.removeFrom(map);
+	          }
+	        }          
+	    });
+
+
+
+
+
+
+
+
+
+
+
+
+		$( document ).ready(function() {
+				
+		});
+
+
+		(function() {
+
+
+		}());
+
+		//addlistener
+
+
+		map.on('zoomend', function(e) {
+			console.log("zoom", map.getZoom());			
+			map.invalidateSize();
+		});
+		map.on('dragend', function(e) {
+			map.invalidateSize();
+		});
+
+
+		//Please Add the Script to Disable pinch, tap, focus Zoom
+		document.addEventListener('touchmove', function (event) {
+		  if (event.scale !== 1) { event.preventDefault(); }
+		}, { passive: false });
+
+
+		if( navigator.userAgent.match(/Windows NT/i) || navigator.platform.indexOf('Win') > -1){
+			
+		}
+		else if( (navigator.userAgent.match(/Macintosh|MacOS|Mac/i) && (('ontouchstart' in document.documentElement) == false ||'ontouchstart' in window == false) ) || 
+			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints <= 0)){
+			
+		}
+		else if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+			(navigator.userAgent.match(/Macintosh|iPad/i) && (('ontouchstart' in document.documentElement) == true ||'ontouchstart' in window == true)) || 
+			((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad')) {
+
+
+		}
+		else{
+			
+		}
+
+		map.on('click', function(e) {
+		    console.log(e.latlng); // e is an event object (MouseEvent in this case)
+		}); 
+
+	</script>
+
+
+
+
+
+</body>
+</html>

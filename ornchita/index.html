@@ -594,7 +594,7 @@
 	                map.fitBounds(gMk.getBounds());
 	                map.addLayer(gMk);
 	            	layerControl.addOverlay(gMk,"<img src='img/info.png' width='20' height='20'>&nbsp;&nbsp;ข้อมูลตำแหน่ง",'ชั้นข้อมูล GIS');
-
+					Clusterpwa.clearLayer();
 					Clusterpwa.addLayer(gMk);
 					Clusterpwa.addTo(map);
 					map.fitBounds(Clusterpwa.getBounds());

@@ -579,7 +579,7 @@
 	                      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
 	                    });
 	                    var dt = "<span>Detail: "+this.detail+"</span><br> ";   
-	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\")'>Edit</botton> ";  				  
+	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\",\""+this.detail+"\")'>Edit</botton> ";  				  
 	                    var dl = "<button id = 'delete' onclick ='deletePOINT(\""+this._id+"\")'>Delete</button> ";                        
 
 
@@ -636,8 +636,8 @@
 	    }
 
 	    var mkactive;
-	    function editPOINT(id) {
-	          
+	    function editPOINT(id,detail) {
+	          detailtmp = detail;
 	          if ( mkactive != null){
 	            map.removeLayer(mkactive)
 	           //mkactive.removeFrom(map);
@@ -649,7 +649,7 @@
 	            //console.log( gMk._layers[layer._leaflet_id]._popup._content.id);
 	            //console.log( gMk._layers[layer._leaflet_id]._popup._content);
 	            var strId = gMk._layers[layer._leaflet_id]._popup._content.split("<button id =")[0].split("id: ")[1].split("<br>")[0];
-	            var detailtxt = '';
+	            var detailtxt = detail;
 						
 	            console.log(id,strId);
 	          
@@ -663,7 +663,7 @@
 
 	              var ltln = `id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${gMk._layers[layer._leaflet_id]._latlng.lat} disabled><br>
 	                         Lng: <input type='number' name='lng' id='lng' value=${gMk._layers[layer._leaflet_id]._latlng.lng} disabled><br> 
-				 Detail: <input type='text' name='detail' id='detail' value=''><br><br>
+				 Detail: <input type='text' name='detail' id='detail' value='${detailtxt}'><br><br>
 	                         <button id = 'Update' onclick = 'updatePOINT("${strId}","${gMk._layers[layer._leaflet_id]._latlng.lat}","${gMk._layers[layer._leaflet_id]._latlng.lng}")'>Update</button> 
 	                         <button id = 'Remove' onclick = 'mkactive.removeFrom(map)'>Remove</button>`
 	                       //  <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
@@ -683,7 +683,7 @@
 	                    //.setContent("I am a standalone popup.");
 	                    .setContent(`id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${e.target._latlng.lat} disabled><br>
 	                         Lng: <input type='number' name='lng' id='lng' value=${e.target._latlng.lng} disabled><br>
-				 Detail: <input type='text' name='detail' id='detail' value=''><br><br> 
+				 Detail: <input type='text' name='detail' id='detail' value='${detailtxt}'><br><br> 
 	                         <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
 	                         <button id = 'Remove' onclick = 'map.removeLayer(mkactive)'>Remove</button>`);
 
@@ -785,7 +785,7 @@
 
 	    var state_btn_add=0;
 	    $( "button img[src='img/location-pin.png']" ).click(function() {
-
+		detailtmp = '';
 	        if(state_btn_add ==0){
 	          $('.leaflet-container').css('cursor','crosshair');
 	          $( "button img[src='img/location-pin.png']" ).parent().parent().css('outline','2px red solid');

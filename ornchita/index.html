@@ -850,7 +850,13 @@
 			((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad')) {
 			$('img[src="img/focus.png"]').css('margin-left','-7px');
 			$('img[src="img/location-pin.png"]').css('margin-left','-7px');
-			$('img[src="img/query.png"]').css('margin-left','-7px');		
+			$('img[src="img/query.png"]').css('margin-left','-7px');
+			
+			googleRoad.setOpacity(0.7);
+			googleTerrain.setOpacity(0.7);
+			googleSat.setOpacity(0.7);
+			googleHybrid.setOpacity(0.7);
+			
 		}
 		else{
 			

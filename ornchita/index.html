@@ -791,7 +791,7 @@
 
 	            var ct = ` Lat: <input type='number' name='lat' id='lat' value=${e.latlng.lat} disabled><br>
 	                    Lng: <input type='number' name='lng' id='lng' value=${e.latlng.lng} disabled><br>
-	                    Detail: <input type='text' name='detail' id='detail' value='' ><br><br>
+	                    Detail: <input type='text' name='detail' id='detail' value='${detailtmp}' ><br><br>
 	                    <button onclick="addPOINT('${e.latlng.lat}','${e.latlng.lng}','')">Add</button>                          
 	                    <button onclick="map.removeLayer(mp)">Remove</button>`;
 

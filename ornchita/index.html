@@ -594,11 +594,12 @@
 	                map.fitBounds(gMk.getBounds());
 	                map.addLayer(gMk);
 	            	layerControl.addOverlay(gMk,"<img src='img/info.png' width='20' height='20'>&nbsp;&nbsp;ข้อมูลตำแหน่ง",'ชั้นข้อมูล GIS');
-					Clusterpwa.addLayer(gMk);
-					Clusterpwa.addTo(map);
-					map.fitBounds(Clusterpwa.getBounds());
-			    		Clusterpwa.refreshClusters(gMk);
-				  	//layerControl.addOverlay(Clusterpwa,"<img src='img/layer.png' width='17' height='17' style='margin-top:-8px;'>&nbsp;&nbsp;กลุ่มข้อมูลตำแหน่ง",'Cluster');
+			    
+			//Clusterpwa.addLayer(gMk);
+			//Clusterpwa.addTo(map);
+			//map.fitBounds(Clusterpwa.getBounds());
+			//Clusterpwa.refreshClusters(gMk);
+			//layerControl.addOverlay(Clusterpwa,"<img src='img/layer.png' width='17' height='17' style='margin-top:-8px;'>&nbsp;&nbsp;กลุ่มข้อมูลตำแหน่ง",'Cluster');
 	            }
 	          });
 	    }
@@ -857,9 +858,10 @@
 		else if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
 			(navigator.userAgent.match(/Macintosh|iPad/i) && (('ontouchstart' in document.documentElement) == true ||'ontouchstart' in window == true)) || 
 			((navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad')) {
-			$('img[[src="img/focus.png"]').css('margin-left','-2px');
-			$('img[[src="img/location-pin.png"]').css('margin-left','-2px');
-			$('img[[src="img/query.png"]').css('margin-left','-2px');		}
+			$('img[src="img/focus.png"]').css('margin-left','-2px');
+			$('img[src="img/location-pin.png"]').css('margin-left','-2px');
+			$('img[src="img/query.png"]').css('margin-left','-2px');		
+		}
 		else{
 			
 		}

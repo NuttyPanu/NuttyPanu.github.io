@@ -190,8 +190,8 @@
 			//scrollWheelZoom: false,
 
 			/*
-	    dragging: !L.Browser.mobile,
-	    tap: !L.Browser.mobile,
+	    		dragging: !L.Browser.mobile,
+	    		tap: !L.Browser.mobile,
 			*/
 	    });
 
@@ -540,7 +540,7 @@
 
 	    var gMk;
 	    function showPOINT(type) {
-	          
+	          detailtmp = '';
 	          if ( gMk != null){
 	            gMk.clearLayers();
 	            //map.removeLayer(gMk)
@@ -671,6 +671,9 @@
 	              
 	              mkactive = L.marker([gMk._layers[layer._leaflet_id]._latlng.lat, gMk._layers[layer._leaflet_id]._latlng.lng]).addTo(map).bindPopup(ltln).openPopup();
 	              mkactive.dragging.enable();
+		      $("[name='detail']").keyup(function(event){
+			  detailtmp = $("#detail").val();
+	    	      });       
 	              mkactive.on('dragend', function(e){
 	                console.log(e);
 	                //alert(e.target._latlng.lat,e.target._latlng.lng);
@@ -688,6 +691,10 @@
 	                    e.target._map._layers[e.target._leaflet_id].bindPopup(popup).openPopup();
 
 	                   // map.removeLayer(e.target._map._layers[e.target._leaflet_id]) //remove marker
+			      
+			  $("[name='detail']").keyup(function(event){
+			     detailtmp = $("#detail").val();
+	    		  });   
 	              });
 
 	            }
@@ -702,6 +709,7 @@
 	        
 	        function updatePOINT(id,lat,lng) {
 	          console.log('update submit');
+		  detail = detailtmp;	
 	          /*
 	          if(lat == '' || lng == ''){
 	                alert('โปรดระบุพิกัด');
@@ -720,7 +728,7 @@
 	                  crossDomain: true,	
 	                  dataType: 'json',
 	                  
-	                  data : {act: 'e', id: id, lat: lat, lng:lng},
+	                  data : {act: 'e', id: id, lat: lat, lng:lng, detail:detail},
 	                  
 	                  dataType: 'json',
 	                  //processData: false,
@@ -738,6 +746,7 @@
 	                });
 	                map.removeLayer(mkactive); //เคลียร์ marker temp ออก
 	                showPOINT('all');
+			
 	          //}
 	        } 
 	        

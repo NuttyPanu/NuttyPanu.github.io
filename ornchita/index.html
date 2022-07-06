@@ -578,11 +578,11 @@
 	                      //iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
 	                      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
 	                    });
-
+	                    var dt = "<span>Detail: Loading...</span><br> ";   
 	                    var dl = "<button id = 'delete' onclick ='deletePOINT(\""+this._id+"\")'>Delete</button> ";                        
 	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\")'>Edit</botton> ";  
 
-	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dl + ed);
+	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dt + dl + ed);
 	                    //let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id );
 	                    gMk.addLayer(mkmeter);
 	                  }
@@ -648,6 +648,8 @@
 	            //console.log( gMk._layers[layer._leaflet_id]._popup._content.id);
 	            //console.log( gMk._layers[layer._leaflet_id]._popup._content);
 	            var strId = gMk._layers[layer._leaflet_id]._popup._content.split("<button id =")[0].split("id: ")[1].split("<br>")[0];
+	            var detailtxt = '';
+						
 	            console.log(id,strId);
 	          
 	            //gMk._layers[layer._leaflet_id].dragging.enable();
@@ -660,6 +662,7 @@
 
 	              var ltln = `id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${gMk._layers[layer._leaflet_id]._latlng.lat} disabled><br>
 	                         Lng: <input type='number' name='lng' id='lng' value=${gMk._layers[layer._leaflet_id]._latlng.lng} disabled><br> 
+				 Detail: <input type='text' name='detail' id='detail' value=''><br><br>
 	                         <button id = 'Update' onclick = 'updatePOINT("${strId}","${gMk._layers[layer._leaflet_id]._latlng.lat}","${gMk._layers[layer._leaflet_id]._latlng.lng}")'>Update</button> 
 	                         <button id = 'Remove' onclick = 'mkactive.removeFrom(map)'>Remove</button>`
 	                       //  <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
@@ -675,7 +678,8 @@
 	                var popup = L.popup()
 	                    //.setContent("I am a standalone popup.");
 	                    .setContent(`id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${e.target._latlng.lat} disabled><br>
-	                         Lng: <input type='number' name='lng' id='lng' value=${e.target._latlng.lng} disabled><br><br> 
+	                         Lng: <input type='number' name='lng' id='lng' value=${e.target._latlng.lng} disabled><br>
+				 Detail: <input type='text' name='detail' id='detail' value=''><br><br> 
 	                         <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
 	                         <button id = 'Remove' onclick = 'map.removeLayer(mkactive)'>Remove</button>`);
 
@@ -786,7 +790,7 @@
 
 	            var ct = ` Lat: <input type='number' name='lat' id='lat' value=${e.latlng.lat} disabled><br>
 	                    Lng: <input type='number' name='lng' id='lng' value=${e.latlng.lng} disabled><br>
-	                    Detail: <input type='text' name='detail' id='detail' value='' ><br>
+	                    Detail: <input type='text' name='detail' id='detail' value='' ><br><br>
 	                    <button onclick="addPOINT('${e.latlng.lat}','${e.latlng.lng}')">Add</button>                          
 	                    <button onclick="map.removeLayer(mp)">Remove</button>`;
 

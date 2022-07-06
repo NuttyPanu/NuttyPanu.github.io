@@ -546,6 +546,11 @@
 	            map.removeLayer(gMk)
 	            layerControl.removeLayer(gMk);
 	          } 
+	          if ( Clusterpwa != null){
+	            Clusterpwa.clearLayers();
+	            map.removeLayer(Clusterpwa)
+	            layerControl.removeLayer(Clusterpwa);
+	          } 		    
 	          $.ajax({
 	            type:'GET',
 	            url:'https://botaengja.herokuapp.com/mongodb.php?act=qm',
@@ -586,14 +591,9 @@
 	                  
 	                });
 
-
-
 	                //map.fitBounds(gMk.getBounds());
 	                //map.addLayer(gMk);
-
-	                map.fitBounds(gMk.getBounds());
-	                map.addLayer(gMk);
-	            	layerControl.addOverlay(gMk,"<img src='img/info.png' width='20' height='20'>&nbsp;&nbsp;ข้อมูลตำแหน่ง",'ชั้นข้อมูล GIS');
+	            	//layerControl.addOverlay(gMk,"<img src='img/info.png' width='20' height='20'>&nbsp;&nbsp;ข้อมูลตำแหน่ง",'ชั้นข้อมูล GIS');
 			    
 			Clusterpwa.addLayer(gMk);
 			Clusterpwa.addTo(map);

@@ -799,9 +799,6 @@
 	            mp = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map).bindPopup(ct).openPopup();
 	            marker_arr.push(mp);
 			  
-		    $("#detail").keyup(function(event){
-			detailtmp = $("#detail").val();
-		    });
 
 	          });
 
@@ -820,6 +817,9 @@
 	        }          
 	    });
 
+	    $("#detail").keyup(function(event){
+		detailtmp = $("#detail").val();
+	    });
 
 		$( document ).ready(function() {
 				

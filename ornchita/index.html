@@ -595,11 +595,11 @@
 	                map.addLayer(gMk);
 	            	layerControl.addOverlay(gMk,"<img src='img/info.png' width='20' height='20'>&nbsp;&nbsp;ข้อมูลตำแหน่ง",'ชั้นข้อมูล GIS');
 			    
-			//Clusterpwa.addLayer(gMk);
-			//Clusterpwa.addTo(map);
-			//map.fitBounds(Clusterpwa.getBounds());
-			//Clusterpwa.refreshClusters(gMk);
-			//layerControl.addOverlay(Clusterpwa,"<img src='img/layer.png' width='17' height='17' style='margin-top:-8px;'>&nbsp;&nbsp;กลุ่มข้อมูลตำแหน่ง",'Cluster');
+			Clusterpwa.addLayer(gMk);
+			Clusterpwa.addTo(map);
+			map.fitBounds(Clusterpwa.getBounds());
+			Clusterpwa.refreshClusters(gMk);
+			layerControl.addOverlay(Clusterpwa,"<img src='img/layer.png' width='17' height='17' style='margin-top:-8px;'>&nbsp;&nbsp;กลุ่มข้อมูลตำแหน่ง",'Cluster');
 	            }
 	          });
 	    }
@@ -808,16 +808,6 @@
 	          }
 	        }          
 	    });
-
-
-
-
-
-
-
-
-
-
 
 
 		$( document ).ready(function() {

@@ -583,7 +583,7 @@
 	                    var dl = "<button id = 'delete' onclick ='deletePOINT(\""+this._id+"\")'>Delete</button> ";                        
 
 
-	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng+'\n'+this.detail, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dt + ed + dl);
+	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng+'\nDetail: '+this.detail, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dt + ed + dl);
 	                    //let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id );
 	                    gMk.addLayer(mkmeter);
 	                  }

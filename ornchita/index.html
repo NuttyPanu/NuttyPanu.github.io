@@ -157,7 +157,7 @@
   <script src="plugin/easybutton/easy-button.js"></script>
                             
   <script>
-
+	var detailtmp='';
 		var landmark_reg = {
 		  "1": "13.350653506275144, 100.978958590485010",
 		  "2": "14.537162354400428, 100.952542754080450",
@@ -578,7 +578,7 @@
 	                      //iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
 	                      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
 	                    });
-	                    var dt = "<span>Detail: Loading...</span><br> ";   
+	                    var dt = "<span>Detail: "+this.detail+"</span><br> ";   
 	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\")'>Edit</botton> ";  				  
 	                    var dl = "<button id = 'delete' onclick ='deletePOINT(\""+this._id+"\")'>Delete</button> ";                        
 
@@ -688,9 +688,8 @@
 	                    e.target._map._layers[e.target._leaflet_id].bindPopup(popup).openPopup();
 
 	                   // map.removeLayer(e.target._map._layers[e.target._leaflet_id]) //remove marker
-	          	  });
-	              
-	              
+	              });
+
 	            }
 	            else{
 	              //gMk._layers[layer._leaflet_id].dragging.disable();
@@ -742,7 +741,8 @@
 	          //}
 	        } 
 	        
-	        function addPOINT(lat,lng){
+	        function addPOINT(lat,lng,detail){
+		  detail = detailtmp;	
 	          /*
 	          if(lat == '' || lng == ''){
 	                alert('โปรดระบุพิกัด');
@@ -763,7 +763,7 @@
 	                  //data: {act:layer,kwhere: $('#pipeType select option:selected').text(),kgroup:'group by pipetype',ksort: 'asc pipsize',kjoin: 'pwacode'},
 	                  //data: {act:layer,pipeSize: $('#pipeSize').find(":selected").val()},
 	                  //data: {act:layer, LAYING: LAYING },
-	                  data: {act:'a', lat: lat, lng: lng},
+	                  data: {act:'a', lat: lat, lng: lng , detail: detail},
 	                  dataType: "json",
 	                  success: function(resultData){
 	                      console.log(resultData);
@@ -792,12 +792,15 @@
 	            var ct = ` Lat: <input type='number' name='lat' id='lat' value=${e.latlng.lat} disabled><br>
 	                    Lng: <input type='number' name='lng' id='lng' value=${e.latlng.lng} disabled><br>
 	                    Detail: <input type='text' name='detail' id='detail' value='' ><br><br>
-	                    <button onclick="addPOINT('${e.latlng.lat}','${e.latlng.lng}')">Add</button>                          
+	                    <button onclick="addPOINT('${e.latlng.lat}','${e.latlng.lng}','')">Add</button>                          
 	                    <button onclick="map.removeLayer(mp)">Remove</button>`;
 
 	            mp = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map).bindPopup(ct).openPopup();
 	            marker_arr.push(mp);
-
+			  
+		    $("#detail").keyup(function(event){
+			detailtmp = $("#detail").val();
+		    });
 
 	          });
 

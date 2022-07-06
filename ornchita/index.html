@@ -579,10 +579,11 @@
 	                      //popupAnchor: [0, -5] // point from which the popup should open relative to the iconAnchor'
 	                    });
 	                    var dt = "<span>Detail: Loading...</span><br> ";   
+	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\")'>Edit</botton> ";  				  
 	                    var dl = "<button id = 'delete' onclick ='deletePOINT(\""+this._id+"\")'>Delete</button> ";                        
-	                    var ed = "<button id = 'edit' onclick = 'editPOINT(\""+this._id+"\")'>Edit</botton> ";  
 
-	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dt + dl + ed);
+
+	                    let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id +'<br>'+ dt + ed + dl);
 	                    //let mkmeter = new L.marker([this.lat,this.lng],{title: "พิกัด: "+this.lat+','+this.lng, icon: iconMaker }).bindPopup('id: ' + this._id );
 	                    gMk.addLayer(mkmeter);
 	                  }

@@ -661,7 +661,7 @@
 	              var ltln = `id: ${strId} <br><br>Lat: <input type='number' name='lat' id='lat' value=${gMk._layers[layer._leaflet_id]._latlng.lat} disabled><br>
 	                         Lng: <input type='number' name='lng' id='lng' value=${gMk._layers[layer._leaflet_id]._latlng.lng} disabled><br> 
 	                         <button id = 'Update' onclick = 'updatePOINT("${strId}","${gMk._layers[layer._leaflet_id]._latlng.lat}","${gMk._layers[layer._leaflet_id]._latlng.lng}")'>Update</button> 
-	                         <button id = 'Remove' onclick = 'map.removeLayer("${strId}")'>Remove</button>`
+	                         <button id = 'Remove' onclick = 'mkactive.removeFrom(map)'>Remove</button>`
 	                       //  <button id = 'Update' onclick ='updatePOINT("${strId}","${e.target._latlng.lat}","${e.target._latlng.lng}")'>Update</button>                        
 	                       //  <button id = 'Remove' onclick = 'map.removeLayer(e.target._map._layers[e.target._leaflet_id])'>Remove</botton> 
 	              

@@ -1,9 +1,0 @@
-{
-  "name": "Leaflet.MapPaint",
-  "version": "0.2.2",
-  "main": "dist/MapPaint.js",
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
-}

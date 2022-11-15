@@ -141,7 +141,7 @@
 
     <script>
 
-        var map = L.map('map').setView([100, 13], 6);
+        var map = L.map('map').setView([13, 100], 6);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -149,7 +149,7 @@
         }).addTo(map);
 
 
-        var marker = L.marker([100, 13]).addTo(map);
+        var marker = L.marker([13, 100]).addTo(map);
         marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
         /*

@@ -39,6 +39,11 @@
   select{
     width:100%;
   }
+
+  #map { 
+    width:100vw; height: 100vh; 
+  }
+
   </style>
 </head>
 <body>
@@ -110,165 +115,66 @@
 
 
     <div class="container" style="margin-top:30px">
-    <div class="row">
-        <div class="col-sm-6">
-        <h5>MAP</h5>
-        <img src="https://th.bing.com/th/id/R.667fe0e42818939019072440e9009c3a?rik=yUAutZJu7JrJFQ&riu=http%3a%2f%2fwww.cdc.gov%2ftravel-static%2fyellowbook%2f2014%2fmap_4-13.png&ehk=RqC%2bsf0oOM67TvHz9Afvnq6kMvvGzleNBFkG%2bT6oERw%3d&risl=&pid=ImgRaw&r=0" class="img-thumbnail" alt="...">
-        <hr class="d-sm-none">
-        </div>
-        <div class="col-sm-6">
-        
-        <h5>Attribute</h5>
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ภาพรวม</button>
-            </li>
-            <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">รายละเอียด</button>
-            </li>
-            <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">ส่งออกข้อมูล</button>
-            </li>
-        </ul>
-
-
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <h3>กปภ.สาขาxxxxxxxx</h3>
-
-            <p>ข้อมูล PWA WATERWORKS</p>
-            <p>OIS จำนวน 10 จุด</p>
-            <p>GIS จำนวน 15 จุด</p>
-
-
-
-            <p>แก้ไขข้อมูล โดย นายภานุกร ศรุติชาติ(พ.12974) เมื่อเวลา 2022-11-02</p>
-
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <br>
-            <form>
-                <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">id</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="input1">
-                </div>
-                </div>
-                <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">name</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="input2">
-                </div>
-                </div>
-                <fieldset class="form-group row">
-                <legend class="col-form-label col-sm-2 float-sm-left pt-0">Radios</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                        First radio
-                    </label>
-                    </div>
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                        Second radio
-                    </label>
-                    </div>
-                    <div class="form-check disabled">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                    <label class="form-check-label" for="gridRadios3">
-                        Third disabled radio
-                    </label>
-                    </div>
-                </div>
-                </fieldset>
-                <div class="form-group row">
-                <div class="col-sm-10 offset-sm-2">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck1">
-                    <label class="form-check-label" for="gridCheck1">
-                        Example checkbox
-                    </label>
-                    </div>
-                </div>
-                </div>
-                <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">บันทึก</button>
-                </div>
-                </div>
-            </form>
-
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <br>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Excel</button>
-                <button type="button" class="btn btn-secondary">Shapefile</button>
-                <button type="button" class="btn btn-secondary">MapInfo</button>
-            </div>
-            <br><br><br>
-            </div>
-        </div>
-
-
-
-
-
-
+        <!--<div class="row">-->
+            <div id="map"></div>
+        <!--</div>-->
     </div>
-    </div>
-    <!--
-    <div class="container" style="margin-top:30px">
-    <div class="row">
-        <div class="col-sm-4">
-        <h2>About Me</h2>
-        <h5>Photo of me:</h5>
-        <div class="fakeimg">Fake Image</div>
-        <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-        <h3>Some Links</h3>
-        <p>Lorem ipsum dolor sit ame.</p>
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <hr class="d-sm-none">
-        </div>
-        <div class="col-sm-8">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg">Fake Image</div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-        <br>
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Sep 2, 2017</h5>
-        <div class="fakeimg">Fake Image</div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-        </div>
-    </div>
-    </div>
-    -->
-
 
 
     <div class="jumbotron text-center" style="margin-bottom:0">
     <p>Footer</p>
     <a href="https://getbootstrap.com/docs/4.6/getting-started/introduction/" target="_blank">Bootstrap4</a>
     </div>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""></script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+
+        var marker = L.marker([51.5, -0.09]).addTo(map);
+
+        var circle = L.circle([51.508, -0.11], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(map);
+
+        var polygon = L.polygon([
+            [51.509, -0.08],
+            [51.503, -0.06],
+            [51.51, -0.047]
+        ]).addTo(map);
+
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+        circle.bindPopup("I am a circle.");
+        polygon.bindPopup("I am a polygon.");
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+    </script>
 
 </body>
 </html>

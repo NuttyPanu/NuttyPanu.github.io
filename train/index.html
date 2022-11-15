@@ -138,7 +138,7 @@
 
     <script>
 
-        var map = L.map('map').setView([13.000, 100.00], 6);
+        var map = L.map('map').setView([100, 13], 6);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -146,10 +146,10 @@
         }).addTo(map);
 
 
-        var marker = L.marker([13.00, 100.000]).addTo(map);
+        var marker = L.marker([100, 13]).addTo(map);
         marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
-
+        /*
         var circle = L.circle([51.508, -0.11], {
             color: 'red',
             fillColor: '#f03',
@@ -166,7 +166,7 @@
         
         circle.bindPopup("I am a circle.");
         polygon.bindPopup("I am a polygon.");
-
+        */
         var popup = L.popup();
 
 

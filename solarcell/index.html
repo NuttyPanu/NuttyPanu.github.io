@@ -1,1 +1,612 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <title>Solar Cell</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="icon" href="img/office.png">
+
+  <!--
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+-->
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+  
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  .jumbotron{
+    padding: 10px 5px!important;
+  }
+  select {
+    width: 100%;
+  }
+  label {
+    display:block;
+  }
+  #selectTop{
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #8c8c8c8c;
+    border-radius: 5px;
+  }
+  select{
+    width:100%;
+  }
+
+  #map { 
+    width:100%; height: 100vh; max-height: 500px; 
+  }
+
+  </style>
+</head>
+<body>
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+    <h3><img src="img/office.png" width="30" height="30" /> แผนที่แสดงตำแหน่งสถานีผลิต กปภ.</h3>
+    <!--<p>พัฒนาโดย พอยขวัญ</p>-->
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#" style="margin-left:5px;"> Solar Cell</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+
+        <!--
+        <li class="nav-item" >
+            <label class="checkbox-inline">
+                <input type="checkbox" checked data-toggle="toggle"> First
+              </label>    
+        </li>
+        <li class="nav-item" onclick="display('show');">
+            <a class="nav-link" href="#">เปิด</a>
+        </li>
+        <li class="nav-item" onclick="display('hide');">
+            <a class="nav-link" href="#">ปิด</a>
+        </li> 
+        -->   
+        </ul>
+    </div>  
+    </nav>
+    <div class="container">
+    <div class="form-check form-switch"  style="padding-top: 10px;" id="swithOpt">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+        <label class="form-check-label" for="flexSwitchCheckChecked" >ตัวกรองข้อมูล</label>
+    </div>   
+    </div>
+    <div class="container" id="selectTop">
+        <div class="row">
+          <div class="col-md-3">
+            <label>เลือกประเภท</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected value="0">ทั้งหมด</option>
+                <option value="1">แรงสูง</option>
+                <option value="2">แรงต่ำ</option>
+                <option value="3">แรงไม่มี</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>ข้อความ</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected value="0">ทั้งหมด</option>
+                <option value="1">มีข้อความ</option>
+                <option value="2">ไม่มีข้อความ</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label>เลือกเขต</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected value="0">ทั้งหมด</option>
+                <option value="1">เขต1</option>
+                <option value="2">เขต2</option>
+                <option value="3">เขต3</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>เลือกสาขา</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected value="0">ทั้งหมด</option>
+                <option value="1">สาขา1</option>
+                <option value="2">สาขา2</option>
+                <option value="3">สาขา3</option>
+            </select>
+          </div>
+
+        </div>
+    </div>
+
+
+    <div class="container" style="margin-top:10px">
+        <!--<div class="row">-->
+            <div id="map"></div>
+        <!--</div>-->
+    </div>
+
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+    <p>Footer</p>
+    <a href="https://getbootstrap.com/docs/4.6/getting-started/introduction/" target="_blank">Bootstrap4</a>
+    </div>
+
+
+
+
+    <!--modal-->
+    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog" style="z-index:1500;">
+      <div id="modal_ft_info" class="modal-dialog modal-md">
+        <div class="modal-content">
+
+          <div class="modal-header">
+
+            <span id="latlng_m" style="display: none;"></span>
+            <span id="pwacode_m" style="display: none;"></span>
+            <h4 class="modal-title text-primary pull-left" id="feature-title"></h4>
+
+            <button type="button" class="btn btn-sm btn-default pull-right" id="navigator_div"  name="navigator_div"title="นำทาง" style="width: 44px; margin-top: -6px; display: block;"><img width="25px" src="img/images.png"  style =""/></button>
+            
+          </div>
+
+          <div class="modal-body" id="feature-info">
+
+
+          </div><!--class="modal-body" id="feature-info">-->
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="($('#featureModal').modal('hide'));">ปิด</button>
+            <button type="button" class="btn btn-primary" id="comment_submit">บันทึก</button>
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""></script>
+
+
+
+
+    <script>
+
+        var map = L.map('map', {
+              //center: [13, 100],
+              minZoom: 5,
+              zoominfoControl: true,
+              //layers: [highlight],
+              
+              //layers: [zone, pwa_office, highlight],
+              //layers: [ExampleData.Basemaps.Grayscale, ExampleData.LayerGroups.cities]
+            }).setView([13, 100], 5);
+
+        var streetmap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+
+        var marker = L.marker([13, 100]).addTo(map);
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+        /*
+        var circle = L.circle([51.508, -0.11], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(map);
+
+        var polygon = L.polygon([
+            [51.509, -0.08],
+            [51.503, -0.06],
+            [51.51, -0.047]
+        ]).addTo(map);
+
+        
+        circle.bindPopup("I am a circle.");
+        polygon.bindPopup("I am a polygon.");
+        */
+        var popup = L.popup();
+
+
+        var content='';
+        content+="<table>";
+
+            content+="<thead>";
+                content+="<tr>"; 
+                    content+="<th>ลำดับ</th><th>รายละเอียด</th>"; 
+                content+="</tr>"; 
+            content+="</thead>";
+
+            content+="<tbody>";
+                content+="<tr>"; 
+                    content+="<th>1</th><th>ควายๆ</th>"; 
+                content+="</tr>"; 
+                content+="<tr>"; 
+                    content+="<th>2</th><th>บลาๆๆๆ</th>"; 
+                content+="</tr>"; 
+            content+="</tbody>";        
+
+        content+="</table>";
+
+
+
+        function onMapClick(e) {
+            console.log(e)
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString()+"<br><hr>"+content)
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+        function display(type){
+            if(type == 'show'){
+                $('#selectTop').show();
+            }
+            else{
+                $('#selectTop').css('display','none');
+            }
+            
+        }
+
+    </script>
+
+
+
+    <link rel="stylesheet" href="https://ismyrnow.github.io/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.css">
+
+    <script src="https://ismyrnow.github.io/leaflet-groupedlayercontrol/src/leaflet.groupedlayercontrol.js"></script>
+
+    <!--
+    <script>
+            /*
+            $.getJSON("data/zone.geojson", function (data) {
+                //console.log(data.features);
+
+                var zone_data = {
+                    "type": "FeatureCollection", 
+                    "features": [
+                        //{"type": "Feature","properties": {  "zone": 1,  "region": 3}},
+                        //{"type": "Feature","properties": {  "zone": 1,  "region": 10}}
+                    ]
+                };
+
+                //console.log(zone_data.features);
+                //var zone_data=[];
+                
+                $.each(data.features, function(index, feature) {
+
+                    //console.log(feature);
+                    //console.log('region:'+feature.properties.region+'area:'+stat_area);
+
+                    if(upwa == 'c1'){
+                        zone_data.features.push(feature);
+                    }
+                    else{
+                        if(feature.properties.zone == upwa.slice(1)){
+                            zone_data.features.push(feature);
+                        }
+                        else{
+
+                        }
+                    }
+                });
+
+                //console.log(zone_data);
+                reg_zone.addData(zone_data);
+            });
+            */
+            /*
+                // Overlay layers are grouped
+                var groupedOverlays = {
+                  "Landmarks": {
+                    "Cities": ExampleData.LayerGroups.cities,
+                    "Restaurants": ExampleData.LayerGroups.restaurants
+                  },
+                  "Random": {
+                    "Dogs": ExampleData.LayerGroups.dogs,
+                    "Cats": ExampleData.LayerGroups.cats
+                  }
+                };
+
+                var options = {
+                  // Make the "Landmarks" group exclusive (use radio inputs)
+                  exclusiveGroups: ["Landmarks"],
+                  // Show a checkbox next to non-exclusive group labels for toggling all
+                  groupCheckboxes: true
+                };
+
+                // Use the custom grouped layer control, not "L.control.layers"
+                var layerControl = L.control.groupedLayers(ExampleData.Basemaps, groupedOverlays, options);
+                map.addControl(layerControl);
+
+                // Remove and add a layer
+                //layerControl.removeLayer(cities);
+                //layerControl.addOverlay(cities, "Cities", "New Category");
+            */
+    </script>
+    -->
+
+    <script>  
+
+        /* Overlay Layers */
+        var highlight = L.geoJson(null).addTo(map);
+        var highlightStyle = {
+          stroke: false,
+          fillColor: "#00FFFF",
+          fillOpacity: 0.7,
+          radius: 11
+        };
+        var pwa_office = L.geoJson(null, {
+          pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {
+              icon: L.icon({
+                iconUrl: "img/office.png",
+                iconSize: [30, 30]
+                /*,
+                iconAnchor: [12, 28],
+                popupAnchor: [0, -25]
+                */
+              }),
+              title: feature.properties.pwaname,
+              riseOnHover: true
+            });
+          },
+          onEachFeature: function (feature, layer) {
+             
+            if (feature.properties) {
+            
+              var content = 
+              "<table id='tblpwa' class='table table-striped table-bordered table-condensed'>" + 
+              "<tr><th>สังกัด</th><td>การประปาส่วนภูมิภาคเขต "+feature.properties.area + "</td></tr>" + 
+              //"<tr><th>ชื่อหน่วยงาน</th><td>" + feature.properties.pwaname + "</td></tr>" + 
+              "<tr><th>ที่อยู่</th><td>" + feature.properties.pwaaddress + "</td></tr>" +  
+              //"<tr><th>โทรศัพท์</th><td>" + feature.properties.tel + "</td></tr>" +  
+              //"<tr><th>โทรสาร</th><td>" + feature.properties.fax + "</td></tr>" +
+              '<tr><th colspan="2"><div class="form-floating"><textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px; min-height:80px;">'+ feature.properties.comment +'</textarea><label for="floatingTextarea2">หมายเหตุ</label></div></th></tr>'
+              "<table>";
+
+              layer.on({
+                click: function (e) {
+
+                  $("#latlng_m").text(layer.feature.geometry.coordinates[1]+","+layer.feature.geometry.coordinates[0]);
+
+                  $("#pwacode_m").text(feature.properties.pwacode);
+
+                  $("#feature-title").html(feature.properties.pwaname);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");       
+                      highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+                },
+                mouseover: function (e) {
+                   highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+                },
+                mouseout: function (e) {
+                  highlight.clearLayers();
+                },
+
+
+              });
+
+
+            }
+          }
+        }).addTo(map);
+
+
+        var baseLayers = {
+          
+        };
+        
+        var baseLayers = {
+          "StreetMap": streetmap,
+          //"Google Terrain": googleTerrain,  
+          //"Google Sat": googleSat,
+          //"Google Hybrid": googleHybrid
+        };
+        
+        var groupedOverlays = {
+            /*
+          "ข้อมูลพื้นฐาน": {
+            "<img src='assets/img/zone.png' width='18' height='22'>&nbsp;กปภ.ข.": zone
+          },
+          */
+          "ชั้นข้อมูล GIS กปภ.": {
+            "<img src='img/office.png' width='20' height='20'>&nbsp;กปภ.สาขา": pwa_office
+          },
+        };
+
+        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+          collapsed: true, }).addTo(map);
+
+
+        //layerControl.addOverlay(points,"<img src='img/office.png' width='17' height='17'>&nbsp;&nbsp;กปภ.เขต",'ชั้นข้อมูล GIS กปภ.');
+
+
+        $('#comment_submit').on('click', function(){
+
+            if (window.confirm("ยืนยันการบันทึกข้อมูล")) {  
+        
+                if($('#floatingTextarea2').val() != ''){
+
+                    $.ajax({
+                        url:'service/genpoint.php',
+                        //url: 'data/detailReport.json',
+                        type: 'POST',
+                        async: false,
+                        data:{pwacode:$('#pwacode_m').text(), comment:$('#floatingTextarea2').val()},
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+                            
+                        }
+                    });  
+                    onload();
+                    $('#featureModal').modal('hide');
+
+                    /*
+                    pwa_office.eachLayer(function (layer,feature) {
+                        //console.log(layer.feature.properties.pwacode);
+                        //console.log(layer);
+                        //console.log(layer._leaflet_id);
+                        //console.log(feature);
+                        //console.log(map);
+                        //console.log(layer);
+                        //console.log(feature);
+                        
+                        if (layer.feature.properties.pwacode == '5511018' ) {
+
+                            console.log(layer.feature.properties.comment);
+                            layer.feature.properties.comment = 'ตื่นเถอะ';
+                              
+                                //layer._icon.style.display = 'block';
+                                //layer._shadow.style.display = 'block';
+                                //layer.options.interactive = true;
+                                //layer.setStyle({radius: 5,weight: 1,opacity: 1,fillOpacity: 0.8});
+                                //      layer.showLabel();
+                        }
+                        else{
+
+                        }
+
+                    });
+                    */
+                            
+                }
+                else{
+
+                    alert('โปรดระบุข้อความ');
+                }
+
+
+            }  
+
+        });
+
+    onload();
+
+    function onload(){
+
+        var tmpcomment;
+
+        $.ajax({
+            url:'service/getpoint.php',
+            //url: 'data/detailReport.json',
+            type: 'POST',
+            async: false,
+            //data:{name:reg_name, index:index},
+            dataType: "json",
+            success: function (data) {
+                tmpcomment=data;
+                console.log(tmpcomment);
+            }
+            
+        });  
+
+        $.getJSON("data/pwa_office.geojson", function (data) {
+            //console.log(data.features);
+
+             var mapPwaCode;
+                 var i=0;
+                 $.each(data.features,function(){
+                    //console.log(this.properties.pwacode);
+                    mapPwaCode=this.properties.pwacode;
+                    
+                    $.each(tmpcomment,function(){
+
+                      if(mapPwaCode==this.pwacode){
+                        //console.log(this.pwacode);
+                        //console.log(mapPwaCode);
+                            data.features[i].properties['comment']=this.comment;
+                            //console.log(data.features[i].properties);
+                      }
+                      else{
+                            data.features[i].properties['comment']='';
+                      }
+                    });
+                    i++;
+                 });
+            //console.log(data);
+              pwa_office.addData(data);
+              map.addLayer(pwa_office);
+              pwa_office.addTo(map);
+              //map.fitBounds(pwa_office.getBounds());  
+            
+              //dataTmp=data;
+             // pwa_office_layer.addData(data);
+              //map.addLayer(pwa_office_layer);
+             // pwa_office_layer.addTo(map);
+                       
+              //$("#loading").hide();
+              //modal_data_upload('map');
+
+              //dateTime();
+        });
+    }
+
+        $("[name='navigator_div']").click(function(){
+              console.log($('#latlng_m').text());
+              //'+mylocation+'
+              //car  data=!3m1!4b1!4m2!4m1!3e0?hl=th
+              //walk data=!3m1!4b1!4m2!4m1!3e2?hl=th
+              //public data=!3m1!4b1!4m2!4m1!3e3?hl=th
+              //bycycle data=!3m1!4b1!4m2!4m1!3e1?hl=th
+              var w = window.open('https://www.google.co.th/maps/dir//'+$('#latlng_m').text()+'/@'+$('#latlng_m').text()+',11z/data=!3m1!4b1!4m2!4m1!3e0?hl=th');
+              //w = window.open('print.html?status=1');
+              //w.focus();
+              //return false;
+
+              //getdirection(13.773, 100.519, 13.855, 100.631);
+              
+        });
+
+        $('#swithOpt').on('click', function(){
+            console.log($('#flexSwitchCheckChecked').prop("checked"))
+            //$(< name of the element >).prop("checked")
+            if($('#flexSwitchCheckChecked').prop("checked") ==true){
+                //$('#selectTop').show();
+                $("#selectTop").fadeIn(1000);
+            }
+            else{
+                $("#selectTop").fadeOut(1000);
+                //$('#selectTop').css('display','none');
+            }
+            
+        });
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <style>
+      .chat-container {
+        margin: 0px;padding: 10px;border: 1px solid #ccc;border-radius: 5px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .chat-messages {height:400px;overflow-y: scroll;border: 1px solid #ccc;padding: 10px;}
+      .bot-message {
+        background-color: #daeaf2;border-radius: 10px;padding: 5px 10px;margin: 5px 50px 5px 10px;
+        text-align: left; /* จัดข้อความด้านซ้าย */
+        }
+        .user-message {
+        background-color: #4caf50;color: white;border-radius: 10px;padding: 5px 10px ;margin: 5px 5px 5px 50px;
+        text-align: right; /* จัดข้อความด้านขวา */
+        }
+        .user-message::before {
+            content: "\1F604"; /* ใช้ Unicode สำหรับไอคอนขยับปาก */
+            margin-right: 5px;font-size: 20px;
+         }
+        .bot-message::before {
+            content: "\1F60A"; /* ใช้ Unicode สำหรับไอคอนขยับปาก */
+            margin-right: 5px;font-size: 20px;
+         }
+      /* CSS for Input Box and Send Button */
+      .input-container {
+        display: flex;}
+      .message-input {
+        flex-grow: 1;padding: 5px;}
+      .send-button {
+        padding: 5px 10px;
+        width: 160px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+      <img src="https://i.ytimg.com/vi/TN1k1_ZQ0LM/maxresdefault.jpg" width="100%" height="100">
+    <div class="chat-container">
+      <div class="chat-messages" id="chat-messages">
+        <!-- Messages will be displayed here -->
+      </div>
+      <div class="input-container">
+        <input
+          type="text"
+          class="message-input"
+          id="message-input"
+          placeholder="..."
+        />
+        <button  class="send-button" id="send-button">Send</button>
+        <img id="loading-image" src="loading.gif" width="50" style="display: none;">
+      </div>
+    </div>
+    <script>
+      const chatMessages = document.getElementById("chat-messages");
+      const messageInput = document.getElementById("message-input");
+      const sendButton = document.getElementById("send-button");
+      const loadingImage = document.getElementById("loading-image");
+      sendButton.addEventListener("click", function () {
+        const userMessage = messageInput.value;
+        // สร้าง JSON object ในรูปแบบที่ต้องการ
+        const jsonInput = {
+          contents: [
+            {
+              parts: [
+                {
+                  text: userMessage,
+                },
+              ],
+            },
+          ],
+        };
+        addMessage("user", userMessage);
+        messageInput.value = "";
+          // แสดงรูปภาพ loading
+          loadingImage.style.display = "inline-block";
+        // ส่ง JSON object ไปยังฟังก์ชัน getBotResponse
+        getBotResponse(jsonInput);
+      });
+      function addMessage(sender, message) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add(sender + "-message");
+        messageDiv.innerText = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function getBotResponse(userMessage) {
+        // Code for making a POST request to Google Cloud NLP service
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify(userMessage), // ส่ง JSON object ที่ได้รับมาจาก input
+          redirect: "follow",
+        };
+        fetch(
+          "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=AIzaSyBDXo8QOf85TZZQC3jMckumexZW5AbbrfM",
+          requestOptions
+        )
+          .then((response) => response.text())
+          .then((result) => {
+            // ส่วนนี้คือการประมวลผลผลลัพธ์ที่ได้จาก Google Cloud NLP service
+            // และแสดงผลลัพธ์ในรูปแบบที่คุณต้องการ
+            console.log(result);
+            const textValue =
+              JSON.parse(result)["candidates"][0]["content"]["parts"][0]["text"];
+            addMessage("bot", textValue); // แสดงผลลัพธ์จากบอทในหน้าเว็บ
+              loadingImage.style.display = "none";// ซ่อนรูปภาพ loading เมื่อเสร็จสิ้นการโหลด
+          })
+          .catch((error) => {
+            console.log("error", error)
+            // ซ่อนรูปภาพ loading เมื่อเสร็จสิ้นการโหลด
+            loadingImage.style.display = "none";
+          });
+      }
+    </script>
+  </body>
+</html>
